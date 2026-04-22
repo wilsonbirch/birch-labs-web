@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
 import {
   FacebookIcon,
+  GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
@@ -13,10 +14,11 @@ import { navLinks } from "@/lib/nav";
 import { getSiteSettings } from "@/lib/site";
 
 const SOCIAL_LINKS = [
-  { key: "facebook", label: "Facebook", Icon: FacebookIcon },
-  { key: "instagram", label: "Instagram", Icon: InstagramIcon },
-  { key: "twitter", label: "X / Twitter", Icon: TwitterIcon },
+  { key: "github", label: "GitHub", Icon: GitHubIcon },
   { key: "linkedin", label: "LinkedIn", Icon: LinkedInIcon },
+  { key: "twitter", label: "X / Twitter", Icon: TwitterIcon },
+  { key: "instagram", label: "Instagram", Icon: InstagramIcon },
+  { key: "facebook", label: "Facebook", Icon: FacebookIcon },
 ] as const;
 
 export async function Footer() {

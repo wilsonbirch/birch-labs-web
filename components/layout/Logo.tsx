@@ -38,19 +38,18 @@ export function Logo({
 }
 
 function Wordmark({ businessName }: { businessName: string }) {
-  const [first, ...rest] = businessName.split(" ");
-  const tail = rest.join(" ");
+  const handle = businessName.toLowerCase().replace(/\s+/g, "_");
 
   return (
-    <span className="inline-flex flex-col leading-none tracking-tight">
-      <span className="font-display text-xl text-[color:var(--color-ink)] sm:text-2xl">
-        {first}
+    <span className="inline-flex items-baseline gap-1 font-mono text-sm tracking-tight text-[color:var(--color-ink)] sm:text-base">
+      <span className="text-[color:var(--color-accent)]" aria-hidden>
+        &gt;
       </span>
-      {tail && (
-        <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[color:var(--color-brand-soft)] sm:text-[11px]">
-          {tail}
-        </span>
-      )}
+      <span>{handle}</span>
+      <span
+        aria-hidden
+        className="inline-block h-3 w-[0.55ch] translate-y-[1px] animate-blink bg-[color:var(--color-accent)] sm:h-4 group-hover:bg-[color:var(--color-ink)]"
+      />
     </span>
   );
 }

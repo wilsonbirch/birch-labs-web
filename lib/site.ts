@@ -4,8 +4,9 @@ import { sanityFetch } from "@/lib/sanity";
 import type { SanityImage } from "@/lib/sanity-image";
 
 export const SITE_DEFAULTS = {
-  businessName: "Your Business",
+  businessName: "Birch Labs",
   tagline: "",
+  availability: "",
   phone: "",
   email: "",
   address: "",
@@ -14,6 +15,7 @@ export const SITE_DEFAULTS = {
     instagram: "",
     twitter: "",
     linkedin: "",
+    github: "",
   },
   footerText: "",
   defaultSeo: {
@@ -26,6 +28,7 @@ export const SITE_DEFAULTS = {
 export type SiteSettings = {
   businessName?: string | null;
   tagline?: string | null;
+  availability?: string | null;
   logo?: SanityImage | null;
   phone?: string | null;
   email?: string | null;
@@ -35,6 +38,7 @@ export type SiteSettings = {
     instagram?: string | null;
     twitter?: string | null;
     linkedin?: string | null;
+    github?: string | null;
   } | null;
   footerText?: string | null;
   defaultSeo?: {
@@ -48,6 +52,7 @@ function withDefaults(settings: SiteSettings | null | undefined) {
   return {
     businessName: settings?.businessName || SITE_DEFAULTS.businessName,
     tagline: settings?.tagline || SITE_DEFAULTS.tagline,
+    availability: settings?.availability || SITE_DEFAULTS.availability,
     logo: settings?.logo ?? null,
     phone: settings?.phone || SITE_DEFAULTS.phone,
     email: settings?.email || SITE_DEFAULTS.email,
@@ -57,6 +62,7 @@ function withDefaults(settings: SiteSettings | null | undefined) {
       instagram: settings?.social?.instagram || SITE_DEFAULTS.social.instagram,
       twitter: settings?.social?.twitter || SITE_DEFAULTS.social.twitter,
       linkedin: settings?.social?.linkedin || SITE_DEFAULTS.social.linkedin,
+      github: settings?.social?.github || SITE_DEFAULTS.social.github,
     },
     footerText: settings?.footerText || SITE_DEFAULTS.footerText,
     defaultSeo: {

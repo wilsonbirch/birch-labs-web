@@ -23,4 +23,13 @@ export const structure: StructureResolver = (S) =>
           .id(type)
           .child(S.document().schemaType(type).documentId(type)),
       ),
+      S.divider(),
+      S.listItem()
+        .title("Projects")
+        .schemaType("project")
+        .child(
+          S.documentTypeList("project")
+            .title("Projects")
+            .defaultOrdering([{ field: "order", direction: "asc" }]),
+        ),
     ]);

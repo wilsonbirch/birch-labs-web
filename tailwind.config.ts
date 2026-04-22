@@ -23,7 +23,10 @@ const config: Config = {
           soft: "var(--color-brand-soft)",
           warm: "var(--color-brand-warm)",
         },
-        accent: "var(--color-accent)",
+        accent: {
+          DEFAULT: "var(--color-accent)",
+          ink: "var(--color-accent-ink)",
+        },
         footer: {
           DEFAULT: "var(--color-footer-bg)",
           fg: "var(--color-footer-fg)",
@@ -32,7 +35,14 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-fraunces)", "ui-serif", "Georgia", "serif"],
+        display: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: [
+          "var(--font-jetbrains-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace",
+        ],
       },
       borderRadius: {
         sm: "0.25rem",
