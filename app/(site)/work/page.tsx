@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 
-import { CTA } from "@/components/sections/CTA";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { TechMarquee } from "@/components/sections/TechMarquee";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { allProjectsQuery, homePageQuery } from "@/lib/queries";
+import { allProjectsQuery } from "@/lib/queries";
 import { sanityFetch } from "@/lib/sanity";
-import { getSiteSettings } from "@/lib/site";
 import type { ProjectCard } from "@/lib/types";
 
 export const revalidate = 60;
@@ -17,28 +15,20 @@ export const metadata: Metadata = {
   description: "Selected projects from Birch Labs — apps, AI pipelines, and marketing sites.",
 };
 
-type HomePageData = {
-  ctaHeading?: string | null;
-  ctaBody?: string | null;
-};
-
 export default async function WorkPage() {
   let projects: ProjectCard[] = [];
-  let home: HomePageData | null = null;
   try {
-    [projects, home] = await Promise.all([
-      sanityFetch<ProjectCard[]>({ query: allProjectsQuery, tags: ["project"] }),
-      sanityFetch<HomePageData | null>({ query: homePageQuery, tags: ["homePage"] }),
-    ]);
+    projects = await sanityFetch<ProjectCard[]>({
+      query: allProjectsQuery,
+      tags: ["project"],
+    });
   } catch (error) {
-    console.warn("[work] Failed to fetch:", error);
+    console.warn("[work] Failed to fetch projects:", error);
   }
-
-  const settings = await getSiteSettings();
 
   return (
     <>
-      <Section spacing="md">
+      <Section spacing="md" className="pb-0 sm:pb-0">
         <Container width="wide">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
             {"// work"}
@@ -63,7 +53,6 @@ export default async function WorkPage() {
         </Section>
       )}
       <TechMarquee />
-      <CTA heading={home?.ctaHeading} body={home?.ctaBody} email={settings.email} />
     </>
   );
 }

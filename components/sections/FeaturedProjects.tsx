@@ -18,20 +18,9 @@ export function FeaturedProjects({ projects }: { projects: ProjectCard[] }) {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <Section id="work" spacing="md">
+    <Section id="work" spacing="md" className="pt-8 sm:pt-10">
       <Container width="wide">
-        <div className="flex items-end justify-between gap-6">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
-              {"// selected work"}
-            </p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.05] sm:text-5xl">
-              Things I&apos;ve shipped.
-            </h2>
-          </div>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
             <MotionFadeIn key={p._id} delay={i * 0.08}>
               <ProjectItem project={p} />
