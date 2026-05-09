@@ -17,24 +17,12 @@ type ContactPageData = {
   seo?: { title?: string | null; description?: string | null; ogImage?: SanityImage | null } | null;
 };
 
-const FALLBACK_HEADING = "Get in touch";
-const FALLBACK_INTRO = "Send a message and we'll get back to you soon.";
-
-async function fetchContact(): Promise<ContactPageData | null> {
-  try {
-    return await sanityFetch<ContactPageData | null>({
-      query: contactPageQuery,
-      tags: ["contactPage"],
-    });
-  } catch (error) {
-    console.warn("[contact] Failed to fetch contactPage:", error);
-    return null;
-  }
-}
-
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await fetchContact();
-  const title = data?.seo?.title ?? data?.heading ?? "Contact";
+  const data = await sanityFetch<ContactPageData | null>({
+    query: contactPageQuery,
+    tags: ["contactPage"],
+  });
+  const title = data?.seo?.title ?? data?.heading ?? undefined;
   const description = data?.seo?.description ?? data?.intro ?? undefined;
   const ogImage = sanityImageUrl(data?.seo?.ogImage, { width: 1200, height: 630 });
   return {
@@ -55,16 +43,19 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const data = await fetchContact();
+  const data = await sanityFetch<ContactPageData | null>({
+    query: contactPageQuery,
+    tags: ["contactPage"],
+  });
 
   return (
     <Section spacing="lg">
       <Container width="narrow" className="space-y-10">
         <div>
-          <Heading level={1}>{data?.heading || FALLBACK_HEADING}</Heading>
-          <p className="mt-4 text-lg text-[color:var(--color-ink-muted)]">
-            {data?.intro || FALLBACK_INTRO}
-          </p>
+          {data?.heading && <Heading level={1}>{data.heading}</Heading>}
+          {data?.intro && (
+            <p className="mt-4 text-lg text-[color:var(--color-ink-muted)]">{data.intro}</p>
+          )}
         </div>
         <ContactForm successMessage={data?.successMessage} />
       </Container>

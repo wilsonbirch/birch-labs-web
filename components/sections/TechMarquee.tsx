@@ -1,43 +1,25 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
-const STACK = [
-  "TypeScript",
-  "Python",
-  "React",
-  "Next.js",
-  "Remix",
-  "Node.js",
-  "FastAPI",
-  "PostgreSQL",
-  "MongoDB",
-  "Redis",
-  "Docker",
-  "Prisma",
-  "GraphQL",
-  "Shopify",
-  "Sanity",
-  "Tailwind",
-  "AWS",
-  "Fly.io",
-  "Framer Motion",
-  "Gemini / Claude",
-  "Firecrawl",
-  "Puppeteer",
-  "CI/CD",
-  "Jest / Vitest",
-];
-
-export function TechMarquee({ items = STACK }: { items?: string[] }) {
+export function TechMarquee({
+  items,
+  eyebrow,
+}: {
+  items: string[];
+  eyebrow?: string | null;
+}) {
+  if (!items || items.length === 0) return null;
   // Duplicate items so the infinite loop has content for the second half.
   const loop = [...items, ...items];
 
   return (
     <Section id="stack" spacing="sm" tone="default" className="border-y border-[color:var(--color-rule)]">
       <Container width="full">
-        <p className="mb-6 px-6 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)] sm:px-8 lg:px-12">
-          {"// stack"}
-        </p>
+        {eyebrow && (
+          <p className="mb-6 px-6 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)] sm:px-8 lg:px-12">
+            {eyebrow}
+          </p>
+        )}
         <div
           className="relative overflow-hidden"
           style={{

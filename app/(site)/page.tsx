@@ -11,13 +11,17 @@ import { getSiteSettings } from "@/lib/site";
 export const revalidate = 60;
 
 type HomePageData = {
-  heroEyebrow?: string | null;
-  heroTitle?: string | null;
-  heroSubtitle?: string | null;
+  heroEyebrow: string;
+  heroSubtitle: string;
   heroImage?: SanityImage | null;
+  heroImageDark?: SanityImage | null;
+  heroPrimaryButtonText: string;
+  heroSecondaryButtonText: string;
   availability?: string | null;
-  ctaHeading?: string | null;
-  ctaBody?: string | null;
+  ctaEyebrow: string;
+  ctaHeading: string;
+  ctaBody: string;
+  ctaButtonText: string;
   seo?: { title?: string | null; description?: string | null; ogImage?: SanityImage | null } | null;
 };
 
@@ -60,26 +64,36 @@ export default async function HomePage() {
     console.warn("[home] Failed to fetch homePage:", error);
   }
 
-  const settings = await getSiteSettings();
+  if (!data) {
+    console.warn("[home] homePage singleton is missing — render skipped");
+    return null;
+  }
 
-  const heroTitle = data?.heroTitle ?? settings.businessName;
-  const heroSubtitle =
-    data?.heroSubtitle ??
-    "I build production software — from AI-powered Shopify apps to motion-rich marketing sites.";
-  const heroEyebrow = data?.heroEyebrow ?? "> freelance full-stack dev · ottawa";
-  const availability = data?.availability ?? settings.availability;
+  const settings = await getSiteSettings();
 
   return (
     <HomeScrollStack
       hero={
         <Hero
-          eyebrow={heroEyebrow}
-          title={heroTitle}
-          subtitle={heroSubtitle}
-          availability={availability}
+          eyebrow={data.heroEyebrow}
+          title={settings.businessName}
+          subtitle={data.heroSubtitle}
+          availability={data.availability ?? settings.availability}
+          logo={data.heroImage ?? settings.logo}
+          logoDark={data.heroImageDark ?? null}
+          primaryButtonText={data.heroPrimaryButtonText}
+          secondaryButtonText={data.heroSecondaryButtonText}
         />
       }
-      cta={<CTA heading={data?.ctaHeading} body={data?.ctaBody} email={settings.email} />}
+      cta={
+        <CTA
+          eyebrow={data.ctaEyebrow}
+          heading={data.ctaHeading}
+          body={data.ctaBody}
+          buttonText={data.ctaButtonText}
+          email={settings.email}
+        />
+      }
     />
   );
 }

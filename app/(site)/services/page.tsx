@@ -1,61 +1,82 @@
 import type { Metadata } from "next";
 
-import { CTA } from "@/components/sections/CTA";
+import { TechMarquee } from "@/components/sections/TechMarquee";
 import { TwoTierServices } from "@/components/sections/TwoTierServices";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { homePageQuery } from "@/lib/queries";
+import { servicesPageQuery } from "@/lib/queries";
 import { sanityFetch } from "@/lib/sanity";
-import { getSiteSettings } from "@/lib/site";
+import { sanityImageUrl, type SanityImage } from "@/lib/sanity-image";
 import type { ServiceTier } from "@/lib/types";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Freelance services from Birch Labs — custom web apps, AI integrations, Shopify builds, and motion-rich marketing sites.",
+type ServicesPageData = {
+  heroEyebrow?: string | null;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  tiers?: ServiceTier[] | null;
+  stackEyebrow?: string | null;
+  stack?: string[] | null;
+  seo?: { title?: string | null; description?: string | null; ogImage?: SanityImage | null } | null;
 };
 
-type HomePageData = {
-  intro?: unknown;
-  tiers?: ServiceTier[] | null;
-  ctaHeading?: string | null;
-  ctaBody?: string | null;
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await sanityFetch<ServicesPageData | null>({
+    query: servicesPageQuery,
+    tags: ["servicesPage"],
+  });
+  if (!data?.seo) return {};
+  const ogImage = sanityImageUrl(data.seo.ogImage, { width: 1200, height: 630 });
+  return {
+    title: data.seo.title ?? undefined,
+    description: data.seo.description ?? undefined,
+    openGraph: {
+      title: data.seo.title ?? undefined,
+      description: data.seo.description ?? undefined,
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
+    },
+    twitter: {
+      card: ogImage ? "summary_large_image" : "summary",
+      title: data.seo.title ?? undefined,
+      description: data.seo.description ?? undefined,
+      images: ogImage ? [ogImage] : undefined,
+    },
+  };
+}
 
 export default async function ServicesPage() {
-  let data: HomePageData | null = null;
-  try {
-    data = await sanityFetch<HomePageData | null>({
-      query: homePageQuery,
-      tags: ["homePage"],
-    });
-  } catch (error) {
-    console.warn("[services] Failed to fetch homePage:", error);
-  }
+  const data = await sanityFetch<ServicesPageData | null>({
+    query: servicesPageQuery,
+    tags: ["servicesPage"],
+  });
 
-  const settings = await getSiteSettings();
   const tiers = Array.isArray(data?.tiers) ? data!.tiers! : [];
+  const stack = data?.stack ?? [];
 
   return (
     <>
       <Section spacing="md">
         <Container width="wide">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
-            {"// services"}
-          </p>
-          <h1 className="font-display mt-4 text-5xl leading-[1.0] sm:text-6xl lg:text-7xl">
-            What I build.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-muted)]">
-            Two tiers, one developer. Pick the work that fits — or combine both when your project
-            needs engineering muscle and design polish.
-          </p>
+          {data?.heroEyebrow && (
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
+              {data.heroEyebrow}
+            </p>
+          )}
+          {data?.heroTitle && (
+            <h1 className="font-display mt-4 text-5xl leading-[1.0] sm:text-6xl lg:text-7xl">
+              {data.heroTitle}
+            </h1>
+          )}
+          {data?.heroSubtitle && (
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-muted)]">
+              {data.heroSubtitle}
+            </p>
+          )}
         </Container>
       </Section>
-      {tiers.length > 0 && <TwoTierServices intro={data?.intro} tiers={tiers} />}
-      <CTA heading={data?.ctaHeading} body={data?.ctaBody} email={settings.email} />
+      {stack.length > 0 && <TechMarquee items={stack} eyebrow={data?.stackEyebrow} />}
+      {tiers.length > 0 && <TwoTierServices tiers={tiers} />}
     </>
   );
 }

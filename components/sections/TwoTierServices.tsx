@@ -1,7 +1,6 @@
 import * as Icons from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import { PortableText } from "@/components/ui/PortableText";
 import { Section } from "@/components/ui/Section";
 import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
 import type { ServiceTier } from "@/lib/types";
@@ -20,10 +19,8 @@ function ServiceIcon({ name }: { name?: string | null }) {
 }
 
 export function TwoTierServices({
-  intro,
   tiers,
 }: {
-  intro?: unknown;
   tiers: ServiceTier[];
 }) {
   if (!tiers || tiers.length === 0) return null;
@@ -31,23 +28,8 @@ export function TwoTierServices({
   return (
     <Section id="services" spacing="md" tone="surface">
       <Container width="wide">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <MotionFadeIn className="lg:col-span-4">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
-              {"// services"}
-            </p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.05] sm:text-5xl">
-              What I build.
-            </h2>
-            {Array.isArray(intro) && intro.length > 0 && (
-              <div className="mt-6 max-w-md text-[color:var(--color-ink-muted)]">
-                <PortableText value={intro} />
-              </div>
-            )}
-          </MotionFadeIn>
-
-          <div className="grid gap-8 lg:col-span-8 lg:grid-cols-2">
-            {tiers.map((tier, i) => (
+        <div className="grid gap-8 sm:grid-cols-2">
+          {tiers.map((tier, i) => (
               <MotionFadeIn
                 key={tier.label}
                 delay={i * 0.1}
@@ -96,9 +78,8 @@ export function TwoTierServices({
                     </li>
                   ))}
                 </ul>
-              </MotionFadeIn>
-            ))}
-          </div>
+          </MotionFadeIn>
+        ))}
         </div>
       </Container>
     </Section>

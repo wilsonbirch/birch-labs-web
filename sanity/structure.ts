@@ -5,6 +5,9 @@ import { SINGLETON_TYPES } from "./schemas";
 const SINGLETON_TITLES: Record<string, string> = {
   siteSettings: "Site Settings",
   homePage: "Home",
+  servicesPage: "Services",
+  workPage: "Work",
+  aboutPage: "About",
   contactPage: "Contact",
 };
 

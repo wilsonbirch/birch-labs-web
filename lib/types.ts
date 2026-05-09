@@ -13,6 +13,7 @@ export type ProjectCard = {
   role: string | null;
   stack: string[] | null;
   heroImage: SanityImage | null;
+  gallery: SanityImage[] | null;
   links: { live?: string | null; github?: string | null } | null;
   featured: boolean | null;
   order: number | null;
