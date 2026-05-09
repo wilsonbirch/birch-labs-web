@@ -1,27 +1,27 @@
-name: Deploy to Fly
+name: fly
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    workflow_dispatch:
 
 concurrency:
-  group: fly-deploy
-  cancel-in-progress: false
+    group: fly-deploy
+    cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Fly deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    deploy:
+        name: deploy prod
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
 
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+            - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      # Build args + runtime env are configured in fly.toml.
-      # Runtime secrets (RESEND_API_KEY, SANITY_API_READ_TOKEN, etc.)
-      # are set via `fly secrets set`.
-      - name: Deploy
-        run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+            # Build args + runtime env are configured in fly.toml.
+            # Runtime secrets (RESEND_API_KEY, SANITY_API_READ_TOKEN, etc.)
+            # are set via `fly secrets set`.
+            - name: Deploy
+              run: flyctl deploy --remote-only
+              env:
+                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
