@@ -13,7 +13,12 @@ export function Logo({
   logo?: SanityImage | null;
   className?: string;
 }) {
-  const imageProps = logo ? sanityImageProps(logo, { height: 64 }) : null;
+  const sanityProps = logo ? sanityImageProps(logo, { height: 64 }) : null;
+
+  const src = sanityProps?.src ?? "/images/logo.svg";
+  const alt = sanityProps?.alt || businessName;
+  const width = sanityProps?.width ?? 64;
+  const height = sanityProps?.height ?? 64;
 
   return (
     <Link
@@ -21,36 +26,14 @@ export function Logo({
       aria-label={`${businessName} — home`}
       className={cn("group inline-flex items-center transition", className)}
     >
-      {imageProps ? (
-        <Image
-          src={imageProps.src}
-          alt={imageProps.alt || businessName}
-          width={imageProps.width ?? 160}
-          height={imageProps.height ?? 32}
-          className="h-8 w-auto sm:h-9"
-          priority
-        />
-      ) : (
-        <Wordmark businessName={businessName} />
-      )}
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className="h-10 w-auto sm:h-12"
+        priority
+      />
     </Link>
-  );
-}
-
-function Wordmark({ businessName }: { businessName: string }) {
-  const [first, ...rest] = businessName.split(" ");
-  const tail = rest.join(" ");
-
-  return (
-    <span className="inline-flex flex-col leading-none tracking-tight">
-      <span className="font-display text-xl text-[color:var(--color-ink)] sm:text-2xl">
-        {first}
-      </span>
-      {tail && (
-        <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[color:var(--color-brand-soft)] sm:text-[11px]">
-          {tail}
-        </span>
-      )}
-    </span>
   );
 }

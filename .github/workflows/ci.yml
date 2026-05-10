@@ -1,42 +1,43 @@
-name: CI
+name: ci
 
 on:
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
 
 concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  build:
-    name: Lint · Typecheck · Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
+    build:
+        name: lint · typecheck · build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
 
-      - name: Set up Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: npm
+            - name: Set up Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 20
+                  cache: npm
 
-      - name: Install
-        run: npm ci
+            - name: Install
+              run: npm ci
 
-      - name: Lint
-        run: npm run lint
+            - name: Lint
+              run: npm run lint
 
-      - name: Typecheck
-        run: npm run typecheck
+            - name: Typecheck
+              run: npm run typecheck
 
-      - name: Build
-        # NEXT_PUBLIC_* values are required at build time so lib/env.ts
-        # doesn't throw. Use safe placeholders for CI.
-        env:
-          NEXT_PUBLIC_SANITY_PROJECT_ID: ci-placeholder
-          NEXT_PUBLIC_SANITY_DATASET: production
-          NEXT_PUBLIC_SANITY_API_VERSION: "2024-10-01"
-          NEXT_PUBLIC_SITE_URL: http://localhost:3000
-        run: npm run build
+            - name: Build
+              # NEXT_PUBLIC_* values are baked into the JS bundle, so they're
+              # not secret. Point CI at the real Sanity project so the static
+              # prerender phase can fetch real content.
+              env:
+                  NEXT_PUBLIC_SANITY_PROJECT_ID: wbezabg8
+                  NEXT_PUBLIC_SANITY_DATASET: production
+                  NEXT_PUBLIC_SANITY_API_VERSION: '2024-10-01'
+                  NEXT_PUBLIC_SITE_URL: http://localhost:3000
+              run: npm run build

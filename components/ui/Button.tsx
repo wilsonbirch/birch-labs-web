@@ -10,11 +10,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[color:var(--color-brand)] text-white hover:bg-[color:var(--color-brand-soft)]",
+    "bg-[color:var(--color-brand)] text-[color:var(--color-bg)] hover:bg-[color:var(--color-brand-soft)]",
   secondary:
-    "border border-[color:var(--color-rule)] bg-transparent text-[color:var(--color-ink)] hover:border-[color:var(--color-brand)] hover:text-[color:var(--color-brand)]",
+    "border border-[color:var(--color-rule)] bg-transparent text-[color:var(--color-ink)] hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]",
   inverse:
-    "bg-white text-[color:var(--color-ink)] hover:bg-[color:var(--color-bg)]",
+    "bg-white text-[#0b0d0e] hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-accent-ink)]",
   link: "text-[color:var(--color-brand)] underline-offset-4 hover:underline",
 };
 

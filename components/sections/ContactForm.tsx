@@ -66,10 +66,9 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
   if (status === "success") {
     return (
       <div className="rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] p-8 text-center">
-        <p className="font-display text-2xl text-[color:var(--color-ink)]">
-          {successMessage || "Thanks — message received."}
-        </p>
-        <p className="mt-2 text-[color:var(--color-ink-muted)]">We&apos;ll be in touch shortly.</p>
+        {successMessage && (
+          <p className="font-display text-2xl text-[color:var(--color-ink)]">{successMessage}</p>
+        )}
       </div>
     );
   }
@@ -100,7 +99,22 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           value={values.message}
           onChange={(e) => update("message", e.target.value)}
           className="input resize-y"
+          aria-describedby="message-hint"
         />
+        <span
+          id="message-hint"
+          className={`mt-1 block text-xs ${
+            values.message.trim().length > 0 && values.message.trim().length < 10
+              ? "text-[color:var(--color-ink-muted)]"
+              : "text-[color:var(--color-ink-muted)]"
+          }`}
+        >
+          {values.message.trim().length < 10
+            ? `${10 - values.message.trim().length} more character${
+                10 - values.message.trim().length === 1 ? "" : "s"
+              } needed (minimum 10)`
+            : `${values.message.trim().length} / 4000`}
+        </span>
       </Field>
 
       {/* Honeypot — visually hidden, real users leave it blank */}

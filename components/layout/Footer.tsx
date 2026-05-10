@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
 import {
   FacebookIcon,
+  GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
@@ -13,10 +14,11 @@ import { navLinks } from "@/lib/nav";
 import { getSiteSettings } from "@/lib/site";
 
 const SOCIAL_LINKS = [
-  { key: "facebook", label: "Facebook", Icon: FacebookIcon },
-  { key: "instagram", label: "Instagram", Icon: InstagramIcon },
-  { key: "twitter", label: "X / Twitter", Icon: TwitterIcon },
+  { key: "github", label: "GitHub", Icon: GitHubIcon },
   { key: "linkedin", label: "LinkedIn", Icon: LinkedInIcon },
+  { key: "twitter", label: "X / Twitter", Icon: TwitterIcon },
+  { key: "instagram", label: "Instagram", Icon: InstagramIcon },
+  { key: "facebook", label: "Facebook", Icon: FacebookIcon },
 ] as const;
 
 export async function Footer() {
@@ -31,9 +33,7 @@ export async function Footer() {
     <footer className="border-t border-[color:var(--color-rule)] bg-[color:var(--color-footer-bg)] text-[color:var(--color-footer-fg)]">
       <Container width="wide" as="div" className="flex flex-col gap-12 py-16 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="lg:max-w-md">
-          <div className="[&_a]:!text-[color:var(--color-footer-fg)] [&_a_span:first-child]:!text-[color:var(--color-footer-fg)] [&_a_span:last-child]:!text-[color:var(--color-footer-fg-muted)]">
-            <Logo businessName={settings.businessName} logo={settings.logo} />
-          </div>
+          <Logo businessName={settings.businessName} logo={settings.logo} />
           {settings.tagline && (
             <p className="mt-4 font-display text-lg leading-snug text-[color:var(--color-footer-fg)]">
               {settings.tagline}

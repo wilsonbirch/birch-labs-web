@@ -55,7 +55,7 @@ export async function POST(request: Request): Promise<NextResponse<ContactResult
 
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_FORM_TO_EMAIL;
-  const fromEmail = process.env.CONTACT_FORM_FROM_EMAIL ?? "Contact Form <onboarding@resend.dev>";
+  const fromEmail = process.env.CONTACT_FORM_FROM_EMAIL || "Contact Form <onboarding@resend.dev>";
 
   const subject = `Contact form — ${data.name}`;
   const text = [

@@ -18,7 +18,6 @@ Designed to be cloned as-is and rebranded: header, footer, navigation, hero, pag
 - `components/layout/` — Header, Footer, Logo, DesktopNav, MobileNav, ThemeToggle
 - `components/sections/HomeHero.tsx`, `ContactForm.tsx` — drop-in examples
 - `sanity/schemas/` — `siteSettings`, `homePage`, generic `page` doc, plus `cta`/`imageWithAlt`/`seo` objects
-- `scripts/seed-sanity.mjs` — seeds one of each so the Studio opens to editable content
 - `Dockerfile` — production build, no platform lock-in
 
 ## Quickstart
@@ -36,12 +35,9 @@ npm install
 
 # 4. Configure env
 cp .env.example .env.local
-# Fill in NEXT_PUBLIC_SANITY_PROJECT_ID and SANITY_API_WRITE_TOKEN at minimum.
+# Fill in NEXT_PUBLIC_SANITY_PROJECT_ID at minimum.
 
-# 5. Seed the dataset
-npm run seed
-
-# 6. Run
+# 5. Run
 npm run dev
 ```
 
@@ -60,7 +56,6 @@ See `.env.example` for the full list.
 | `NEXT_PUBLIC_SANITY_DATASET` | yes | Usually `production` |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | yes | Pinned API date |
 | `NEXT_PUBLIC_SITE_URL` | yes | Absolute URL base for OG / metadata / sitemap |
-| `SANITY_API_WRITE_TOKEN` | for seed | Only used by `scripts/seed-sanity.mjs` |
 | `SANITY_API_READ_TOKEN` | for drafts | Only needed if fetching drafts |
 | `RESEND_API_KEY` | for email | Contact form falls back to console log without it |
 | `CONTACT_FORM_TO_EMAIL` | for email | Destination address |
@@ -173,4 +168,3 @@ These are common asks that we leave out because the right choice depends on the 
 - `npm run build` — production build
 - `npm run start` — serve the built app
 - `npm run lint` / `npm run typecheck`
-- `npm run seed` — populate Sanity with starter content

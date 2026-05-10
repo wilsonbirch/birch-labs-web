@@ -5,6 +5,9 @@ import { SINGLETON_TYPES } from "./schemas";
 const SINGLETON_TITLES: Record<string, string> = {
   siteSettings: "Site Settings",
   homePage: "Home",
+  servicesPage: "Services",
+  workPage: "Work",
+  aboutPage: "About",
   contactPage: "Contact",
 };
 
@@ -23,4 +26,13 @@ export const structure: StructureResolver = (S) =>
           .id(type)
           .child(S.document().schemaType(type).documentId(type)),
       ),
+      S.divider(),
+      S.listItem()
+        .title("Projects")
+        .schemaType("project")
+        .child(
+          S.documentTypeList("project")
+            .title("Projects")
+            .defaultOrdering([{ field: "order", direction: "asc" }]),
+        ),
     ]);

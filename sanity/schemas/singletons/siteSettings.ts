@@ -16,6 +16,12 @@ export const siteSettings = defineType({
       type: "string",
     }),
     defineField({
+      name: "availability",
+      title: "Availability",
+      type: "string",
+      description: "Short site-wide availability note (e.g. 'Currently booking Q3 2026').",
+    }),
+    defineField({
       name: "logo",
       type: "imageWithAlt",
     }),
@@ -41,6 +47,7 @@ export const siteSettings = defineType({
         { name: "instagram", type: "url" },
         { name: "twitter", type: "url" },
         { name: "linkedin", type: "url" },
+        { name: "github", type: "url" },
       ],
     }),
     defineField({
