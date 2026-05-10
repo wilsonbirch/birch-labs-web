@@ -11,6 +11,10 @@ updates:
         update-types:
           - minor
           - patch
+    ignore:
+      # Pin @types/node major to runtime Node version (currently 22 LTS).
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/"
