@@ -32,10 +32,11 @@ jobs:
               run: npm run typecheck
 
             - name: Build
-              # NEXT_PUBLIC_* values are required at build time so lib/env.ts
-              # doesn't throw. Use safe placeholders for CI.
+              # NEXT_PUBLIC_* values are baked into the JS bundle, so they're
+              # not secret. Point CI at the real Sanity project so the static
+              # prerender phase can fetch real content.
               env:
-                  NEXT_PUBLIC_SANITY_PROJECT_ID: ci-placeholder
+                  NEXT_PUBLIC_SANITY_PROJECT_ID: wbezabg8
                   NEXT_PUBLIC_SANITY_DATASET: production
                   NEXT_PUBLIC_SANITY_API_VERSION: '2024-10-01'
                   NEXT_PUBLIC_SITE_URL: http://localhost:3000
