@@ -60,47 +60,26 @@ export function MobileNav({
         role="dialog"
         aria-modal="true"
         aria-label="Site navigation"
-        style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: 100,
-          pointerEvents: open ? "auto" : "none",
-        }}
-        className="lg:hidden"
+        className={cn(
+          "fixed inset-0 z-[100] lg:hidden",
+          open ? "pointer-events-auto" : "pointer-events-none",
+        )}
       >
         <div
           aria-hidden
           onClick={() => setOpen(false)}
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            opacity: open ? 1 : 0,
-            transition: "opacity 300ms",
-          }}
+          className={cn(
+            "absolute inset-0 bg-black/70 transition-opacity duration-300",
+            open ? "opacity-100" : "opacity-0",
+          )}
         />
         <div
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            maxWidth: "22rem",
-            boxShadow: "-8px 0 32px rgba(0,0,0,0.25)",
-            transform: open ? "translateX(0)" : "translateX(100%)",
-            transition: "transform 300ms",
-          }}
+          className={cn(
+            "absolute inset-y-0 right-0 flex w-full max-w-[22rem] flex-col shadow-[-8px_0_32px_rgba(0,0,0,0.25)] transition-transform duration-300",
+            open ? "translate-x-0" : "translate-x-full",
+          )}
         >
-          <div
-            style={{ backgroundColor: "var(--color-bg)" }}
-            className="flex items-center justify-between border-b border-[color:var(--color-rule)] px-6 py-4"
-          >
+          <div className="flex items-center justify-between border-b border-[color:var(--color-rule)] bg-[color:var(--color-bg)] px-6 py-4">
             <span className="font-display text-lg">Menu</span>
             <button
               type="button"
@@ -111,10 +90,7 @@ export function MobileNav({
               <X aria-hidden className="h-5 w-5" />
             </button>
           </div>
-          <nav
-            style={{ backgroundColor: "var(--color-bg)", flex: "1 1 auto" }}
-            className="flex flex-col gap-1 px-4 py-6 text-lg"
-          >
+          <nav className="flex flex-auto flex-col gap-1 bg-[color:var(--color-bg)] px-4 py-6 text-lg">
             {links.map((link) => {
               const active =
                 pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
@@ -136,10 +112,7 @@ export function MobileNav({
             })}
           </nav>
           {cta && (
-            <div
-              style={{ backgroundColor: "var(--color-bg)" }}
-              className="mt-auto border-t border-[color:var(--color-rule)] px-6 py-6"
-            >
+            <div className="mt-auto border-t border-[color:var(--color-rule)] bg-[color:var(--color-bg)] px-6 py-6">
               <Button
                 href={cta.href}
                 variant={cta.style ?? "primary"}

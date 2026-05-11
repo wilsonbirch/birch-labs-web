@@ -6,6 +6,9 @@ import { contactSchema, type ContactInput, type ContactResult } from "@/lib/cont
 
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
 
+const INPUT_CLASS =
+  "block w-full rounded-md border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] px-[0.9rem] py-[0.65rem] text-base leading-[1.4] text-[color:var(--color-ink)] focus:outline-2 focus:outline-offset-2 focus:outline-[color:var(--color-accent)]";
+
 const INITIAL: ContactInput = {
   name: "",
   email: "",
@@ -81,7 +84,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           value={values.name}
           onChange={(e) => update("name", e.target.value)}
           autoComplete="name"
-          className="input"
+          className={INPUT_CLASS}
         />
       </Field>
       <Field label="Email" error={errors.email}>
@@ -90,7 +93,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           value={values.email}
           onChange={(e) => update("email", e.target.value)}
           autoComplete="email"
-          className="input"
+          className={INPUT_CLASS}
         />
       </Field>
       <Field label="Message" error={errors.message}>
@@ -98,16 +101,12 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           rows={6}
           value={values.message}
           onChange={(e) => update("message", e.target.value)}
-          className="input resize-y"
+          className={`${INPUT_CLASS} resize-y`}
           aria-describedby="message-hint"
         />
         <span
           id="message-hint"
-          className={`mt-1 block text-xs ${
-            values.message.trim().length > 0 && values.message.trim().length < 10
-              ? "text-[color:var(--color-ink-muted)]"
-              : "text-[color:var(--color-ink-muted)]"
-          }`}
+          className="mt-1 block text-xs text-[color:var(--color-ink-muted)]"
         >
           {values.message.trim().length < 10
             ? `${10 - values.message.trim().length} more character${
@@ -118,7 +117,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
       </Field>
 
       {/* Honeypot — visually hidden, real users leave it blank */}
-      <div aria-hidden style={{ position: "absolute", left: "-10000px" }}>
+      <div aria-hidden className="sr-only">
         <label>
           Website
           <input
@@ -144,24 +143,6 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
       >
         {status === "submitting" ? "Sending…" : "Send message"}
       </button>
-
-      <style jsx>{`
-        .input {
-          display: block;
-          width: 100%;
-          border: 1px solid var(--color-rule);
-          background: var(--color-surface);
-          color: var(--color-ink);
-          border-radius: 0.5rem;
-          padding: 0.65rem 0.9rem;
-          font-size: 1rem;
-          line-height: 1.4;
-        }
-        .input:focus {
-          outline: 2px solid var(--color-accent);
-          outline-offset: 2px;
-        }
-      `}</style>
     </form>
   );
 }
