@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Container } from "@/components/ui/Container";
-import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { contactPageQuery } from "@/lib/queries";
 import { sanityFetch } from "@/lib/sanity";
@@ -52,7 +51,11 @@ export default async function ContactPage() {
     <Section spacing="lg">
       <Container width="narrow" className="space-y-10">
         <div>
-          {data?.heading && <Heading level={1}>{data.heading}</Heading>}
+          {data?.heading && (
+            <h1 className="font-display text-5xl leading-[1.0] sm:text-6xl lg:text-7xl">
+              {data.heading}
+            </h1>
+          )}
           {data?.intro && (
             <p className="mt-4 text-lg text-[color:var(--color-ink-muted)]">{data.intro}</p>
           )}
