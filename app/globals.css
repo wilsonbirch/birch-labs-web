@@ -1,7 +1,56 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* Preserve the .dark-class strategy (Tailwind 4 defaults to prefers-color-scheme). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens — radii override Tailwind 4 defaults; fonts wire Next's
+   per-font CSS variables into Tailwind's font-sans/font-mono utilities. */
+@theme {
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Heavyweight display heading style — used on h1/h2 hero copy. */
+@utility font-display {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-feature-settings: "ss01", "ss02", "cv11";
+}
+
+/* Terminal-style blinking caret. */
+@utility animate-blink {
+  animation: blink 1s steps(1) infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Infinite horizontal marquee — pauses on hover, respects reduced motion. */
+@utility animate-marquee {
+  animation: marquee 45s linear infinite;
+  &:hover {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Runtime CSS variables — read by utility classes via bg-[color:var(--color-*)] etc.
+   Swapped wholesale by the .dark class on <html>. */
 :root {
   --color-bg: #ffffff;
   --color-surface: #f4f6f8;
@@ -36,7 +85,6 @@
 
 html {
   position: relative;
-  scroll-behavior: smooth;
   color-scheme: dark;
 }
 
@@ -45,12 +93,7 @@ html:not(.dark) {
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-ink);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: clip;
 }
 
 ::selection {
@@ -58,40 +101,8 @@ body {
   color: var(--color-accent-ink);
 }
 
-.font-display {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  font-feature-settings: "ss01", "ss02", "cv11";
-}
-
-.font-mono,
-.font-mono * {
-  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-/* Terminal-style blinking caret */
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-.animate-blink {
-  animation: blink 1s steps(1) infinite;
-}
-
-/* Marquee (infinite horizontal scroll) */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 45s linear infinite;
-}
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-/* Subtle noise overlay for depth */
+/* Subtle noise overlay — kept as a component class because the inline data
+   URI would make any JSX usage hard to read. */
 .noise-overlay {
   position: absolute;
   inset: 0;
@@ -99,23 +110,4 @@ body {
   opacity: 0.035;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-.mobile-nav-panel {
-  background-color: var(--color-bg) !important;
-  background-image: none !important;
-  opacity: 1 !important;
-}
-.mobile-nav-backdrop {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-blink,
-  .animate-marquee {
-    animation: none !important;
-  }
-  html {
-    scroll-behavior: auto;
-  }
 }

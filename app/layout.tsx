@@ -62,13 +62,15 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased motion-safe:scroll-smooth`}
     >
       <head>
         <meta name="color-scheme" content="dark light" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col overflow-x-clip bg-[color:var(--color-bg)] font-sans text-[color:var(--color-ink)]">
+        {children}
+      </body>
     </html>
   );
 }
