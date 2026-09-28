@@ -26,6 +26,8 @@ export type ProjectCard = {
   links: { live?: string; github?: string };
   /** Long-form write-up, one string per paragraph. Not rendered yet. */
   body: string[];
+  /** Unreleased: shown (with a Draft chip) in `next dev` only, never in a production build. */
+  draft?: boolean;
 };
 
 export type ServiceItem = {

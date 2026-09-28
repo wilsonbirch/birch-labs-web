@@ -72,6 +72,7 @@ export function ProjectCard({
 
         <div className="pointer-events-none absolute left-4 top-4 z-10 flex gap-2">
           <Chip tone="accent">{TIER_LABEL[project.tier]}</Chip>
+          {project.draft && <Chip>Draft</Chip>}
         </div>
 
         {hasMultiple && (

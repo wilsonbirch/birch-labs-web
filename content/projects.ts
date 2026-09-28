@@ -11,9 +11,46 @@ import onereviewPlans from "./images/projects/onereview-plans.png";
 import onereviewSummaries from "./images/projects/onereview-summaries.png";
 import saltyHero from "./images/projects/salty-hero.png";
 import saltyHome from "./images/projects/salty-home.png";
+import vnmJournal from "./images/projects/vnm-journal.png";
+import vnmNowPlaying from "./images/projects/vnm-now-playing.png";
+import vnmVillageMap from "./images/projects/vnm-village-map.png";
+import vnmVillageSquare from "./images/projects/vnm-village-square.png";
 
 /** Shown on /work in this order. */
-export const projects: ProjectCard[] = [
+const allProjects: ProjectCard[] = [
+  {
+    slug: "village-of-nothing-much",
+    // Remove once the app launches.
+    draft: true,
+    title: "Village of Nothing Much",
+    client: "Nothing Much Happens",
+    year: 2026,
+    tier: "applied-engineering",
+    role: "Lead Developer",
+    summary:
+      "Member app for the Nothing Much Happens sleep podcast: iOS, Android, and web on one GraphQL backend. Streaming audio with synced progress, a village map of community rooms, private journals, moderation tools, and Stripe memberships migrated from Fourthwall.",
+    stack: [
+      "Expo",
+      "React Native",
+      "Next.js",
+      "GraphQL",
+      "Prisma",
+      "PostgreSQL",
+      "Supabase",
+      "Stripe",
+    ],
+    heroImage: { src: vnmNowPlaying, alt: "Village of Nothing Much - Now Playing screen" },
+    gallery: [
+      { src: vnmVillageMap, alt: "Village of Nothing Much - village map" },
+      { src: vnmJournal, alt: "Village of Nothing Much - private journal" },
+      { src: vnmVillageSquare, alt: "Village of Nothing Much - Village Square home" },
+    ],
+    links: {},
+    body: [
+      "Architected and built the platform end to end for the Nothing Much Happens community: an Expo app for iOS and Android and a Next.js web app with a full admin portal, both on a GraphQL API (Pothos, Yoga, Prisma on Postgres).",
+      "A transactional event outbox drives badges, push notifications, and email sync from one stream. Moderation ships with reports, audit logs, and server-enforced quiet hours for late-night posting. Memberships run on Stripe with an import path for existing Fourthwall members.",
+    ],
+  },
   {
     slug: "onereview",
     title: "OneReview",
@@ -139,3 +176,8 @@ export const projects: ProjectCard[] = [
     ],
   },
 ];
+
+/** Drafts render in `next dev` only, so they can be previewed but never ship. */
+export const projects = allProjects.filter(
+  (p) => !p.draft || process.env.NODE_ENV === "development",
+);
