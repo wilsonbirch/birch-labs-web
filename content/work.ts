@@ -9,5 +9,5 @@ export const work = {
   heroEyebrow: "// work",
   heroTitle: "Things I've shipped.",
   heroSubtitle:
-    "A mix of production work, client projects, and things I built because no one else had.",
+    "A mix of production work, client projects, and personal builds.",
 };
