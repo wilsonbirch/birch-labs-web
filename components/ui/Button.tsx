@@ -14,7 +14,7 @@ const variants: Record<Variant, string> = {
   secondary:
     "border border-[color:var(--color-rule)] bg-transparent text-[color:var(--color-ink)] hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]",
   inverse:
-    "bg-white text-[#0b0d0e] hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-accent-ink)]",
+    "bg-white text-[color:var(--color-accent-ink)] hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-accent-ink)]",
   link: "text-[color:var(--color-brand)] underline-offset-4 hover:underline",
 };
 

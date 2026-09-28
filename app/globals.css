@@ -52,33 +52,36 @@
 /* Runtime CSS variables — read by utility classes via bg-[color:var(--color-*)] etc.
    Swapped wholesale by the .dark class on <html>. */
 :root {
+  /* BirchLabs brand palette v1 — White #FFFFFF, Slate #64748B, Royal #003087,
+     Monochrome #60A5FA, Gold #FFB81C, Ink #0D131C. Gap tokens (surface, rule,
+     brand-soft/warm) use the Tailwind slate/blue scales the palette sits on. */
   --color-bg: #ffffff;
-  --color-surface: #f4f6f8;
-  --color-ink: #2c3e50;
-  --color-ink-muted: #6b7a88;
-  --color-rule: #d8dee4;
-  --color-brand: #17569b;
-  --color-brand-soft: #4a7bb8;
-  --color-brand-warm: #0f3d70;
-  --color-accent: #e2c044;
-  --color-accent-ink: #2c3e50;
-  --color-footer-bg: #17569b;
+  --color-surface: #f8fafc;
+  --color-ink: #0d131c;
+  --color-ink-muted: #64748b;
+  --color-rule: #e2e8f0;
+  --color-brand: #003087;
+  --color-brand-soft: #1d4ed8;
+  --color-brand-warm: #002466;
+  --color-accent: #ffb81c;
+  --color-accent-ink: #0d131c;
+  --color-footer-bg: #003087;
   --color-footer-fg: #ffffff;
   --color-footer-fg-muted: rgba(255, 255, 255, 0.7);
 }
 
 .dark {
-  --color-bg: #1a2532;
-  --color-surface: #2c3e50;
+  --color-bg: #0d131c;
+  --color-surface: #161f2c;
   --color-ink: #ffffff;
   --color-ink-muted: rgba(255, 255, 255, 0.65);
-  --color-rule: #3a4d62;
-  --color-brand: #4a8dd1;
-  --color-brand-soft: #2c6fb5;
-  --color-brand-warm: #17569b;
-  --color-accent: #e2c044;
-  --color-accent-ink: #2c3e50;
-  --color-footer-bg: #17569b;
+  --color-rule: #334155;
+  --color-brand: #60a5fa;
+  --color-brand-soft: #93c5fd;
+  --color-brand-warm: #003087;
+  --color-accent: #ffb81c;
+  --color-accent-ink: #0d131c;
+  --color-footer-bg: #003087;
   --color-footer-fg: #ffffff;
   --color-footer-fg-muted: rgba(255, 255, 255, 0.7);
 }

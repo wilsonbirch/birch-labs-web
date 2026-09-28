@@ -139,7 +139,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex h-12 items-center justify-center rounded-full bg-[color:var(--color-brand)] px-7 text-sm font-medium text-white transition hover:bg-[color:var(--color-brand-soft)] disabled:opacity-60"
+        className="inline-flex h-12 items-center justify-center rounded-full bg-[color:var(--color-brand)] px-7 text-sm font-medium text-[color:var(--color-bg)] transition hover:bg-[color:var(--color-brand-soft)] disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Send message"}
       </button>
