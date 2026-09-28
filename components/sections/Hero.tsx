@@ -7,13 +7,11 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { BlinkingCursor } from "@/components/ui/BlinkingCursor";
-import { Chip } from "@/components/ui/Chip";
 import type { Img } from "@/lib/types";
 
 export function Hero({
   eyebrow,
   subtitle,
-  availability,
   logo,
   logoDark,
   primaryButtonText,
@@ -21,7 +19,6 @@ export function Hero({
 }: {
   eyebrow: string;
   subtitle: string;
-  availability?: string | null;
   logo: Img;
   logoDark: Img;
   primaryButtonText: string;
@@ -33,22 +30,6 @@ export function Hero({
     <Section spacing="none" className="relative overflow-hidden py-12 sm:py-16 [@media(max-height:800px)]:py-6">
       <span className="noise-overlay" aria-hidden />
       <Container width="wide" className="relative">
-        {availability && (
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 10 }}
-            animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Chip tone="outline" className="mb-8">
-              <span
-                aria-hidden
-                className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]"
-              />
-              {availability}
-            </Chip>
-          </motion.div>
-        )}
-
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}

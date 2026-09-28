@@ -14,7 +14,6 @@ export default function HomePage() {
         <Hero
           eyebrow={home.heroEyebrow}
           subtitle={home.heroSubtitle}
-          availability={site.availability}
           logo={home.heroLogo}
           logoDark={home.heroLogoDark}
           primaryButtonText={home.heroPrimaryButtonText}
