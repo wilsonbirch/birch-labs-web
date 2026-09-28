@@ -46,8 +46,9 @@ export function HomeScrollStack({
     );
   }
 
+  // Offsets = header height (h-16 / lg:h-20) + its 2px bottom border.
   const pinClass =
-    "sticky top-16 lg:top-20 min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-5rem)]";
+    "sticky top-[calc(4rem+2px)] lg:top-[calc(5rem+2px)] min-h-[calc(100vh-4rem-2px)] lg:min-h-[calc(100vh-5rem-2px)]";
 
   return (
     <div
@@ -69,7 +70,7 @@ export function HomeScrollStack({
       >
         {/* Front face — Hero */}
         <div
-          className="absolute inset-0 flex items-center"
+          className="absolute inset-0 flex items-center-safe"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -80,7 +81,7 @@ export function HomeScrollStack({
 
         {/* Back face — CTA, pre-rotated so it's readable once the card flips */}
         <div
-          className="absolute inset-0 flex items-start pt-[24vh]"
+          className="absolute inset-0 flex items-center-safe"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",

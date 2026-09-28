@@ -6,15 +6,15 @@ type Variant = "primary" | "secondary" | "link" | "inverse";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-accent)] disabled:pointer-events-none disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-brand)] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary:
     "bg-[color:var(--color-brand)] text-[color:var(--color-bg)] hover:bg-[color:var(--color-brand-soft)]",
   secondary:
-    "border border-[color:var(--color-rule)] bg-transparent text-[color:var(--color-ink)] hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]",
+    "border border-[color:var(--color-rule)] bg-transparent text-[color:var(--color-ink)] hover:border-[color:var(--color-brand)] hover:text-[color:var(--color-brand)] active:border-[color:var(--color-brand-soft)] active:text-[color:var(--color-brand-soft)]",
   inverse:
-    "bg-white text-[#0b0d0e] hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-accent-ink)]",
+    "bg-white text-[color:var(--color-accent-ink)] hover:bg-[color:var(--color-brand)] hover:text-[color:var(--color-bg)]",
   link: "text-[color:var(--color-brand)] underline-offset-4 hover:underline",
 };
 

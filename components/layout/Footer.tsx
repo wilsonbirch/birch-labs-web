@@ -1,5 +1,4 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
@@ -10,7 +9,6 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from "@/components/layout/SocialIcons";
-import { navLinks } from "@/lib/nav";
 import { site } from "@/content/site";
 
 const SOCIAL_LINKS = [
@@ -31,7 +29,7 @@ export function Footer() {
     <footer className="border-t border-[color:var(--color-rule)] bg-[color:var(--color-footer-bg)] text-[color:var(--color-footer-fg)]">
       <Container width="wide" as="div" className="flex flex-col gap-12 py-16 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="lg:max-w-md">
-          <Logo businessName={site.businessName} />
+          <Logo businessName={site.businessName} onDark />
           {site.tagline && (
             <p className="mt-4 font-display text-lg leading-snug text-[color:var(--color-footer-fg)]">
               {site.tagline}
@@ -42,24 +40,6 @@ export function Footer() {
               {site.footerText}
             </p>
           )}
-        </div>
-
-        <div>
-          <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[color:var(--color-footer-fg-muted)]">
-            Explore
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-[color:var(--color-footer-fg)] opacity-80 transition hover:opacity-100"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div>
@@ -123,7 +103,6 @@ export function Footer() {
           className="flex flex-col gap-2 py-6 text-xs text-[color:var(--color-footer-fg-muted)] sm:flex-row sm:items-center sm:justify-between"
         >
           <p>© {new Date().getFullYear()} {site.businessName}. All rights reserved.</p>
-          <p>Built with Next.js.</p>
         </Container>
       </div>
     </footer>

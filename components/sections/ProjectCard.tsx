@@ -6,7 +6,11 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Chip } from "@/components/ui/Chip";
 import { GitHubIcon } from "@/components/layout/SocialIcons";
+import { cn } from "@/lib/cn";
 import type { Img, ProjectCard as ProjectCardType } from "@/lib/types";
+
+const CIRCLE_BUTTON =
+  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-rule)] transition";
 
 const TIER_LABEL: Record<ProjectCardType["tier"], string> = {
   "applied-engineering": "Applied Engineering",
@@ -38,7 +42,6 @@ export function ProjectCard({
 
   const hasMultiple = slides.length > 1;
   const image = slides[index];
-  const primaryHref = project.links.live || project.links.github;
 
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
   const next = () => setIndex((i) => (i + 1) % slides.length);
@@ -46,7 +49,7 @@ export function ProjectCard({
   return (
     <article
       ref={articleRef}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] transition duration-300 ease-out hover:border-[color:var(--color-accent)] ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] transition duration-300 ease-out hover:border-[color:var(--color-brand)] ${
         inFocus ? "blur-0 opacity-100" : "opacity-60 blur-[2px]"
       }`}
     >
@@ -72,6 +75,7 @@ export function ProjectCard({
 
         <div className="pointer-events-none absolute left-4 top-4 z-10 flex gap-2">
           <Chip tone="accent">{TIER_LABEL[project.tier]}</Chip>
+          {project.draft && <Chip>Draft</Chip>}
         </div>
 
         {hasMultiple && (
@@ -115,16 +119,37 @@ export function ProjectCard({
             </p>
             <h3 className="mt-1 text-xl font-semibold">{project.title}</h3>
           </div>
-          {primaryHref && (
-            <a
-              href={primaryHref}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`Open ${project.title}`}
-              className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-full border border-[color:var(--color-rule)] transition group-hover:border-[color:var(--color-accent)] group-hover:bg-[color:var(--color-accent)] group-hover:text-[color:var(--color-accent-ink)]"
-            >
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+          {(project.links.live || project.links.github) && (
+            <div className="flex flex-none gap-2">
+              {project.links.github && (
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`${project.title} source on GitHub`}
+                  className={cn(
+                    CIRCLE_BUTTON,
+                    "hover:border-[color:var(--color-brand)] hover:bg-[color:var(--color-brand)] hover:text-[color:var(--color-bg)]",
+                  )}
+                >
+                  <GitHubIcon className="h-4 w-4" />
+                </a>
+              )}
+              {project.links.live && (
+                <a
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`Open ${project.title}`}
+                  className={cn(
+                    CIRCLE_BUTTON,
+                    "group-hover:border-[color:var(--color-brand)] group-hover:bg-[color:var(--color-brand)] group-hover:text-[color:var(--color-bg)]",
+                  )}
+                >
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
+            </div>
           )}
         </div>
 
@@ -142,17 +167,6 @@ export function ProjectCard({
           </ul>
         )}
 
-        {project.links.github && (
-          <a
-            href={project.links.github}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 text-xs text-[color:var(--color-ink-muted)] transition hover:text-[color:var(--color-ink)]"
-          >
-            <GitHubIcon className="h-3.5 w-3.5" />
-            source
-          </a>
-        )}
       </div>
     </article>
   );

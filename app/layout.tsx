@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { site } from "@/content/site";
@@ -30,6 +30,10 @@ export const metadata: Metadata = {
     template: `%s | ${site.businessName}`,
   },
   openGraph: { ...base.openGraph, type: "website", siteName: site.businessName },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#003087",
 };
 
 // Dark-first: default to dark unless the user has explicitly chosen light.

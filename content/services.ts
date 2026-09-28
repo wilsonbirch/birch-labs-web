@@ -1,15 +1,14 @@
-import type { Seo, ServiceTier } from "@/lib/types";
+import type { Seo, ServiceItem } from "@/lib/types";
 
 export const services = {
   seo: {
     title: "Full-Stack Development Services",
     description:
-      "Custom web apps, Shopify builds, AI integrations, and design-led marketing sites — built and shipped by a freelance developer in Ottawa.",
+      "Native mobile apps, custom web apps, Shopify builds, AI integrations, and design-led marketing sites — built and shipped by a freelance developer in Ottawa.",
   } satisfies Seo,
   heroEyebrow: "// services",
   heroTitle: "What I build.",
-  heroSubtitle:
-    "Two tiers, one developer. Pick the work that fits, or combine both when your project needs engineering muscle and design polish.",
+  heroSubtitle: "From native apps to marketing sites, one developer across the full stack.",
   stackEyebrow: "// stack",
   stack: [
     "NEXT.js",
@@ -24,6 +23,12 @@ export const services = {
     "resque",
     "docker",
     "prisma",
+    "expo",
+    "react native",
+    "supabase",
+    "stripe",
+    "mux",
+    "posthog",
     "SQL",
     "graphql",
     "shopify",
@@ -40,120 +45,107 @@ export const services = {
     "typescript",
     "react",
   ],
-  tiers: [
+  services: [
     {
-      label: "Applied Engineering",
-      tagline:
-        "Custom software, Shopify apps, AI pipelines, and everything in between.",
-      services: [
-        {
-          title: "Shopify apps & storefronts",
-          description:
-            "Polaris-grade embedded apps and custom storefronts, built on Remix.",
-          icon: "shopping-bag",
-          bullets: [
-            "Billing API & webhooks",
-            "Multi-tenant architecture",
-            "App Store ready",
-          ],
-        },
-        {
-          title: "AI & LLM integrations",
-          description:
-            "RAG, summarization, and agent workflows using Gemini, Claude, or OpenAI.",
-          icon: "sparkles",
-          bullets: [
-            "Prompt design & eval",
-            "Async pipelines (Redis queues)",
-            "Firecrawl / Puppeteer scraping",
-          ],
-        },
-        {
-          title: "Custom SaaS & internal tools",
-          description: "Full-stack builds from schema to shipping.",
-          icon: "layout",
-          bullets: [
-            "Next.js / Remix / FastAPI",
-            "PostgreSQL & Prisma",
-            "Auth, billing, admin",
-          ],
-        },
-        {
-          title: "DevOps & cloud infrastructure",
-          description:
-            "From CI/CD to autoscaling — the infra and ops glue that keeps teams shipping at any size.",
-          icon: "server",
-          bullets: [
-            "GitHub Actions / Azure DevOps",
-            "Fly.io / Vercel deploys",
-            "Autoscaling, caching, queues",
-            "Observability & release automation",
-          ],
-        },
-        {
-          title: "Vibe-code hardening",
-          description:
-            "Your AI-built MVP works. I make it survive real users, real load, and a real team.",
-          icon: "shield-check",
-          bullets: [
-            "Test coverage & CI/CD",
-            "Refactor the load-bearing bits",
-            "Code health audits & cleanup",
-            "Maintainable patterns your team can extend",
-          ],
-        },
+      title: "Native mobile apps",
+      description: "iOS and Android from one codebase, shipped to the App Store and Google Play.",
+      icon: "smartphone",
+      bullets: ["Expo & React Native", "App Store & Play delivery", "Over-the-air updates"],
+    },
+    {
+      title: "Custom web apps & SaaS",
+      description: "Full-stack builds from schema to shipping.",
+      icon: "layout",
+      bullets: ["Next.js / Remix / FastAPI", "PostgreSQL, Prisma & GraphQL", "Auth, billing, admin portals"],
+    },
+    {
+      title: "Shopify apps & storefronts",
+      description: "Polaris-grade embedded apps and custom storefronts, built on Remix.",
+      icon: "shopping-bag",
+      bullets: ["Billing API & webhooks", "Multi-tenant architecture", "App Store ready"],
+    },
+    {
+      title: "AI & LLM integrations",
+      description: "RAG, summarization, and agent workflows using Gemini, Claude, or OpenAI.",
+      icon: "sparkles",
+      bullets: [
+        "Prompt design & eval",
+        "Async pipelines (Redis queues)",
+        "Firecrawl / Puppeteer scraping",
       ],
     },
     {
-      label: "Marketing Sites",
-      tagline:
-        "Design-forward, animated, CMS-backed sites for small businesses.",
-      services: [
-        {
-          title: "Bespoke landing pages",
-          description:
-            "Hand-built sites that don't look like a template — because they aren't.",
-          icon: "palette",
-          bullets: [
-            "Figma-to-production",
-            "Motion & micro-interactions",
-            "Accessibility-first",
-          ],
-        },
-        {
-          title: "CMS-backed sites",
-          description:
-            "Sanity, Shopify, or the right CMS for the job — so your client can edit, not email you.",
-          icon: "file-text",
-          bullets: [
-            "Structured content modelling",
-            "Editor-friendly studio",
-            "Live previews",
-          ],
-        },
-        {
-          title: "Motion & interaction",
-          description:
-            "Scroll-driven moments, hover states, and animations that actually serve the story.",
-          icon: "wand-2",
-          bullets: [
-            "Framer Motion / GSAP",
-            "Scroll choreography",
-            "Reduced-motion aware",
-          ],
-        },
-        {
-          title: "Performance & SEO",
-          description:
-            "Fast by default. Lighthouse 95+ and sensible on-page SEO come in the box.",
-          icon: "zap",
-          bullets: [
-            "Core Web Vitals",
-            "Schema.org & OG",
-            "Edge / ISR where it helps",
-          ],
-        },
+      title: "Data pipelines & scraping",
+      description: "Scheduled scrapers that turn messy sources into clean, alertable data.",
+      icon: "workflow",
+      bullets: ["Puppeteer scrapers & schedules", "PDF & document parsing", "Change detection & alerts"],
+    },
+    {
+      title: "Memberships & payments",
+      description:
+        "Subscriptions, tiers, and paywalls on Stripe, including moving members off another platform.",
+      icon: "credit-card",
+      bullets: ["Stripe Billing & webhooks", "Tiers & feature entitlements", "Member migrations"],
+    },
+    {
+      title: "Community & moderation",
+      description: "Comments, reporting, and moderator tools that keep an online community healthy.",
+      icon: "users",
+      bullets: ["Reports & audit logs", "Moderator roles & permissions", "Push & email notifications"],
+    },
+    {
+      title: "Audio & video streaming",
+      description:
+        "Podcast and video playback that picks up where listeners left off, on every device.",
+      icon: "headphones",
+      bullets: ["Background audio playback", "Mux video & live streams", "Podcast RSS feeds"],
+    },
+    {
+      title: "Marketing sites",
+      description:
+        "Hand-built sites that don't look like a template, with a CMS your team can edit themselves.",
+      icon: "palette",
+      bullets: [
+        "Figma-to-production",
+        "Sanity, Shopify, or the right CMS",
+        "Motion & scroll choreography",
       ],
     },
-  ] satisfies ServiceTier[],
+    {
+      title: "Performance & SEO",
+      description: "Fast by default. Lighthouse 95+ and sensible on-page SEO come in the box.",
+      icon: "zap",
+      bullets: ["Core Web Vitals", "Schema.org & OG", "Edge / ISR where it helps"],
+    },
+    {
+      title: "Accessibility audits",
+      description: "Find and fix WCAG issues before your users do.",
+      icon: "accessibility",
+      bullets: ["WCAG AA audits", "Accessibility linting in CI", "Keyboard & screen reader fixes"],
+    },
+    {
+      title: "DevOps & cloud infrastructure",
+      description:
+        "From CI/CD to autoscaling — the infra and ops glue that keeps teams shipping at any size.",
+      icon: "server",
+      bullets: [
+        "GitHub Actions / Azure DevOps",
+        "Fly.io / Vercel deploys",
+        "Autoscaling, caching, queues",
+        "Observability & release automation",
+      ],
+    },
+    {
+      title: "Vibe-code hardening",
+      description:
+        "Your AI-built MVP works. I make it survive real users, real load, and a real team.",
+      icon: "shield-check",
+      bullets: [
+        "Test coverage & CI/CD",
+        "Refactor the load-bearing bits",
+        "Code health audits & cleanup",
+        "Maintainable patterns your team can extend",
+      ],
+    },
+  ] satisfies ServiceItem[],
 };

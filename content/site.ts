@@ -14,7 +14,7 @@ export const site = {
   footerText:
     "Birch Labs is the freelance practice of Wilson Birch — full-stack developer and CTO. Based in Ottawa, Canada.",
   seo: {
-    title: "Birch Labs — Full-stack development",
+    title: "Birch Labs | Full-stack development",
     description:
       "Freelance full-stack development. Custom web apps, AI integrations, Shopify builds, and motion-rich marketing sites.",
   } satisfies Seo,

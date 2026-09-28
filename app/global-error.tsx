@@ -24,8 +24,8 @@ export default function GlobalError({
           justifyContent: "center",
           padding: "2rem",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
-          background: "#fafaf7",
-          color: "#1a1d1d",
+          background: "#ffffff",
+          color: "#0d131c",
         }}
       >
         <div style={{ maxWidth: "32rem", textAlign: "center" }}>
@@ -34,7 +34,7 @@ export default function GlobalError({
               fontSize: "0.75rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#5a605f",
+              color: "#64748b",
               marginBottom: "1rem",
             }}
           >
@@ -50,7 +50,7 @@ export default function GlobalError({
           >
             Something went wrong.
           </h1>
-          <p style={{ color: "#5a605f", marginBottom: "1.5rem" }}>
+          <p style={{ color: "#64748b", marginBottom: "1.5rem" }}>
             The page failed to render. Please try again.
           </p>
           <button
@@ -63,8 +63,8 @@ export default function GlobalError({
               justifyContent: "center",
               borderRadius: "999px",
               padding: "0 1.5rem",
-              background: "#2f3b3d",
-              color: "#fafaf7",
+              background: "#003087",
+              color: "#ffffff",
               border: "none",
               fontSize: "0.875rem",
               fontWeight: 500,

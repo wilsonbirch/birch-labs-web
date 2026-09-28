@@ -9,11 +9,11 @@ export const runtime = "nodejs";
 /**
  * Contact form endpoint.
  *
- * Validates with the shared zod schema, rejects honeypot hits, and —
- * if RESEND_API_KEY + CONTACT_FORM_TO_EMAIL are configured — sends the
- * message via Resend. Otherwise it logs the submission to the server
- * console and returns success, so the form still works in dev before
- * email delivery is wired up.
+ * Validates with the shared zod schema, rejects honeypot hits, and sends
+ * the message via Resend (RESEND_API_KEY + CONTACT_FORM_TO_EMAIL). In dev
+ * without those set it logs the submission and returns success, so the
+ * form works before email is wired up. In production missing config is an
+ * error: reporting success there would silently drop leads.
  */
 export async function POST(request: Request): Promise<NextResponse<ContactResult>> {
   const limit = rateLimit(`contact:${clientIp(request.headers)}`);
@@ -90,6 +90,14 @@ export async function POST(request: Request): Promise<NextResponse<ContactResult
         { status: 500 },
       );
     }
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    console.error("[contact] RESEND_API_KEY / CONTACT_FORM_TO_EMAIL not set; message not sent");
+    return NextResponse.json(
+      { ok: false, error: "We couldn't send your message. Please email us directly." },
+      { status: 500 },
+    );
   }
 
   console.info("[contact] Submission (no Resend configured):\n%s\n%s", subject, text);
