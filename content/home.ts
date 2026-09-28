@@ -5,7 +5,7 @@ import wordmark from "./images/hero-wordmark.svg";
 
 export const home = {
   seo: {
-    title: "Birch Labs — Full-stack development",
+    title: "Birch Labs | Full-stack development",
     description:
       "I build production software for founders and teams: AI-powered Shopify apps, custom SaaS, and motion-rich marketing sites. Ottawa-based, ship-focused.",
   } satisfies Seo,

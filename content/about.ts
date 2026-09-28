@@ -5,7 +5,7 @@ import portrait from "./images/portrait.jpg";
 
 export const about = {
   seo: {
-    title: "About Wilson Birch — Engineer at Birch Labs",
+    title: "About Wilson Birch",
     description:
       "Engineer turned developer. I build production apps, AI pipelines, and marketing sites at Birch Labs — short-form contracts, real outcomes.",
   } satisfies Seo,
