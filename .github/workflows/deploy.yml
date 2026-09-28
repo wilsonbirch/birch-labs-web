@@ -1,6 +1,10 @@
 name: fly
 
+# Deploys main to the birch-labs-web Fly app on every merge (a push to main).
+# PRs are gated by ci.yml before they can merge. Manual runs stay available.
 on:
+    push:
+        branches: [main]
     workflow_dispatch:
 
 concurrency:
