@@ -1,5 +1,4 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
@@ -10,7 +9,6 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from "@/components/layout/SocialIcons";
-import { navLinks } from "@/lib/nav";
 import { site } from "@/content/site";
 
 const SOCIAL_LINKS = [
@@ -42,24 +40,6 @@ export function Footer() {
               {site.footerText}
             </p>
           )}
-        </div>
-
-        <div>
-          <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[color:var(--color-footer-fg-muted)]">
-            Explore
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-[color:var(--color-footer-fg)] opacity-80 transition hover:opacity-100"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div>
