@@ -58,7 +58,7 @@
   --color-bg: #ffffff;
   --color-surface: #f8fafc;
   --color-ink: #0d131c;
-  --color-ink-muted: #64748b;
+  --color-ink-muted: #0d131c; /* all body text is Ink; the hero wordmark keeps Slate in its SVG */
   --color-rule: #e2e8f0;
   --color-brand: #003087;
   --color-brand-soft: #1d4ed8;
@@ -74,7 +74,7 @@
   --color-bg: #0d131c;
   --color-surface: #161f2c;
   --color-ink: #ffffff;
-  --color-ink-muted: rgba(255, 255, 255, 0.65);
+  --color-ink-muted: #ffffff;
   --color-rule: #334155;
   --color-brand: #60a5fa;
   --color-brand-soft: #93c5fd;
