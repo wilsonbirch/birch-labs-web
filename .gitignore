@@ -34,9 +34,6 @@ yarn-error.log*
 .env*
 !.env.example
 
-# sanity studio build artefacts
-/dist
-
 # vercel
 .vercel
 

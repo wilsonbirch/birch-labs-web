@@ -17,7 +17,7 @@ jobs:
             - uses: superfly/flyctl-actions/setup-flyctl@master
 
             # Build args + runtime env are configured in fly.toml.
-            # Runtime secrets (RESEND_API_KEY, SANITY_API_READ_TOKEN, etc.)
+            # Runtime secrets (RESEND_API_KEY, CONTACT_FORM_TO_EMAIL, etc.)
             # are set via `fly secrets set`.
             - name: Deploy
               run: flyctl deploy --remote-only

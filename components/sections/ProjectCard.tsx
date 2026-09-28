@@ -6,8 +6,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Chip } from "@/components/ui/Chip";
 import { GitHubIcon } from "@/components/layout/SocialIcons";
-import { sanityImageProps, type SanityImage } from "@/lib/sanity-image";
-import type { ProjectCard as ProjectCardType } from "@/lib/types";
+import type { Img, ProjectCard as ProjectCardType } from "@/lib/types";
 
 const TIER_LABEL: Record<ProjectCardType["tier"], string> = {
   "applied-engineering": "Applied Engineering",
@@ -21,9 +20,7 @@ export function ProjectCard({
   project: ProjectCardType;
   priority?: boolean;
 }) {
-  const slides: SanityImage[] = [project.heroImage, ...(project.gallery ?? [])].filter(
-    (img): img is SanityImage => Boolean(img),
-  );
+  const slides: Img[] = [project.heroImage, ...project.gallery];
   const [index, setIndex] = useState(0);
   const articleRef = useRef<HTMLElement | null>(null);
   const [inFocus, setInFocus] = useState(true);
@@ -40,9 +37,8 @@ export function ProjectCard({
   }, []);
 
   const hasMultiple = slides.length > 1;
-  const current = slides[index];
-  const image = current ? sanityImageProps(current, { width: 1200 }) : null;
-  const primaryHref = project.links?.live || project.links?.github || undefined;
+  const image = slides[index];
+  const primaryHref = project.links.live || project.links.github;
 
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
   const next = () => setIndex((i) => (i + 1) % slides.length);
@@ -57,14 +53,13 @@ export function ProjectCard({
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-[color:var(--color-bg)]">
         {image ? (
           <Image
-            key={image.src}
+            key={image.src.src}
             src={image.src}
             alt={image.alt}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             priority={priority && index === 0}
-            placeholder={image.blurDataURL ? "blur" : undefined}
-            blurDataURL={image.blurDataURL}
+            placeholder="blur"
             className="object-cover transition duration-700 group-hover:scale-[1.04]"
           />
         ) : (
@@ -115,7 +110,7 @@ export function ProjectCard({
         <div className="flex items-baseline justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
-              {project.client ?? "personal"}
+              {project.client}
               {project.year ? ` · ${project.year}` : null}
             </p>
             <h3 className="mt-1 text-xl font-semibold">{project.title}</h3>
@@ -137,7 +132,7 @@ export function ProjectCard({
           {project.summary}
         </p>
 
-        {project.stack && project.stack.length > 0 && (
+        {project.stack.length > 0 && (
           <ul className="mt-auto flex flex-wrap gap-1.5 pt-2">
             {project.stack.slice(0, 6).map((s) => (
               <li key={s}>
@@ -147,7 +142,7 @@ export function ProjectCard({
           </ul>
         )}
 
-        {project.links?.github && (
+        {project.links.github && (
           <a
             href={project.links.github}
             target="_blank"

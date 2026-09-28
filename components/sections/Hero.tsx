@@ -8,11 +8,10 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { BlinkingCursor } from "@/components/ui/BlinkingCursor";
 import { Chip } from "@/components/ui/Chip";
-import { sanityImageProps, type SanityImage } from "@/lib/sanity-image";
+import type { Img } from "@/lib/types";
 
 export function Hero({
   eyebrow,
-  title,
   subtitle,
   availability,
   logo,
@@ -21,27 +20,13 @@ export function Hero({
   secondaryButtonText,
 }: {
   eyebrow: string;
-  title: string;
   subtitle: string;
   availability?: string | null;
-  logo?: SanityImage | null;
-  logoDark?: SanityImage | null;
+  logo: Img;
+  logoDark: Img;
   primaryButtonText: string;
   secondaryButtonText: string;
 }) {
-  const lightLogo = logo ? sanityImageProps(logo, { height: 512 }) : null;
-  const darkLogo = logoDark ? sanityImageProps(logoDark, { height: 512 }) : null;
-
-  const lightSrc = lightLogo?.src ?? "/images/logo.svg";
-  const lightAlt = lightLogo?.alt || title;
-  const lightWidth = lightLogo?.width ?? 512;
-  const lightHeight = lightLogo?.height ?? 512;
-
-  // If no dark variant uploaded, fall back to the light one (so dark mode still shows something).
-  const darkSrc = darkLogo?.src ?? lightSrc;
-  const darkAlt = darkLogo?.alt || lightAlt;
-  const darkWidth = darkLogo?.width ?? lightWidth;
-  const darkHeight = darkLogo?.height ?? lightHeight;
   const reduce = useReducedMotion();
 
   return (
@@ -81,18 +66,14 @@ export function Hero({
           className="mt-6"
         >
           <Image
-            src={lightSrc}
-            alt={lightAlt}
-            width={lightWidth}
-            height={lightHeight}
+            src={logo.src}
+            alt={logo.alt}
             priority
             className="block h-40 w-auto dark:hidden sm:h-56 lg:h-64 xl:h-72"
           />
           <Image
-            src={darkSrc}
-            alt={darkAlt}
-            width={darkWidth}
-            height={darkHeight}
+            src={logoDark.src}
+            alt={logoDark.alt}
             priority
             className="hidden h-40 w-auto dark:block sm:h-56 lg:h-64 xl:h-72"
           />
