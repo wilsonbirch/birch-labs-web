@@ -103,7 +103,6 @@ export function Footer() {
           className="flex flex-col gap-2 py-6 text-xs text-[color:var(--color-footer-fg-muted)] sm:flex-row sm:items-center sm:justify-between"
         >
           <p>© {new Date().getFullYear()} {site.businessName}. All rights reserved.</p>
-          <p>Built with Next.js.</p>
         </Container>
       </div>
     </footer>
