@@ -22,7 +22,7 @@ export function CTA({
   const cta = buttonText ?? "Start a project →";
 
   return (
-    <Section id="contact-cta" spacing="none" className="relative overflow-hidden pt-12 pb-24 sm:pt-16 sm:pb-32">
+    <Section id="contact-cta" spacing="none" className="relative overflow-hidden py-12 sm:py-16">
       <span className="noise-overlay" aria-hidden />
       <Container width="wide" className="relative">
         <MotionFadeIn className="text-center">

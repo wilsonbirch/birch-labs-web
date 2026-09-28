@@ -81,7 +81,7 @@ export function HomeScrollStack({
 
         {/* Back face — CTA, pre-rotated so it's readable once the card flips */}
         <div
-          className="absolute inset-0 flex items-start pt-[24vh]"
+          className="absolute inset-0 flex items-center-safe"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
