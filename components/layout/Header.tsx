@@ -10,7 +10,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-[color:var(--color-rule)] bg-[color:var(--color-bg)]/85 backdrop-blur supports-[backdrop-filter]:bg-[color:var(--color-bg)]/70">
+    <header className="sticky top-0 z-40 border-b-2 border-[color:var(--color-rule)] bg-[color:var(--color-bg)]/85 backdrop-blur supports-[backdrop-filter]:bg-[color:var(--color-bg)]/70">
       <Container width="wide" as="div" className="flex h-16 items-center gap-6 lg:h-20">
         <Logo businessName={site.businessName} />
 
