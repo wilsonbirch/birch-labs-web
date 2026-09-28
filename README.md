@@ -91,7 +91,7 @@ docker build --build-arg NEXT_PUBLIC_SITE_URL=https://example.com -t birch-labs-
 
 `NEXT_PUBLIC_*` values are inlined at build time. Runtime secrets (`RESEND_API_KEY`, `CONTACT_FORM_TO_EMAIL`) are supplied by the platform at container start.
 
-`fly.toml` deploys the Fly app `birch-labs-web` (region `yyz`, scales to zero) at https://birch-labs-web.fly.dev, with `birchlabs.ca` as the canonical URL. Run `fly deploy`, or trigger `.github/workflows/deploy.yml` from the Actions tab. That workflow uses the `FLY_API_TOKEN` repo secret, which is a deploy token scoped to this app. Runtime secrets are set with `fly secrets set KEY=value`: `RESEND_API_KEY`, `CONTACT_FORM_TO_EMAIL`, and `CONTACT_FORM_FROM_EMAIL`.
+`fly.toml` deploys the Fly app `birch-labs-web` (region `yyz`, scales to zero) at https://birch-labs-web.fly.dev, with `birchlabs.ca` as the canonical URL. Every merge to `main` deploys automatically through `.github/workflows/deploy.yml`. You can also trigger that workflow from the Actions tab, or run `fly deploy` locally. That workflow uses the `FLY_API_TOKEN` repo secret, which is a deploy token scoped to this app. Runtime secrets are set with `fly secrets set KEY=value`: `RESEND_API_KEY`, `CONTACT_FORM_TO_EMAIL`, and `CONTACT_FORM_FROM_EMAIL`.
 
 ## Known limits
 
