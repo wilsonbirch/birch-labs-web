@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for next-sanity-template on 2026-04-20T22:32:38-04:00
+# Fly.io config for birchlabs.ca.
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'next-sanity-template'
-primary_region = 'iad'
+app = 'birch-labs-web'
+primary_region = 'yyz'
 
 [build]
   dockerfile = 'Dockerfile'
@@ -13,18 +13,20 @@ primary_region = 'iad'
   # time. They are not secret. Bump NEXT_PUBLIC_SITE_URL when you
   # attach a custom domain.
   [build.args]
-    NEXT_PUBLIC_SITE_URL = 'https://next-sanity-template.fly.dev'
+    NEXT_PUBLIC_SITE_URL = 'https://birchlabs.ca'
 
 # Runtime config — visible in fly.toml (i.e. in git). Only put
-# non-secret values here. For RESEND_API_KEY,
-# CONTACT_FORM_TO_EMAIL, etc. use:
-#   fly secrets set KEY=value
+# non-secret values here. RESEND_API_KEY, CONTACT_FORM_TO_EMAIL, and
+# CONTACT_FORM_FROM_EMAIL are Fly secrets (fly secrets set KEY=value);
+# without them the contact form returns 500 in production.
 [env]
   NODE_ENV = 'production'
 
 [http_service]
   internal_port = 3000
   force_https = true
+  # Scales to zero when idle: near-free, but the first visit after idle
+  # cold-starts (~2-5s). Set min_machines_running = 1 to keep one warm.
   auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
