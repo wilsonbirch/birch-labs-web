@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-import { contactSchema, type ContactInput, type ContactResult } from "@/lib/contact-schema";
+import {
+  contactSchema,
+  MESSAGE_MAX,
+  MESSAGE_MIN,
+  type ContactInput,
+  type ContactResult,
+} from "@/lib/contact-schema";
 
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
 
@@ -101,6 +107,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           rows={6}
           value={values.message}
           onChange={(e) => update("message", e.target.value)}
+          maxLength={MESSAGE_MAX}
           className={`${INPUT_CLASS} resize-y`}
           aria-describedby="message-hint"
         />
@@ -108,11 +115,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           id="message-hint"
           className="mt-1 block text-xs text-[color:var(--color-ink-muted)]"
         >
-          {values.message.trim().length < 10
-            ? `${10 - values.message.trim().length} more character${
-                10 - values.message.trim().length === 1 ? "" : "s"
-              } needed (minimum 10)`
-            : `${values.message.trim().length} / 4000`}
+          <MessageCount length={values.message.trim().length} />
         </span>
       </Field>
 
@@ -145,6 +148,22 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
       </button>
     </form>
   );
+}
+
+/** "-5" while under the minimum (counting up toward it), then the plain character count. */
+function MessageCount({ length }: { length: number }) {
+  const remaining = MESSAGE_MIN - length;
+  if (remaining > 0) {
+    return (
+      <>
+        <span aria-hidden>-{remaining}</span>
+        <span className="sr-only">
+          {remaining} more character{remaining === 1 ? "" : "s"} needed
+        </span>
+      </>
+    );
+  }
+  return <>{length}</>;
 }
 
 function Field({

@@ -6,14 +6,17 @@
 
 import { z } from "zod";
 
+export const MESSAGE_MIN = 10;
+export const MESSAGE_MAX = 4000;
+
 export const contactSchema = z.object({
   name: z.string().trim().min(1, "Required").max(120),
   email: z.string().trim().toLowerCase().email("Enter a valid email"),
   message: z
     .string()
     .trim()
-    .min(10, "A short message helps us reply")
-    .max(4000, "Keep it under 4000 characters"),
+    .min(MESSAGE_MIN, "A short message helps us reply")
+    .max(MESSAGE_MAX, `Keep it under ${MESSAGE_MAX} characters`),
   // Honeypot — real users leave this empty.
   website: z.string().optional(),
 });
