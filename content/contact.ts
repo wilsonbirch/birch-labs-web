@@ -8,6 +8,6 @@ export const contact = {
   } satisfies Seo,
   heading: "Start a project",
   intro:
-    "Tell me about what you're building. I'll reply within 48 hours — even if the answer is 'not a fit right now.'",
-  successMessage: "Got it. I'll be in touch within 48 hours.",
+    "Tell me about what you're building, big or small, and I'll follow up with honest thoughts and next steps.",
+  successMessage: "Got it, thanks! I'll be in touch soon.",
 };
