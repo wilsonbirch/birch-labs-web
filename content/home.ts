@@ -25,6 +25,6 @@ export const home = {
   ctaEyebrow: "// let's build",
   ctaHeading: "Have a project?",
   ctaBody:
-    "Short-form pitches welcome. Send a paragraph about what you're building, and I'll reply within 48 hours with honest thoughts and a rough estimate.",
+    "Short-form pitches welcome. Send a paragraph about what you're building, and I'll reply with honest thoughts and a rough estimate.",
   ctaButtonText: "Start a project →",
 };
