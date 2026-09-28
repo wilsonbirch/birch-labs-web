@@ -36,9 +36,3 @@ export type ServiceItem = {
   bullets?: string[] | null;
   icon?: string | null;
 };
-
-export type ServiceTier = {
-  label: string;
-  tagline?: string | null;
-  services: ServiceItem[];
-};

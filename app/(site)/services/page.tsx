@@ -1,5 +1,5 @@
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { TechMarquee } from "@/components/sections/TechMarquee";
-import { TwoTierServices } from "@/components/sections/TwoTierServices";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { services } from "@/content/services";
@@ -23,8 +23,8 @@ export default function ServicesPage() {
           </p>
         </Container>
       </Section>
+      <ServicesGrid services={services.services} />
       <TechMarquee items={services.stack} eyebrow={services.stackEyebrow} />
-      <TwoTierServices tiers={services.tiers} />
     </>
   );
 }
