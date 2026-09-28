@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
-import { sanityImageUrl } from "@/lib/sanity-image";
-import { getSiteSettings } from "@/lib/site";
+import { site } from "@/content/site";
+import { seoMetadata } from "@/lib/metadata";
 
 import "./globals.css";
 
@@ -20,34 +20,17 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
-  const title = settings.defaultSeo.title || settings.businessName;
-  const description = settings.defaultSeo.description || settings.tagline || undefined;
-  const ogImage = sanityImageUrl(settings.defaultSeo.ogImage, { width: 1200, height: 630 });
+const base = seoMetadata(site.seo);
 
-  return {
-    metadataBase: new URL(siteUrl),
-    title: {
-      default: title,
-      template: `%s | ${settings.businessName}`,
-    },
-    description,
-    openGraph: {
-      type: "website",
-      siteName: settings.businessName,
-      title,
-      description,
-      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
-    },
-    twitter: {
-      card: ogImage ? "summary_large_image" : "summary",
-      title,
-      description,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
-}
+export const metadata: Metadata = {
+  ...base,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: site.seo.title,
+    template: `%s | ${site.businessName}`,
+  },
+  openGraph: { ...base.openGraph, type: "website", siteName: site.businessName },
+};
 
 // Dark-first: default to dark unless the user has explicitly chosen light.
 const themeScript = `(()=>{try{var t=localStorage.getItem('theme');var d=t==='light'?false:(t==='dark'||!t||t==='system'||matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`;

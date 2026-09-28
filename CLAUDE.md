@@ -4,21 +4,21 @@ Before declaring any task "complete", run ALL THREE checks. Each catches a class
 
 ```bash
 npm run lint            # ESLint — Next.js + React rules
-npm run typecheck       # tsc --noEmit — whole-program type errors
-npm run build           # next build — production bundle + static prerender against Sanity
+npm run typecheck       # next typegen + tsc --noEmit — whole-program type errors
+npm run build           # next build — production bundle + static prerender
 ```
 
 What each uniquely catches:
 
 - **lint** — stale-closure `useEffect` deps (`react-hooks/exhaustive-deps`), missing `key` props in `.map()`, dead variables, a11y regressions, and Next's own rules around `<Image>`, `<Link>`, and metadata. Errors fail the script; warnings are advisory.
-- **typecheck** — whole-program type errors. `tsc --noEmit` walks the entire graph (including server components, route handlers, and Sanity schema files) and surfaces type mismatches across module boundaries — including drift between GROQ query projections in `lib/queries.ts` and the corresponding TS types in `lib/types.ts` / page-level type definitions.
-- **build** — runs the full Next 16 production pipeline (Turbopack compile + static page generation). Only this catches: server/client boundary leaks (`"use client"` placement), prerender failures from misconfigured Sanity queries, Tailwind CSS v4 + PostCSS resolution issues, and broken `<Image>` remote-pattern config. **Note:** the static prerender phase fetches real content for `/`, `/work`, `/services`, `/about`, and `/contact` — so a build run requires a working Sanity project ID. Locally, `.env.local` provides this; CI injects it via the workflow env block.
+- **typecheck** — whole-program type errors. `next typegen` first writes `next-env.d.ts` (gitignored; it declares the static image-import types), then `tsc --noEmit` walks the entire graph (including server components and route handlers) and surfaces type mismatches across module boundaries — including drift between the content files in `content/` and the types in `lib/types.ts` / component props.
+- **build** — runs the full Next 16 production pipeline (Turbopack compile + static page generation). Only this catches: server/client boundary leaks (`"use client"` placement), prerender failures, broken static image imports from `content/images/`, and Tailwind CSS v4 + PostCSS resolution issues. Content is local, so a build needs no network access or env vars.
 
 There is no test suite in this repo yet (no Vitest, no Playwright). If/when one is added, expand this list — don't fold the new checks silently into `build`.
 
-**Local prerequisites:** `.env.local` must contain valid `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, and `NEXT_PUBLIC_SANITY_API_VERSION` (otherwise `lib/env.ts` throws at boot). The contact form (`/api/contact`) additionally needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200, so dev work doesn't require a Resend account.
+**Local prerequisites:** none to build or run. The contact form (`/api/contact`) needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200, so dev work doesn't require a Resend account.
 
-CI runs all three via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job (`lint · typecheck · build`) — fast enough that parallelism isn't worth the complexity. The build step injects the real Sanity project ID via env (the values are public, baked into the JS bundle anyway). A green CI run is the floor, not a victory lap.
+CI runs all three via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job (`lint · typecheck · build`) — fast enough that parallelism isn't worth the complexity. A green CI run is the floor, not a victory lap.
 
 ## Plan Mode Instruction
 

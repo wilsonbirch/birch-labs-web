@@ -1,10 +1,9 @@
 import Image from "next/image";
 
 import { Container } from "@/components/ui/Container";
-import { PortableText } from "@/components/ui/PortableText";
 import { Section } from "@/components/ui/Section";
 import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
-import { sanityImageProps, type SanityImage } from "@/lib/sanity-image";
+import type { Img } from "@/lib/types";
 
 export type QuickFact = { label: string; value: string };
 
@@ -15,14 +14,15 @@ export function About({
   quickFacts,
 }: {
   heading?: string | null;
-  body?: unknown;
-  portrait?: SanityImage | null;
+  /** One string per paragraph. */
+  body?: string[] | null;
+  portrait?: Img | null;
   quickFacts?: QuickFact[] | null;
 }) {
-  const hasBody = Array.isArray(body) && body.length > 0;
+  const paragraphs = body ?? [];
+  const hasBody = paragraphs.length > 0;
   const facts = (quickFacts ?? []).filter((f) => f && f.label && f.value);
-  const image = portrait ? sanityImageProps(portrait, { width: 800 }) : null;
-  if (!heading && !hasBody && !image && facts.length === 0) return null;
+  if (!heading && !hasBody && !portrait && facts.length === 0) return null;
 
   return (
     <Section
@@ -32,16 +32,15 @@ export function About({
     >
       <Container width="wide">
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          {image && (
+          {portrait && (
             <MotionFadeIn className="lg:col-span-5">
               <div className="relative aspect-[4/6] w-full max-w-md overflow-hidden rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] lg:max-w-none">
                 <Image
-                  src={image.src}
-                  alt={image.alt}
+                  src={portrait.src}
+                  alt={portrait.alt}
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
-                  placeholder={image.blurDataURL ? "blur" : undefined}
-                  blurDataURL={image.blurDataURL}
+                  placeholder="blur"
                   className="object-cover"
                 />
               </div>
@@ -49,7 +48,7 @@ export function About({
           )}
           <MotionFadeIn
             delay={0.1}
-            className={image ? "lg:col-span-7" : "lg:col-span-8 lg:col-start-3"}
+            className={portrait ? "lg:col-span-7" : "lg:col-span-8 lg:col-start-3"}
           >
             {heading && (
               <h2 className="font-display text-4xl leading-[1.05] sm:text-5xl">
@@ -62,7 +61,13 @@ export function About({
                   heading ? "mt-6" : ""
                 }`}
               >
-                <PortableText value={body} />
+                <div className="space-y-5">
+                  {paragraphs.map((p) => (
+                    <p key={p} className="text-lg leading-relaxed text-[color:var(--color-ink-muted)]">
+                      {p}
+                    </p>
+                  ))}
+                </div>
               </div>
             )}
             {facts.length > 0 && (

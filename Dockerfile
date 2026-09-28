@@ -11,16 +11,9 @@ ENV NODE_ENV="production"
 FROM base AS build
 
 # NEXT_PUBLIC_* values must be inlined into the client bundle at build
-# time — they're not picked up from runtime env. Pass these as
+# time — they're not picked up from runtime env. Pass this as
 # --build-arg on `docker build`.
-ARG NEXT_PUBLIC_SANITY_PROJECT_ID
-ARG NEXT_PUBLIC_SANITY_DATASET
-ARG NEXT_PUBLIC_SANITY_API_VERSION
 ARG NEXT_PUBLIC_SITE_URL
-
-ENV NEXT_PUBLIC_SANITY_PROJECT_ID=$NEXT_PUBLIC_SANITY_PROJECT_ID
-ENV NEXT_PUBLIC_SANITY_DATASET=$NEXT_PUBLIC_SANITY_DATASET
-ENV NEXT_PUBLIC_SANITY_API_VERSION=$NEXT_PUBLIC_SANITY_API_VERSION
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 
 RUN apt-get update -qq && \

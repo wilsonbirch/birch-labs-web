@@ -18,7 +18,7 @@ export function FeaturedProjects({ projects }: { projects: ProjectCardType[] }) 
         >
           {projects.map((p, i) => (
             <MotionFadeIn
-              key={p._id}
+              key={p.slug}
               delay={i * 0.08}
               className="w-[85%] flex-shrink-0 snap-start sm:w-[60%] md:w-[46%] lg:w-[32%]"
             >

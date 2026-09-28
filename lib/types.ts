@@ -1,22 +1,31 @@
-import type { SanityImage } from "@/lib/sanity-image";
+import type { StaticImageData } from "next/image";
+
+/** A statically imported image — next/image reads width, height, and blur data from `src`. */
+export type Img = { src: StaticImageData; alt: string };
+
+/** Per-page SEO. `ogImage` is a path under /public. */
+export type Seo = { title: string; description: string; ogImage?: string };
+
+export type SocialLinks = Partial<
+  Record<"github" | "linkedin" | "twitter" | "instagram" | "facebook", string>
+>;
 
 export type ProjectTier = "applied-engineering" | "marketing-site";
 
 export type ProjectCard = {
-  _id: string;
+  slug: string;
   title: string;
-  slug: string | null;
-  client: string | null;
-  year: number | null;
+  client: string;
+  year: number;
   tier: ProjectTier;
   summary: string;
-  role: string | null;
-  stack: string[] | null;
-  heroImage: SanityImage | null;
-  gallery: SanityImage[] | null;
-  links: { live?: string | null; github?: string | null } | null;
-  featured: boolean | null;
-  order: number | null;
+  role: string;
+  stack: string[];
+  heroImage: Img;
+  gallery: Img[];
+  links: { live?: string; github?: string };
+  /** Long-form write-up, one string per paragraph. Not rendered yet. */
+  body: string[];
 };
 
 export type ServiceItem = {

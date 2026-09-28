@@ -1,66 +1,22 @@
-import type { Metadata } from "next";
-
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { contactPageQuery } from "@/lib/queries";
-import { sanityFetch } from "@/lib/sanity";
-import { sanityImageUrl, type SanityImage } from "@/lib/sanity-image";
+import { contact } from "@/content/contact";
+import { seoMetadata } from "@/lib/metadata";
 
-export const revalidate = 60;
+export const metadata = seoMetadata(contact.seo);
 
-type ContactPageData = {
-  heading?: string | null;
-  intro?: string | null;
-  successMessage?: string | null;
-  seo?: { title?: string | null; description?: string | null; ogImage?: SanityImage | null } | null;
-};
-
-export async function generateMetadata(): Promise<Metadata> {
-  const data = await sanityFetch<ContactPageData | null>({
-    query: contactPageQuery,
-    tags: ["contactPage"],
-  });
-  const title = data?.seo?.title ?? data?.heading ?? undefined;
-  const description = data?.seo?.description ?? data?.intro ?? undefined;
-  const ogImage = sanityImageUrl(data?.seo?.ogImage, { width: 1200, height: 630 });
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
-    },
-    twitter: {
-      card: ogImage ? "summary_large_image" : "summary",
-      title,
-      description,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
-}
-
-export default async function ContactPage() {
-  const data = await sanityFetch<ContactPageData | null>({
-    query: contactPageQuery,
-    tags: ["contactPage"],
-  });
-
+export default function ContactPage() {
   return (
     <Section spacing="lg">
       <Container width="narrow" className="space-y-10">
         <div>
-          {data?.heading && (
-            <h1 className="font-display text-5xl leading-[1.0] sm:text-6xl lg:text-7xl">
-              {data.heading}
-            </h1>
-          )}
-          {data?.intro && (
-            <p className="mt-4 text-lg text-[color:var(--color-ink-muted)]">{data.intro}</p>
-          )}
+          <h1 className="font-display text-5xl leading-[1.0] sm:text-6xl lg:text-7xl">
+            {contact.heading}
+          </h1>
+          <p className="mt-4 text-lg text-[color:var(--color-ink-muted)]">{contact.intro}</p>
         </div>
-        <ContactForm successMessage={data?.successMessage} />
+        <ContactForm successMessage={contact.successMessage} />
       </Container>
     </Section>
   );

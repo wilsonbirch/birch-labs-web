@@ -11,7 +11,7 @@ import {
   TwitterIcon,
 } from "@/components/layout/SocialIcons";
 import { navLinks } from "@/lib/nav";
-import { getSiteSettings } from "@/lib/site";
+import { site } from "@/content/site";
 
 const SOCIAL_LINKS = [
   { key: "github", label: "GitHub", Icon: GitHubIcon },
@@ -21,11 +21,9 @@ const SOCIAL_LINKS = [
   { key: "facebook", label: "Facebook", Icon: FacebookIcon },
 ] as const;
 
-export async function Footer() {
-  const settings = await getSiteSettings();
-
+export function Footer() {
   const socials = SOCIAL_LINKS.flatMap(({ key, label, Icon }) => {
-    const href = settings.social[key];
+    const href = site.social[key];
     return href ? [{ key, label, href, Icon }] : [];
   });
 
@@ -33,15 +31,15 @@ export async function Footer() {
     <footer className="border-t border-[color:var(--color-rule)] bg-[color:var(--color-footer-bg)] text-[color:var(--color-footer-fg)]">
       <Container width="wide" as="div" className="flex flex-col gap-12 py-16 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="lg:max-w-md">
-          <Logo businessName={settings.businessName} logo={settings.logo} />
-          {settings.tagline && (
+          <Logo businessName={site.businessName} />
+          {site.tagline && (
             <p className="mt-4 font-display text-lg leading-snug text-[color:var(--color-footer-fg)]">
-              {settings.tagline}
+              {site.tagline}
             </p>
           )}
-          {settings.footerText && (
+          {site.footerText && (
             <p className="mt-4 text-sm leading-relaxed text-[color:var(--color-footer-fg-muted)]">
-              {settings.footerText}
+              {site.footerText}
             </p>
           )}
         </div>
@@ -69,32 +67,32 @@ export async function Footer() {
             Contact
           </h3>
           <ul className="mt-4 space-y-3 text-sm">
-            {settings.email && (
+            {site.email && (
               <li className="flex items-center gap-3">
                 <Mail aria-hidden className="h-4 w-4 text-[color:var(--color-footer-fg-muted)]" />
                 <a
-                  href={`mailto:${settings.email}`}
+                  href={`mailto:${site.email}`}
                   className="text-[color:var(--color-footer-fg)] opacity-80 transition hover:opacity-100"
                 >
-                  {settings.email}
+                  {site.email}
                 </a>
               </li>
             )}
-            {settings.phone && (
+            {site.phone && (
               <li className="flex items-center gap-3">
                 <Phone aria-hidden className="h-4 w-4 text-[color:var(--color-footer-fg-muted)]" />
                 <a
-                  href={`tel:${settings.phone}`}
+                  href={`tel:${site.phone}`}
                   className="text-[color:var(--color-footer-fg)] opacity-80 transition hover:opacity-100"
                 >
-                  {settings.phone}
+                  {site.phone}
                 </a>
               </li>
             )}
-            {settings.address && (
+            {site.address && (
               <li className="flex items-center gap-3 text-[color:var(--color-footer-fg)] opacity-80">
                 <MapPin aria-hidden className="h-4 w-4 text-[color:var(--color-footer-fg-muted)]" />
-                <span>{settings.address}</span>
+                <span>{site.address}</span>
               </li>
             )}
           </ul>
@@ -124,8 +122,8 @@ export async function Footer() {
           as="div"
           className="flex flex-col gap-2 py-6 text-xs text-[color:var(--color-footer-fg-muted)] sm:flex-row sm:items-center sm:justify-between"
         >
-          <p>© {new Date().getFullYear()} {settings.businessName}. All rights reserved.</p>
-          <p>Built with Next.js + Sanity.</p>
+          <p>© {new Date().getFullYear()} {site.businessName}. All rights reserved.</p>
+          <p>Built with Next.js.</p>
         </Container>
       </div>
     </footer>
