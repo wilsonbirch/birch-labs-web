@@ -70,7 +70,7 @@ export function HomeScrollStack({
       >
         {/* Front face — Hero */}
         <div
-          className="absolute inset-0 flex items-center"
+          className="absolute inset-0 flex items-center-safe"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",

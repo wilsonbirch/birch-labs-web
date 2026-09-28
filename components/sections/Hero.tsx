@@ -30,7 +30,7 @@ export function Hero({
   const reduce = useReducedMotion();
 
   return (
-    <Section spacing="none" className="relative overflow-hidden py-12 sm:py-16">
+    <Section spacing="none" className="relative overflow-hidden py-12 sm:py-16 [@media(max-height:800px)]:py-6">
       <span className="noise-overlay" aria-hidden />
       <Container width="wide" className="relative">
         {availability && (
@@ -65,17 +65,20 @@ export function Hero({
           transition={{ duration: 0.7, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="mt-6"
         >
+          {/* max-h caps the wordmark by window height (the rem budget ≈ header + the
+              rest of the hero + padding; larger on phones, where the subtitle wraps
+              more) so the pinned hero fits on short screens. */}
           <Image
             src={logo.src}
             alt={logo.alt}
             priority
-            className="block h-40 w-auto dark:hidden sm:h-56 lg:h-64 xl:h-72"
+            className="block h-40 w-auto dark:hidden sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16"
           />
           <Image
             src={logoDark.src}
             alt={logoDark.alt}
             priority
-            className="hidden h-40 w-auto dark:block sm:h-56 lg:h-64 xl:h-72"
+            className="hidden h-40 w-auto dark:block sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16"
           />
         </motion.h1>
 
