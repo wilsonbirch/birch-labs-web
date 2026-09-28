@@ -16,7 +16,7 @@ What each uniquely catches:
 
 There is no test suite in this repo yet (no Vitest, no Playwright). If/when one is added, expand this list — don't fold the new checks silently into `build`.
 
-**Local prerequisites:** none to build or run. The contact form (`/api/contact`) needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200, so dev work doesn't require a Resend account.
+**Local prerequisites:** none to build or run. The contact form (`/api/contact`) needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200 in dev (so dev work doesn't require a Resend account), but returns a 500 in production so leads are never silently dropped.
 
 CI runs all three via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job (`lint · typecheck · build`) — fast enough that parallelism isn't worth the complexity. A green CI run is the floor, not a victory lap.
 
