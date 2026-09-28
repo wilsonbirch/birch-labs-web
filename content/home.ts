@@ -8,7 +8,6 @@ export const home = {
     title: "Birch Labs — Freelance full-stack developer · Ottawa",
     description:
       "I build production software for founders and teams: AI-powered Shopify apps, custom SaaS, and motion-rich marketing sites. Ottawa-based, ship-focused.",
-    ogImage: "/images/og-home.png",
   } satisfies Seo,
   heroEyebrow: "> freelance full-stack dev · ottawa",
   heroSubtitle:

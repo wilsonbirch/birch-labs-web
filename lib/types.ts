@@ -3,7 +3,7 @@ import type { StaticImageData } from "next/image";
 /** A statically imported image — next/image reads width, height, and blur data from `src`. */
 export type Img = { src: StaticImageData; alt: string };
 
-/** Per-page SEO. `ogImage` is a path under /public. */
+/** Per-page SEO. `ogImage` is a path under /public; defaults to the brand card. */
 export type Seo = { title: string; description: string; ogImage?: string };
 
 export type SocialLinks = Partial<

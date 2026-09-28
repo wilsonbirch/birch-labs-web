@@ -31,7 +31,7 @@ export function Footer() {
     <footer className="border-t border-[color:var(--color-rule)] bg-[color:var(--color-footer-bg)] text-[color:var(--color-footer-fg)]">
       <Container width="wide" as="div" className="flex flex-col gap-12 py-16 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="lg:max-w-md">
-          <Logo businessName={site.businessName} />
+          <Logo businessName={site.businessName} onDark />
           {site.tagline && (
             <p className="mt-4 font-display text-lg leading-snug text-[color:var(--color-footer-fg)]">
               {site.tagline}
