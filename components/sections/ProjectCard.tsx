@@ -46,7 +46,7 @@ export function ProjectCard({
   return (
     <article
       ref={articleRef}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] transition duration-300 ease-out hover:border-[color:var(--color-accent)] ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] transition duration-300 ease-out hover:border-[color:var(--color-brand)] ${
         inFocus ? "blur-0 opacity-100" : "opacity-60 blur-[2px]"
       }`}
     >
@@ -121,7 +121,7 @@ export function ProjectCard({
               target="_blank"
               rel="noreferrer noopener"
               aria-label={`Open ${project.title}`}
-              className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-full border border-[color:var(--color-rule)] transition group-hover:border-[color:var(--color-accent)] group-hover:bg-[color:var(--color-accent)] group-hover:text-[color:var(--color-accent-ink)]"
+              className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-full border border-[color:var(--color-rule)] transition group-hover:border-[color:var(--color-brand)] group-hover:bg-[color:var(--color-brand)] group-hover:text-[color:var(--color-bg)]"
             >
               <ArrowUpRight className="h-4 w-4" />
             </a>

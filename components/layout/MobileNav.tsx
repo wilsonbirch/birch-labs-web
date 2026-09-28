@@ -103,7 +103,7 @@ export function MobileNav({
                     "rounded-md px-4 py-3 font-display transition",
                     active
                       ? "bg-[color:var(--color-rule)]/60 text-[color:var(--color-brand)]"
-                      : "text-[color:var(--color-ink)] hover:bg-[color:var(--color-rule)]/40",
+                      : "text-[color:var(--color-ink)] hover:bg-[color:var(--color-rule)]/40 hover:text-[color:var(--color-brand)] active:text-[color:var(--color-brand-soft)]",
                   )}
                 >
                   {link.label}

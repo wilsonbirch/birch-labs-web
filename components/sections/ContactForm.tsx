@@ -7,7 +7,7 @@ import { contactSchema, type ContactInput, type ContactResult } from "@/lib/cont
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
 
 const INPUT_CLASS =
-  "block w-full rounded-md border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] px-[0.9rem] py-[0.65rem] text-base leading-[1.4] text-[color:var(--color-ink)] focus:outline-2 focus:outline-offset-2 focus:outline-[color:var(--color-accent)]";
+  "block w-full rounded-md border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] px-[0.9rem] py-[0.65rem] text-base leading-[1.4] text-[color:var(--color-ink)] focus:outline-2 focus:outline-offset-2 focus:outline-[color:var(--color-brand)]";
 
 const INITIAL: ContactInput = {
   name: "",
