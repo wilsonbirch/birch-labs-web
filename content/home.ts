@@ -14,11 +14,11 @@ export const home = {
     "Need a lead for your next software project, or an extra set of hands? Let's build something great together.",
   heroLogo: {
     src: wordmark,
-    alt: "BIRCH LABS written logo (light mode)",
+    alt: "Birch Labs",
   } satisfies Img,
   heroLogoDark: {
     src: wordmarkWhite,
-    alt: "BIRCH LABS written logo (dark mode)",
+    alt: "Birch Labs",
   } satisfies Img,
   heroPrimaryButtonText: "See the work",
   heroSecondaryButtonText: "Start a project →",

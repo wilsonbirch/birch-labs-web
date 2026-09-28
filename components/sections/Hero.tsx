@@ -53,13 +53,13 @@ export function Hero({
             src={logo.src}
             alt={logo.alt}
             priority
-            className="block h-40 w-auto dark:hidden sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16"
+            className="block h-40 w-auto dark:hidden sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16 max-w-full object-contain object-left"
           />
           <Image
             src={logoDark.src}
             alt={logoDark.alt}
             priority
-            className="hidden h-40 w-auto dark:block sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16"
+            className="hidden h-40 w-auto dark:block sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16 max-w-full object-contain object-left"
           />
         </motion.h1>
 
