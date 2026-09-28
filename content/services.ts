@@ -75,6 +75,12 @@ export const services = {
       ],
     },
     {
+      title: "Data pipelines & scraping",
+      description: "Scheduled scrapers that turn messy sources into clean, alertable data.",
+      icon: "workflow",
+      bullets: ["Puppeteer scrapers & schedules", "PDF & document parsing", "Change detection & alerts"],
+    },
+    {
       title: "Memberships & payments",
       description:
         "Subscriptions, tiers, and paywalls on Stripe, including moving members off another platform.",
@@ -110,6 +116,12 @@ export const services = {
       description: "Fast by default. Lighthouse 95+ and sensible on-page SEO come in the box.",
       icon: "zap",
       bullets: ["Core Web Vitals", "Schema.org & OG", "Edge / ISR where it helps"],
+    },
+    {
+      title: "Accessibility audits",
+      description: "Find and fix WCAG issues before your users do.",
+      icon: "accessibility",
+      bullets: ["WCAG AA audits", "Accessibility linting in CI", "Keyboard & screen reader fixes"],
     },
     {
       title: "DevOps & cloud infrastructure",
