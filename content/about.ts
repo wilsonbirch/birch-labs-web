@@ -19,12 +19,11 @@ export const about = {
   } satisfies Img,
   /** One string per paragraph. */
   body: [
-    "Mechanical engineering grad from Carleton University, former U Sports football player, now building software full-time. The bridge between the two: a stubborn love of solving the actual problem, not the polished-up version of it. I'm happiest in the messy middle of a project, where the spec is half-written and the answer isn't obvious yet. Lately that's meant shipping AI pipelines, marketing sites, and product surfaces for early-stage teams under the Birch Labs banner.",
+    "Mechanical engineering grad from Carleton University, former U Sports football player, now building software full-time. Easy problems are already solved. I'm searching for the hard ones. Lately that's meant native apps, AI pipelines, and membership platforms for growing teams under the Birch Labs banner.",
   ],
   quickFacts: [
     { label: "EXPERIENCE", value: "5+ Years Software Engineering" },
     { label: "BACKGROUND", value: "Mechanical Engineering Graduate" },
-    { label: "ATHLETICS", value: "USports Football, Carleton University" },
     { label: "NOW", value: "Founder & engineer at Birch Labs" },
     { label: "BASED IN", value: "Ottawa, On." },
   ] satisfies QuickFact[],

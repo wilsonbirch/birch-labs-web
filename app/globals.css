@@ -68,22 +68,26 @@
   --color-footer-bg: #003087;
   --color-footer-fg: #ffffff;
   --color-footer-fg-muted: rgba(255, 255, 255, 0.7);
+  --color-footer-rule: #e2e8f0;
 }
 
 .dark {
   --color-bg: #0d131c;
   --color-surface: #161f2c;
   --color-ink: #ffffff;
-  --color-ink-muted: #ffffff;
+  --color-ink-muted: #cbd5e1; /* slate-300: 13:1 on Ink, keeps headings dominant */
   --color-rule: #334155;
   --color-brand: #60a5fa;
   --color-brand-soft: #93c5fd;
   --color-brand-warm: #003087;
   --color-accent: #ffb81c;
   --color-accent-ink: #0d131c;
-  --color-footer-bg: #003087;
+  /* Royal is a heavy slab on a near-black page: dark mode uses the card
+     surface with a brand-blue top rule instead. */
+  --color-footer-bg: #161f2c;
   --color-footer-fg: #ffffff;
   --color-footer-fg-muted: rgba(255, 255, 255, 0.7);
+  --color-footer-rule: #60a5fa;
 }
 
 html {
