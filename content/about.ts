@@ -19,7 +19,7 @@ export const about = {
   } satisfies Img,
   /** One string per paragraph. */
   body: [
-    "Mechanical engineering grad from Carleton University, former U Sports football player, now building software full-time. Easy problems are already solved. I'm searching for the hard ones. Lately that's meant shipping AI pipelines, marketing sites, and product surfaces for early-stage teams under the Birch Labs banner.",
+    "Mechanical engineering grad from Carleton University, former U Sports football player, now building software full-time. Easy problems are already solved. I'm searching for the hard ones. Lately that's meant native apps, AI pipelines, and membership platforms for growing teams under the Birch Labs banner.",
   ],
   quickFacts: [
     { label: "EXPERIENCE", value: "5+ Years Software Engineering" },
