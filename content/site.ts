@@ -5,7 +5,6 @@ export const site = {
   tagline: "Full-stack development for ambitious builds.",
   availability: "Currently booking — reply within 48 hours",
   email: "wilson@birchlabs.ca",
-  phone: "613-229-4163",
   address: "Ottawa, ON",
   social: {
     github: "https://github.com/wilsonbirch",

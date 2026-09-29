@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/layout/Logo";
@@ -55,17 +55,6 @@ export function Footer() {
                   className="text-[color:var(--color-footer-fg)] opacity-80 transition hover:opacity-100"
                 >
                   {site.email}
-                </a>
-              </li>
-            )}
-            {site.phone && (
-              <li className="flex items-center gap-3">
-                <Phone aria-hidden className="h-4 w-4 text-[color:var(--color-footer-fg-muted)]" />
-                <a
-                  href={`tel:${site.phone}`}
-                  className="text-[color:var(--color-footer-fg)] opacity-80 transition hover:opacity-100"
-                >
-                  {site.phone}
                 </a>
               </li>
             )}
