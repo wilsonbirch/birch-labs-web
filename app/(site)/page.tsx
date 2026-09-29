@@ -10,7 +10,7 @@ import { seoMetadata } from "@/lib/metadata";
 // Absolute: the home title already names the business, so skip the
 // layout's "%s | Birch Labs" template.
 export const metadata: Metadata = {
-  ...seoMetadata(home.seo),
+  ...seoMetadata(home.seo, "/"),
   title: { absolute: home.seo.title },
 };
 

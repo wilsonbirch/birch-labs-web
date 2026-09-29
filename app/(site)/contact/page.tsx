@@ -6,7 +6,7 @@ import { contact } from "@/content/contact";
 import { site } from "@/content/site";
 import { seoMetadata } from "@/lib/metadata";
 
-export const metadata = seoMetadata(contact.seo);
+export const metadata = seoMetadata(contact.seo, "/contact");
 
 export default function ContactPage() {
   return (
