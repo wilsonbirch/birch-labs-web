@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { about } from "@/content/about";
 import { seoMetadata } from "@/lib/metadata";
 
-export const metadata = seoMetadata(about.seo);
+export const metadata = seoMetadata(about.seo, "/about");
 
 export default function AboutPage() {
   return (

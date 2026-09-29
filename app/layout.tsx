@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
+import { JsonLd } from "@/components/ui/JsonLd";
 import { site } from "@/content/site";
 import { seoMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site-url";
+import { siteGraph } from "@/lib/structured-data";
 
 import "./globals.css";
 
@@ -18,13 +21,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const base = seoMetadata(site.seo);
 
 export const metadata: Metadata = {
   ...base,
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: site.seo.title,
     template: `%s | ${site.businessName}`,
@@ -54,6 +56,8 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="dark light" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="Site summary for LLMs" />
+        <JsonLd data={siteGraph()} />
       </head>
       <body className="flex min-h-full flex-col overflow-x-clip bg-[color:var(--color-bg)] font-sans text-[color:var(--color-ink)]">
         {children}

@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { services } from "@/content/services";
 import { seoMetadata } from "@/lib/metadata";
 
-export const metadata = seoMetadata(services.seo);
+export const metadata = seoMetadata(services.seo, "/services");
 
 export default function ServicesPage() {
   return (

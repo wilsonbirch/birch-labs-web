@@ -10,19 +10,20 @@ import {
   TwitterIcon,
 } from "@/components/layout/SocialIcons";
 import { site } from "@/content/site";
+import { SOCIAL_LABELS } from "@/lib/types";
 
-const SOCIAL_LINKS = [
-  { key: "github", label: "GitHub", Icon: GitHubIcon },
-  { key: "linkedin", label: "LinkedIn", Icon: LinkedInIcon },
-  { key: "twitter", label: "X / Twitter", Icon: TwitterIcon },
-  { key: "instagram", label: "Instagram", Icon: InstagramIcon },
-  { key: "facebook", label: "Facebook", Icon: FacebookIcon },
+const SOCIAL_ICONS = [
+  { key: "github", Icon: GitHubIcon },
+  { key: "linkedin", Icon: LinkedInIcon },
+  { key: "twitter", Icon: TwitterIcon },
+  { key: "instagram", Icon: InstagramIcon },
+  { key: "facebook", Icon: FacebookIcon },
 ] as const;
 
 export function Footer() {
-  const socials = SOCIAL_LINKS.flatMap(({ key, label, Icon }) => {
+  const socials = SOCIAL_ICONS.flatMap(({ key, Icon }) => {
     const href = site.social[key];
-    return href ? [{ key, label, href, Icon }] : [];
+    return href ? [{ key, label: SOCIAL_LABELS[key], href, Icon }] : [];
   });
 
   return (

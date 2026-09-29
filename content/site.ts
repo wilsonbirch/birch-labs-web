@@ -6,6 +6,16 @@ export const site = {
   availability: "Currently booking — reply within 48 hours",
   email: "wilson@birchlabs.ca",
   address: "Ottawa, ON",
+  owner: { name: "Wilson Birch", jobTitle: "Full-stack developer" },
+  location: { city: "Ottawa", region: "ON", country: "CA", timeZone: "Eastern Time" },
+  /** Stated for agents and search (llms.txt, JSON-LD); not shown on the page. */
+  workingModel:
+    "Based in Ottawa, Canada (Eastern Time), working remotely with clients across Canada and the US.",
+  engagements: [
+    "Contract and fixed-scope projects",
+    "Fractional technical lead or CTO",
+    "Team augmentation",
+  ],
   social: {
     github: "https://github.com/wilsonbirch",
     linkedin: "https://www.linkedin.com/in/wilson-birch/",
