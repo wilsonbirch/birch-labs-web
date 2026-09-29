@@ -1,24 +1,19 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { navLinks } from "@/lib/nav";
+import { absoluteUrl } from "@/lib/site-url";
 
 export const revalidate = 3600;
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
+/** Every public page: home, the nav pages, and contact. */
+const PAGES = ["/", ...navLinks.map((link) => link.href), "/contact"];
 
-  return [
-    {
-      url: `${siteUrl}/`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${siteUrl}/contact`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-  ];
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  return PAGES.map((path) => ({
+    url: absoluteUrl(path),
+    lastModified: now,
+    changeFrequency: path === "/" ? "weekly" : "monthly",
+    priority: path === "/" ? 1 : 0.7,
+  }));
 }
