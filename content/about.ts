@@ -24,7 +24,6 @@ export const about = {
   quickFacts: [
     { label: "EXPERIENCE", value: "5+ Years Software Engineering" },
     { label: "BACKGROUND", value: "Mechanical Engineering Graduate" },
-    { label: "ATHLETICS", value: "USports Football, Carleton University" },
     { label: "NOW", value: "Founder & engineer at Birch Labs" },
     { label: "BASED IN", value: "Ottawa, On." },
   ] satisfies QuickFact[],
