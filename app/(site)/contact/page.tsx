@@ -13,7 +13,7 @@ export default function ContactPage() {
     <Section spacing="lg">
       <Container width="narrow" className="space-y-10">
         <div>
-          <Chip tone="outline" className="mb-8">
+          <Chip tone="outline" className="mb-8 text-balance">
             <span
               aria-hidden
               className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]"

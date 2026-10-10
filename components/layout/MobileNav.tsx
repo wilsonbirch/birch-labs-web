@@ -61,7 +61,9 @@ export function MobileNav({
         aria-modal="true"
         aria-label="Site navigation"
         className={cn(
-          "fixed inset-0 z-[100] lg:hidden",
+          // overflow-hidden: the closed panel sits translated off-screen; without
+          // the clip it widens the page (iOS Safari lets you pan into it).
+          "fixed inset-0 z-[100] overflow-hidden lg:hidden",
           open ? "pointer-events-auto" : "pointer-events-none",
         )}
       >

@@ -17,12 +17,15 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2 lg:gap-4">
           <DesktopNav links={navLinks} />
 
+          {/* Shown on phones too; hidden under 360px where it no longer fits beside
+              the icons. A variant class, because cn() is plain clsx and a bare
+              `hidden` loses to Button's `inline-flex`. */}
           {headerCta && (
             <Button
               href={headerCta.href}
               variant={headerCta.style ?? "primary"}
               size="sm"
-              className="hidden lg:inline-flex"
+              className="whitespace-nowrap max-[359px]:hidden"
             >
               {headerCta.label}
             </Button>
