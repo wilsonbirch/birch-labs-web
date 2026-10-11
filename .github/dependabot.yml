@@ -21,6 +21,12 @@ updates:
       # supports ESLint 10. Unignore once that lands.
       - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
+      # TypeScript 7 (the Go port) is unsupported by typescript-eslint 8.x
+      # (peer range typescript <6.1.0), which eslint-config-next@16.x pulls
+      # in, so lint crashes on load. Hold TS majors until typescript-eslint
+      # ships TS 7 support. Unignore once that lands.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: "/"
