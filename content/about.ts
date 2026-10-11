@@ -12,7 +12,7 @@ export const about = {
   heroEyebrow: "// about",
   heroTitle: "Who's building this.",
   heroSubtitle:
-    "Engineer turned developer building production software at Birch Labs. Short contracts, real outcomes",
+    "Engineer turned developer building production software at Birch Labs. Short contracts, real outcomes.",
   portrait: {
     src: portrait,
     alt: "Self portrait, Birch Labs owner/operator Wilson Birch",
@@ -25,6 +25,6 @@ export const about = {
     { label: "EXPERIENCE", value: "5+ Years Software Engineering" },
     { label: "BACKGROUND", value: "Mechanical Engineering Graduate" },
     { label: "NOW", value: "Founder & engineer at Birch Labs" },
-    { label: "BASED IN", value: "Ottawa, On." },
+    { label: "BASED IN", value: "Ottawa, ON" },
   ] satisfies QuickFact[],
 };

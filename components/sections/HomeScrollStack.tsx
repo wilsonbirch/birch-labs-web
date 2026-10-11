@@ -48,7 +48,7 @@ export function HomeScrollStack({
 
   // Offsets = header height (h-16 / lg:h-20) + its 2px bottom border.
   const pinClass =
-    "sticky top-[calc(4rem+2px)] lg:top-[calc(5rem+2px)] min-h-[calc(100vh-4rem-2px)] lg:min-h-[calc(100vh-5rem-2px)]";
+    "sticky top-[calc(4rem+2px)] lg:top-[calc(5rem+2px)] min-h-[calc(100svh-4rem-2px)] lg:min-h-[calc(100svh-5rem-2px)]";
 
   return (
     <div

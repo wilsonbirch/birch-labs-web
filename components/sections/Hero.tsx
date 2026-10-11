@@ -48,18 +48,19 @@ export function Hero({
         >
           {/* max-h caps the wordmark by window height (the rem budget ≈ header + the
               rest of the hero + padding; larger on phones, where the subtitle wraps
-              more) so the pinned hero fits on short screens. */}
+              more) so the pinned hero fits on short screens. 30rem = measured worst
+              case on phones (66px header + 414px of hero at 320–360px wide). */}
           <Image
             src={logo.src}
             alt={logo.alt}
             priority
-            className="block h-40 w-auto dark:hidden sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16 max-w-full object-contain object-left"
+            className="block h-auto w-full dark:hidden sm:h-56 sm:w-auto lg:h-64 xl:h-72 max-h-[calc(100svh-30rem)] sm:max-h-[calc(100svh-31rem)] min-h-16 max-w-full object-contain object-left"
           />
           <Image
             src={logoDark.src}
             alt={logoDark.alt}
             priority
-            className="hidden h-40 w-auto dark:block sm:h-56 lg:h-64 xl:h-72 max-h-[calc(100svh-38rem)] sm:max-h-[calc(100svh-31rem)] min-h-16 max-w-full object-contain object-left"
+            className="hidden h-auto w-full dark:block sm:h-56 sm:w-auto lg:h-64 xl:h-72 max-h-[calc(100svh-30rem)] sm:max-h-[calc(100svh-31rem)] min-h-16 max-w-full object-contain object-left"
           />
         </motion.h1>
 

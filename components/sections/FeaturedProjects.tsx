@@ -11,7 +11,7 @@ export function FeaturedProjects({ projects }: { projects: ProjectCardType[] }) 
     <Section id="work" spacing="md" className="pt-8 sm:pt-10">
       <Container width="wide">
         <div
-          className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+          className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:scroll-px-6 sm:px-6 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
           aria-label="Projects"
           role="region"
           tabIndex={0}
