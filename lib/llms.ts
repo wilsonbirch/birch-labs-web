@@ -1,4 +1,5 @@
 import { about } from "@/content/about";
+import { contact } from "@/content/contact";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
@@ -29,7 +30,7 @@ function header(): string[] {
     "## Contact",
     "",
     `- Email: ${site.email}`,
-    `- [Project inquiry form](${absoluteUrl("/contact")}): name, email, and a short description of the project`,
+    `- [Project inquiry form](${absoluteUrl("/contact")}): name, email, a topic (${contact.topics.map((t) => t.label).join(", ")}), and a short description`,
     ...Object.entries(site.social)
       .filter(([, href]) => href)
       .map(([key, href]) => `- ${SOCIAL_LABELS[key as SocialKey]}: ${href}`),

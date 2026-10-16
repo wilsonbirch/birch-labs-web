@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 
+import { contact } from "@/content/contact";
 import {
   contactSchema,
+  DEFAULT_TOPIC,
+  isContactTopic,
   MESSAGE_MAX,
   MESSAGE_MIN,
   type ContactInput,
   type ContactResult,
+  type ContactTopic,
 } from "@/lib/contact-schema";
 
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
@@ -15,15 +19,15 @@ type FieldErrors = Partial<Record<keyof ContactInput, string>>;
 const INPUT_CLASS =
   "block w-full rounded-md border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] px-[0.9rem] py-[0.65rem] text-base leading-[1.4] text-[color:var(--color-ink)] focus:outline-2 focus:outline-offset-2 focus:outline-[color:var(--color-brand)]";
 
-const INITIAL: ContactInput = {
-  name: "",
-  email: "",
-  message: "",
-  website: "",
-};
+function initialValues(topic: ContactTopic = DEFAULT_TOPIC): ContactInput {
+  return { name: "", email: "", message: "", topic, website: "" };
+}
 
-export function ContactForm({ successMessage }: { successMessage?: string | null } = {}) {
-  const [values, setValues] = useState<ContactInput>(INITIAL);
+export function ContactForm({
+  successMessage,
+  initialTopic,
+}: { successMessage?: string | null; initialTopic?: ContactTopic } = {}) {
+  const [values, setValues] = useState<ContactInput>(() => initialValues(initialTopic));
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formError, setFormError] = useState<string | null>(null);
@@ -64,7 +68,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
         setStatus("error");
         return;
       }
-      setValues(INITIAL);
+      setValues(initialValues(initialTopic));
       setStatus("success");
     } catch {
       setFormError("Network error — please try again.");
@@ -101,6 +105,21 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
           autoComplete="email"
           className={INPUT_CLASS}
         />
+      </Field>
+      <Field label={contact.topicLabel} error={errors.topic}>
+        <select
+          value={values.topic}
+          onChange={(e) => {
+            if (isContactTopic(e.target.value)) update("topic", e.target.value);
+          }}
+          className={INPUT_CLASS}
+        >
+          {contact.topics.map((t) => (
+            <option key={t.value} value={t.value}>
+              {t.label}
+            </option>
+          ))}
+        </select>
       </Field>
       <Field label="Message" error={errors.message}>
         <textarea

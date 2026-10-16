@@ -4,11 +4,16 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { contact } from "@/content/contact";
 import { site } from "@/content/site";
+import { isContactTopic } from "@/lib/contact-schema";
 import { seoMetadata } from "@/lib/metadata";
 
 export const metadata = seoMetadata(contact.seo, "/contact");
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
+  // Links like /contact?topic=own-your-software preselect the form's topic.
+  const { topic } = await searchParams;
+  const initialTopic = isContactTopic(topic) ? topic : undefined;
+
   return (
     <Section spacing="lg">
       <Container width="narrow" className="space-y-10">
@@ -25,7 +30,7 @@ export default function ContactPage() {
           </h1>
           <p className="mt-4 text-lg text-[color:var(--color-ink-muted)]">{contact.intro}</p>
         </div>
-        <ContactForm successMessage={contact.successMessage} />
+        <ContactForm successMessage={contact.successMessage} initialTopic={initialTopic} />
       </Container>
     </Section>
   );
