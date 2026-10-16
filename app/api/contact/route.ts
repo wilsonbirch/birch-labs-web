@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-import { contactSchema, type ContactResult } from "@/lib/contact-schema";
+import { contactSchema, topicLabel, type ContactResult } from "@/lib/contact-schema";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -57,9 +57,11 @@ export async function POST(request: Request): Promise<NextResponse<ContactResult
   const toEmail = process.env.CONTACT_FORM_TO_EMAIL;
   const fromEmail = process.env.CONTACT_FORM_FROM_EMAIL || "Contact Form <onboarding@resend.dev>";
 
-  const subject = `Contact form — ${data.name}`;
+  const topic = topicLabel(data.topic);
+  const subject = `Contact form (${topic}) — ${data.name}`;
   const text = [
     `From: ${data.name} <${data.email}>`,
+    `Topic: ${topic}`,
     "",
     "Message:",
     data.message,

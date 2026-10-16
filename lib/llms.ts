@@ -1,10 +1,9 @@
 import { about } from "@/content/about";
 import { contact } from "@/content/contact";
-import { home } from "@/content/home";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
-import { work } from "@/content/work";
+import { pages } from "@/lib/pages";
 import { absoluteUrl } from "@/lib/site-url";
 import { SOCIAL_LABELS, type ProjectCard, type SocialKey } from "@/lib/types";
 
@@ -31,21 +30,13 @@ function header(): string[] {
     "## Contact",
     "",
     `- Email: ${site.email}`,
-    `- [Project inquiry form](${absoluteUrl("/contact")}): name, email, and a short description of the project`,
+    `- [Project inquiry form](${absoluteUrl("/contact")}): name, email, a topic (${contact.topics.map((t) => t.label).join(", ")}), and a short description`,
     ...Object.entries(site.social)
       .filter(([, href]) => href)
       .map(([key, href]) => `- ${SOCIAL_LABELS[key as SocialKey]}: ${href}`),
     "",
   ];
 }
-
-const pages = [
-  { name: "Home", path: "/", description: home.seo.description },
-  { name: "Work", path: "/work", description: work.seo.description },
-  { name: "Services", path: "/services", description: services.seo.description },
-  { name: "About", path: "/about", description: about.seo.description },
-  { name: "Contact", path: "/contact", description: contact.seo.description },
-];
 
 function projectLink(p: ProjectCard): string {
   return p.links.live ?? p.links.github ?? absoluteUrl("/work");

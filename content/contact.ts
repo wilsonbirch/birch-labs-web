@@ -10,4 +10,11 @@ export const contact = {
   intro:
     "Tell me about what you're building, big or small, and I'll follow up with honest thoughts and next steps.",
   successMessage: "Got it, thanks! I'll be in touch soon.",
-};
+  topicLabel: "What are you after?",
+  /** The first topic is the default. `?topic=<value>` on /contact preselects one. */
+  topics: [
+    { value: "project", label: "A software project" },
+    { value: "own-your-software", label: "Own your software (build vs buy)" },
+    { value: "other", label: "Something else" },
+  ],
+} as const;

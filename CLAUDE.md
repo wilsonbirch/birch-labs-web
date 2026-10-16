@@ -1,10 +1,11 @@
 ## Pre-merge checks
 
-Before declaring any task "complete", run ALL THREE checks. Each catches a class of failure the others miss — do not declare done from a subset:
+Before declaring any task "complete", run ALL FOUR checks. Each catches a class of failure the others miss — do not declare done from a subset:
 
 ```bash
 npm run lint            # ESLint — Next.js + React rules
 npm run typecheck       # next typegen + tsc --noEmit — whole-program type errors
+npm test                # vitest run — behaviour of the generated SEO files and shared logic
 npm run build           # next build — production bundle + static prerender
 ```
 
@@ -14,11 +15,11 @@ What each uniquely catches:
 - **typecheck** — whole-program type errors. `next typegen` first writes `next-env.d.ts` (gitignored; it declares the static image-import types), then `tsc --noEmit` walks the entire graph (including server components and route handlers) and surfaces type mismatches across module boundaries — including drift between the content files in `content/` and the types in `lib/types.ts` / component props.
 - **build** — runs the full Next 16 production pipeline (Turbopack compile + static page generation). Only this catches: server/client boundary leaks (`"use client"` placement), prerender failures, broken static image imports from `content/images/`, and Tailwind CSS v4 + PostCSS resolution issues. Content is local, so a build needs no network access or env vars.
 
-There is no test suite in this repo yet (no Vitest, no Playwright). If/when one is added, expand this list — don't fold the new checks silently into `build`.
+- **test** — Vitest unit tests (`*.test.ts`, next to the code they cover). They pin what the build can't see: that the sitemap, llms.txt and JSON-LD list every page in `lib/pages.ts`, that the contact schema accepts and rejects the right input, and that content references (like a case study's project slug) resolve. Image imports from `content/` are stubbed in `vitest.config.mts`. No Playwright yet.
 
 **Local prerequisites:** none to build or run. The contact form (`/api/contact`) needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200 in dev (so dev work doesn't require a Resend account), but returns a 500 in production so leads are never silently dropped.
 
-CI runs all three via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job (`lint · typecheck · build`) — fast enough that parallelism isn't worth the complexity. A green CI run is the floor, not a victory lap.
+CI runs all four via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job (`lint · typecheck · test · build`) — fast enough that parallelism isn't worth the complexity. A green CI run is the floor, not a victory lap.
 
 ## Plan Mode Instruction
 

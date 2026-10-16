@@ -8,12 +8,14 @@ export function CTA({
   heading,
   body,
   buttonText,
+  href = "/contact",
   email,
 }: {
   eyebrow?: string | null;
   heading?: string | null;
   body?: string | null;
   buttonText?: string | null;
+  href?: string;
   email?: string | null;
 }) {
   const eyebrowText = eyebrow ?? "// let's build";
@@ -37,7 +39,7 @@ export function CTA({
             {description}
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button href="/contact" variant="primary" size="lg">
+            <Button href={href} variant="primary" size="lg">
               {cta}
             </Button>
             {email && (
