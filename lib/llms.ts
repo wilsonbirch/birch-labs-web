@@ -1,10 +1,8 @@
 import { about } from "@/content/about";
-import { contact } from "@/content/contact";
-import { home } from "@/content/home";
 import { projects } from "@/content/projects";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
-import { work } from "@/content/work";
+import { pages } from "@/lib/pages";
 import { absoluteUrl } from "@/lib/site-url";
 import { SOCIAL_LABELS, type ProjectCard, type SocialKey } from "@/lib/types";
 
@@ -38,14 +36,6 @@ function header(): string[] {
     "",
   ];
 }
-
-const pages = [
-  { name: "Home", path: "/", description: home.seo.description },
-  { name: "Work", path: "/work", description: work.seo.description },
-  { name: "Services", path: "/services", description: services.seo.description },
-  { name: "About", path: "/about", description: about.seo.description },
-  { name: "Contact", path: "/contact", description: contact.seo.description },
-];
 
 function projectLink(p: ProjectCard): string {
   return p.links.live ?? p.links.github ?? absoluteUrl("/work");
