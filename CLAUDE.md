@@ -20,7 +20,7 @@ Unit tests use Vitest (`tests/**/*.test.ts`, config in `vitest.config.mts`, `@/`
 
 **Local prerequisites:** none to build or run. The contact form (`/api/contact`) needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200 in dev (so dev work doesn't require a Resend account), but returns a 500 in production so leads are never silently dropped.
 
-CI runs all three via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job (`lint · typecheck · build`) — fast enough that parallelism isn't worth the complexity. A green CI run is the floor, not a victory lap.
+CI runs all four via `.github/workflows/ci.yml` on every PR to `main` and via `workflow_dispatch`. There's a single sequential job, named `lint · typecheck · build` even though it also runs the tests — fast enough that parallelism isn't worth the complexity. **Don't rename that job:** the `main` ruleset requires a check with exactly that name, so a renamed job never satisfies it and every PR is blocked ("base branch policy prohibits the merge"). A green CI run is the floor, not a victory lap.
 
 ## Plan Mode Instruction
 
