@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
     build:
-        name: lint · typecheck · build
+        name: test · lint · typecheck · build
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v7
@@ -24,6 +24,9 @@ jobs:
 
             - name: Install
               run: npm ci
+
+            - name: Test
+              run: npm test
 
             - name: Lint
               run: npm run lint

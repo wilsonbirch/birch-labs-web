@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { site } from "@/content/site";
 import { seoMetadata } from "@/lib/metadata";
+import { THEME_BOOT_SCRIPT, themeCss } from "@/lib/themes";
 import { SITE_URL } from "@/lib/site-url";
 import { siteGraph } from "@/lib/structured-data";
 
@@ -38,9 +39,6 @@ export const viewport: Viewport = {
   themeColor: "#003087",
 };
 
-// Dark-first: default to dark unless the user has explicitly chosen light.
-const themeScript = `(()=>{try{var t=localStorage.getItem('theme');var d=t==='light'?false:(t==='dark'||!t||t==='system'||matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,7 +53,10 @@ export default function RootLayout({
     >
       <head>
         <meta name="color-scheme" content="dark light" />
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Theme tokens for every site theme, then pick this visit's theme before first paint
+            (see lib/themes.ts). */}
+        <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="Site summary for LLMs" />
         <JsonLd data={siteGraph()} />
       </head>
