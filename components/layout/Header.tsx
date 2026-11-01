@@ -6,7 +6,7 @@ import { site } from "@/content/site";
 import { DesktopNav } from "./DesktopNav";
 import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemePicker } from "./ThemePicker";
 
 export function Header() {
   return (
@@ -30,7 +30,7 @@ export function Header() {
               {headerCta.label}
             </Button>
           )}
-          <ThemeToggle />
+          <ThemePicker />
           <MobileNav links={navLinks} cta={headerCta} />
         </div>
       </Container>

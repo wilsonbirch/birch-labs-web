@@ -28,6 +28,7 @@ export function Hero({
 
   return (
     <Section spacing="none" className="relative overflow-hidden py-12 sm:py-16 [@media(max-height:800px)]:py-6">
+      <span className="hero-art" aria-hidden />
       <span className="noise-overlay" aria-hidden />
       <Container width="wide" className="relative">
         <motion.p
