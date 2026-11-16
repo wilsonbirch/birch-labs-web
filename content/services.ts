@@ -46,12 +46,12 @@ export const services = {
     "typescript",
     "react",
   ],
-  /** Same names as the steps on /own-your-software, so each card links there. Build or buy? is the optional start. */
+  /** Same names as the steps on /own-your-software, so each card links to its step. Build or buy? is the optional start. */
   services: [
     {
       title: "Build it",
       description:
-        "Replace a subscription, or build the tool you wish existed. Web, mobile, payments, AI, whatever it needs. Some of what I've built:",
+        "Replace a subscription, or build the tool you wish existed. Web, mobile, payments, AI, whatever it needs.",
       icon: "hammer",
       bullets: [
         "Native iOS and Android apps",
@@ -61,7 +61,7 @@ export const services = {
         "Data pipelines and scrapers",
         "Memberships and payments on Stripe",
       ],
-      href: "/own-your-software",
+      href: "/own-your-software#build-it",
     },
     {
       title: "Finish it",
@@ -75,7 +75,7 @@ export const services = {
         "Hosting in accounts you own",
         "Guardrails for building safely with AI",
       ],
-      href: "/own-your-software",
+      href: "/own-your-software#finish-it",
     },
     {
       title: "Run it",
@@ -87,7 +87,7 @@ export const services = {
         "Monitoring and alerts",
         "Small changes as you need them",
       ],
-      href: "/own-your-software",
+      href: "/own-your-software#run-it",
     },
     {
       title: "Build or buy?",
@@ -99,7 +99,7 @@ export const services = {
         "An optional audit of your subscriptions",
         "Replace, trim, renegotiate or keep, tool by tool",
       ],
-      href: "/own-your-software",
+      href: "/own-your-software#idea",
     },
   ] satisfies ServiceItem[],
 };

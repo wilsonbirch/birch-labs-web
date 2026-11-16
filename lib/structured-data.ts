@@ -62,7 +62,8 @@ export function siteGraph() {
         areaServed,
         founder: { "@id": ids.person },
         sameAs,
-        knowsAbout: services.services.map((s) => s.title),
+        // The Build it bullets are the work itself; service titles are not topics.
+        knowsAbout: services.services.find((s) => s.title === "Build it")?.bullets,
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Software development services",
@@ -128,7 +129,7 @@ export function ownYourSoftwareGraph() {
         "@type": "Service",
         "@id": `${url}#service`,
         name: ownYourSoftware.seo.title,
-        serviceType: "Build vs buy software consulting",
+        serviceType: "Custom software development and maintenance",
         description: ownYourSoftware.seo.description,
         url,
         provider: { "@id": ids.business },

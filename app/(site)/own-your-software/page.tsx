@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { CTA } from "@/components/sections/CTA";
 import { ProjectCard } from "@/components/sections/ProjectCard";
+import { Bullets } from "@/components/ui/Bullets";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -20,22 +21,6 @@ const CONTACT_HREF = "/contact?topic=own-your-software";
 const EYEBROW = "font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]";
 const H2 = "font-display mt-4 text-4xl leading-[1.05] sm:text-5xl";
 const MUTED = "text-lg leading-relaxed text-[color:var(--color-ink-muted)]";
-
-function Bullets({ items }: { items?: string[] }) {
-  if (!items || items.length === 0) return null;
-  return (
-    <ul className="mt-4 space-y-1 text-sm text-[color:var(--color-ink-muted)]">
-      {items.map((bullet) => (
-        <li key={bullet} className="flex gap-2">
-          <span aria-hidden className="text-[color:var(--color-accent)]">
-            ·
-          </span>
-          {bullet}
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export default function OwnYourSoftwarePage() {
   // Drafts are filtered out of `projects` in production, so the case study
@@ -87,7 +72,7 @@ export default function OwnYourSoftwarePage() {
           <p className={`mt-6 max-w-2xl ${MUTED}`}>{page.stepsIntro}</p>
           <ol className="mt-12 grid gap-6 sm:grid-cols-2">
             {page.steps.map((step, i) => (
-              <li key={step.title} className="flex">
+              <li key={step.id} id={step.id} className="flex scroll-mt-20 lg:scroll-mt-24">
                 <MotionFadeIn
                   delay={(i % 2) * 0.08}
                   className="flex flex-1 flex-col rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] p-6 sm:p-8"

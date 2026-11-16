@@ -13,13 +13,16 @@ import { SOCIAL_LABELS, type ProjectCard, type SocialKey } from "@/lib/types";
  * of `projects` in production builds.
  */
 
+/** Ends a sentence without doubling punctuation ("Build or buy?" stays as is). */
+const sentence = (text: string) => (/[.?!]$/.test(text) ? text : `${text}.`);
+
 const intro = `${site.businessName} is the freelance software practice of ${site.owner.name}, a ${site.owner.jobTitle.toLowerCase()}. ${site.workingModel}`;
 
 function header(): string[] {
   return [
     `# ${site.businessName}`,
     "",
-    `> ${intro} ${site.pitch} Services: ${services.services.map((s) => s.title).join(", ")}.`,
+    `> ${intro} ${site.pitch} ${sentence(`Services: ${services.services.map((s) => s.title).join(", ")}`)}`,
     "",
     `Availability: ${site.availability}.`,
     `Engagements: ${site.engagements.join("; ")}.`,

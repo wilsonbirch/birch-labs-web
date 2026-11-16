@@ -1,6 +1,7 @@
 import * as Icons from "lucide-react";
 import Link from "next/link";
 
+import { Bullets } from "@/components/ui/Bullets";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
@@ -47,27 +48,13 @@ export function ServicesGrid({ services }: { services: ServiceItem[] }) {
                     {s.description}
                   </p>
                 )}
-                {s.bullets && s.bullets.length > 0 && (
-                  <ul className="mt-4 space-y-1 text-sm text-[color:var(--color-ink-muted)]">
-                    {s.bullets.map((b) => (
-                      <li key={b} className="flex gap-2">
-                        <span
-                          aria-hidden
-                          className="text-[color:var(--color-accent)]"
-                        >
-                          ·
-                        </span>
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <Bullets items={s.bullets} />
                 {s.href && (
                   <Link
                     href={s.href}
                     className="mt-auto pt-6 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-brand)] underline-offset-4 hover:underline"
                   >
-                    How it works →
+                    How it works<span className="sr-only">: {s.title}</span> →
                   </Link>
                 )}
               </MotionFadeIn>

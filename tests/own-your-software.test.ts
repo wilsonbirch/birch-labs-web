@@ -5,6 +5,7 @@ import { ownYourSoftware } from "@/content/own-your-software";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { isContactTopic } from "@/lib/contact-schema";
+import { llmsFullTxt, llmsTxt } from "@/lib/llms";
 import { pages } from "@/lib/pages";
 import { ownYourSoftwareGraph, siteGraph } from "@/lib/structured-data";
 
@@ -39,7 +40,7 @@ describe("/own-your-software", () => {
   it("is registered, in the nav, and linked from a services card", () => {
     const page = pages.find((p) => p.path === "/own-your-software");
     expect(page?.navLabel).toBeTruthy();
-    expect(services.services.some((s) => s.href === "/own-your-software")).toBe(true);
+    expect(services.services.some((s) => s.href?.startsWith("/own-your-software#"))).toBe(true);
   });
 
   it("sends its calls to action to a contact topic that exists", () => {
@@ -56,8 +57,14 @@ describe("/own-your-software", () => {
 });
 
 describe("site copy", () => {
-  it("publishes no prices on any page or in the site JSON-LD", () => {
+  it("publishes no prices in the home, services or site copy, or the site JSON-LD", () => {
     for (const content of [home, services, site, siteGraph()]) expect(JSON.stringify(content)).not.toMatch(PRICE);
+  });
+
+  it("says nothing about prices or full stack in llms.txt, llms-full.txt or the site JSON-LD", () => {
+    const text = llmsTxt() + llmsFullTxt() + JSON.stringify(siteGraph());
+    expect(text).not.toMatch(PRICE);
+    expect(text).not.toMatch(/full[- ]?stack/i);
   });
 
   it("sends the home hero buttons to registered pages", () => {
@@ -70,6 +77,12 @@ describe("site copy", () => {
 describe("services cards", () => {
   it("only link to registered pages", () => {
     const paths = pages.map((p) => p.path);
-    for (const s of services.services) if (s.href) expect(paths).toContain(s.href);
+    for (const s of services.services) if (s.href) expect(paths).toContain(s.href.split("#")[0]);
+  });
+
+  it("link each card to its own step on /own-your-software", () => {
+    const anchors = services.services.map((s) => s.href?.split("#")[1]);
+    expect(new Set(anchors).size).toBe(services.services.length);
+    for (const a of anchors) expect(ownYourSoftware.steps.map((s) => s.id)).toContain(a);
   });
 });

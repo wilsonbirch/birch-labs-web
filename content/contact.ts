@@ -14,7 +14,7 @@ export const contact = {
   /** The first topic is the default. `?topic=<value>` on /contact preselects one. */
   topics: [
     { value: "project", label: "A software project" },
-    { value: "own-your-software", label: "Own your software (build vs buy)" },
+    { value: "own-your-software", label: "Own your software" },
     { value: "other", label: "Something else" },
   ],
 } as const;

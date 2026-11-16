@@ -1,6 +1,8 @@
 import type { Seo } from "@/lib/types";
 
 export type EngagementStep = {
+  /** Anchor on /own-your-software; the services cards link to it. */
+  id: string;
   number: string;
   title: string;
   /** What the step answers or produces, in a few words. */
@@ -38,6 +40,7 @@ export const ownYourSoftware = {
   /** Same names as the services cards on /services ("Build or buy?" is step 01's outcome). */
   steps: [
     {
+      id: "idea",
       number: "01",
       title: "Idea",
       outcome: "Build or buy?",
@@ -45,6 +48,7 @@ export const ownYourSoftware = {
         "A free call about the tool you want to own and whether it's worth building. If buying wins, I'll say so.",
     },
     {
+      id: "build-it",
       number: "02",
       title: "Build it",
       outcome: "One tool, built and owned",
@@ -58,6 +62,7 @@ export const ownYourSoftware = {
       ],
     },
     {
+      id: "finish-it",
       number: "03",
       title: "Finish it",
       outcome: "Ready for real users",
@@ -72,6 +77,7 @@ export const ownYourSoftware = {
       ],
     },
     {
+      id: "run-it",
       number: "04",
       title: "Run it",
       outcome: "Kept running",
