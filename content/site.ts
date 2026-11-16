@@ -28,6 +28,7 @@ export const site = {
   social: {
     github: "https://github.com/wilsonbirch",
     linkedin: "https://www.linkedin.com/in/wilson-birch/",
+    instagram: "https://www.instagram.com/birch.labs/",
   } satisfies SocialLinks as SocialLinks,
   footerText:
     "Birch Labs is the freelance practice of Wilson Birch, software developer and CTO. Based in Ottawa, Canada.",
