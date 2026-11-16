@@ -8,7 +8,7 @@ export const home = {
   seo: {
     title: "Birch Labs | Own your software",
     description:
-      "Anyone can start building software with AI. I get yours across the line, from sign-in and payments to security and hosting, and keep it running. Ottawa-based.",
+      "Own your software. AI has made it possible to build any tool you need. I get yours across the line and keep it running. Based in Ottawa.",
   } satisfies Seo,
   heroEyebrow: "> Own your software",
   heroSubtitle: site.pitch,
