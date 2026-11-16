@@ -76,7 +76,7 @@ export default function OwnYourSoftwarePage() {
                   delay={(i % 2) * 0.08}
                   className="flex flex-1 flex-col rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] p-6 sm:p-8"
                 >
-                  <p className="font-mono text-sm text-[color:var(--color-accent)]">{step.number}</p>
+                  <p className="font-mono text-sm text-[color:var(--color-ink-muted)]">{step.number}</p>
                   <h3 className="mt-3 text-2xl font-semibold text-[color:var(--color-ink)]">{step.title}</h3>
                   <p className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
                     {step.outcome}
@@ -111,7 +111,7 @@ export default function OwnYourSoftwarePage() {
               <p className={`mt-6 ${MUTED}`}>{page.caseStudyBody}</p>
               <Link
                 href="/work"
-                className="mt-6 inline-block font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-brand)] underline-offset-4 hover:underline"
+                className="mt-6 inline-block font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)] underline decoration-[color:var(--color-accent)] decoration-2 underline-offset-4 transition hover:text-[color:var(--color-ink)]"
               >
                 More work →
               </Link>
@@ -134,7 +134,7 @@ export default function OwnYourSoftwarePage() {
                   {faq.question}
                   <span
                     aria-hidden
-                    className="font-mono text-[color:var(--color-accent)] transition group-open:rotate-45"
+                    className="font-mono text-[color:var(--color-ink-muted)] transition group-open:rotate-45"
                   >
                     +
                   </span>
