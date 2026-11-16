@@ -2,7 +2,6 @@ import { about } from "@/content/about";
 import { contact } from "@/content/contact";
 import { home } from "@/content/home";
 import { ownYourSoftware } from "@/content/own-your-software";
-import { services } from "@/content/services";
 import { work } from "@/content/work";
 
 export type SitePage = {
@@ -21,11 +20,10 @@ export type SitePage = {
 export const pages: ReadonlyArray<SitePage> = [
   { path: "/", name: "Home", description: home.seo.description },
   { path: "/work", name: "Work", navLabel: "Work", description: work.seo.description },
-  { path: "/services", name: "Services", navLabel: "Services", description: services.seo.description },
   {
     path: "/own-your-software",
     name: "Own your software",
-    navLabel: "Build vs buy",
+    navLabel: "Own your software",
     description: ownYourSoftware.seo.description,
   },
   { path: "/about", name: "About", navLabel: "About", description: about.seo.description },

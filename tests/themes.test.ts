@@ -8,6 +8,7 @@ import {
   THEME_BOOT_SCRIPT,
   THEME_IDS,
   VISIT_KEY,
+  logoVars,
   pickTheme,
   themeCss,
   type RotationState,
@@ -49,6 +50,46 @@ describe("theme catalogue", () => {
     expect(contrast(v["--color-accent-ink"], v["--color-accent"])).toBeGreaterThanOrEqual(4.5);
     expect(contrast(v["--color-footer-fg"], v["--color-footer-bg"])).toBeGreaterThanOrEqual(7);
     expect(contrast(v["--color-footer-fg-muted"], v["--color-footer-bg"])).toBeGreaterThanOrEqual(4.5);
+  });
+
+  // WCAG 1.4.11 (non-text contrast): every part of the logo stands out from the page behind it.
+  it.each(generated.map((t) => [t.id, t] as const))("%s logo colours clear 3:1", (_id, t) => {
+    const v = t.vars;
+    for (const [k, c] of Object.entries(logoVars(v))) {
+      expect(c, k).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(contrast(c, v["--color-bg"]), k).toBeGreaterThanOrEqual(3);
+    }
+    // the footer mark is drawn in --color-footer-fg
+    expect(contrast(v["--color-footer-fg"], v["--color-footer-bg"])).toBeGreaterThanOrEqual(3);
+  });
+
+  it("emits each theme's logo colours", () => {
+    const rose = ALL_THEMES.find((t) => t.id === "rose-pine")!;
+    const css = themeCss([rose]);
+    for (const [k, c] of Object.entries(logoVars(rose.vars))) expect(css).toContain(`${k}:${c}`);
+  });
+
+  it("keeps the brand themes' logo colours and contrast (app/globals.css)", async () => {
+    const { readFileSync } = await import("node:fs");
+    const css = readFileSync("app/globals.css", "utf8");
+    const block = (selector: string) =>
+      Object.fromEntries(
+        [...new RegExp(`^${selector} \\{([^}]*)\\}`, "m").exec(css)![1].matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(
+          (m) => [m[1], m[2].trim()],
+        ),
+      );
+    const light = block(":root");
+    const dark = { ...light, ...block("\\.dark") };
+    expect([light["--logo-a"], light["--logo-b"], light["--logo-text"]]).toEqual(["#003087", "#60a5fa", "#64748b"]);
+    expect([dark["--logo-a"], dark["--logo-b"], dark["--logo-text"]]).toEqual(["#ffffff", "#ffffff", "#cbd5e1"]);
+    for (const v of [light, dark]) {
+      for (const k of ["--logo-a", "--logo-b", "--logo-text"]) {
+        // The one exception: the owner's Monochrome blue on white is 2.5:1, kept as the brand artwork.
+        if (v === light && k === "--logo-b") continue;
+        expect(contrast(v[k], v["--color-bg"]), k).toBeGreaterThanOrEqual(3);
+      }
+      expect(contrast(v["--color-footer-fg"], v["--color-footer-bg"])).toBeGreaterThanOrEqual(3);
+    }
   });
 
   it("only uses plain #rrggbb colours (safe to inline in <style>)", () => {

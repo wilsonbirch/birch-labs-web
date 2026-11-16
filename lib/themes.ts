@@ -60,12 +60,28 @@ export function findTheme(id: string | null | undefined): SiteTheme | undefined 
   return ALL_THEMES.find((t) => t.id === id);
 }
 
+/**
+ * Logo fills for a theme with its own palette (the brand themes' are in app/globals.css): the mark's
+ * royal half takes the brand colour, its light half the accent, and the wordmark letters the muted
+ * ink, so the logo wears the theme's own two signature colours. All three already clear 3:1 on the
+ * background (the generator guarantees 4.5 / 3 / 4.5); tests/themes.test.ts re-checks.
+ */
+export function logoVars(vars: SiteTheme["vars"]): Record<string, string> {
+  return {
+    "--logo-a": vars["--color-brand"],
+    "--logo-b": vars["--color-accent"],
+    "--logo-text": vars["--color-ink-muted"],
+  };
+}
+
 /** The `html[data-theme]` override blocks for every theme that changes a token or has a hero. */
 export function themeCss(themes: readonly SiteTheme[] = ALL_THEMES): string {
   return themes
     .filter((t) => Object.keys(t.vars).length > 0 || t.hero)
     .map((t) => {
-      const decls = Object.entries(t.vars).map(([k, v]) => `${k}:${v}`);
+      // a theme without a brand colour (only ever a test fixture) keeps the base logo colours
+      const logo = t.vars["--color-brand"] ? logoVars(t.vars) : {};
+      const decls = Object.entries({ ...t.vars, ...logo }).map(([k, v]) => `${k}:${v}`);
       decls.push(`--hero-image:${t.hero ? `url("${t.hero}")` : "none"}`);
       const phone = t.heroPhone ?? t.hero;
       decls.push(`--hero-image-phone:${phone ? `url("${phone}")` : "none"}`);

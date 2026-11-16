@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
 
 import sitemap from "@/app/sitemap";
-import { services } from "@/content/services";
-import { llmsFullTxt, llmsTxt } from "@/lib/llms";
+import nextConfig from "@/next.config";
+import { llmsTxt } from "@/lib/llms";
 import { navLinks } from "@/lib/nav";
 import { pages } from "@/lib/pages";
 import { siteGraph } from "@/lib/structured-data";
 
 // Pages that must never drop out of the registry by accident.
-const CORE_PATHS = ["/", "/work", "/services", "/about", "/contact"];
+const CORE_PATHS = ["/", "/work", "/own-your-software", "/about", "/contact"];
 const paths = pages.map((p) => p.path);
 
 describe("page registry", () => {
@@ -23,6 +23,15 @@ describe("page registry", () => {
       expect(page.name.trim()).not.toBe("");
       expect(page.description.trim()).not.toBe("");
     }
+  });
+
+  it("no longer has /services, which redirects to /own-your-software", async () => {
+    expect(paths).not.toContain("/services");
+    expect(await nextConfig.redirects?.()).toContainEqual({
+      source: "/services",
+      destination: "/own-your-software",
+      permanent: true,
+    });
   });
 
   it("builds the nav from labelled pages, in registry order", () => {
@@ -47,25 +56,10 @@ describe("llms.txt", () => {
       expect(txt).toContain(`- [${page.name}](https://birchlabs.ca${page.path}): ${page.description}`);
     }
   });
-
-  it("names every service in both files", () => {
-    const short = llmsTxt();
-    const full = llmsFullTxt();
-    for (const s of services.services) {
-      expect(short).toContain(`- ${s.title}`);
-      expect(full).toContain(`### ${s.title}`);
-    }
-  });
 });
 
 describe("structured data", () => {
   const graph = siteGraph()["@graph"];
-  const business = graph.find((node) => node["@type"] === "ProfessionalService");
-
-  it("offers every service in the catalog", () => {
-    const offered = business?.hasOfferCatalog?.itemListElement.map((o) => o.itemOffered.name);
-    expect(offered).toEqual(services.services.map((s) => s.title));
-  });
 
   it("serializes to JSON without losing nodes", () => {
     expect(JSON.parse(JSON.stringify(siteGraph()))["@graph"]).toHaveLength(graph.length);

@@ -1,7 +1,6 @@
 import { about } from "@/content/about";
 import { contact } from "@/content/contact";
 import { projects } from "@/content/projects";
-import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { pages } from "@/lib/pages";
 import { absoluteUrl } from "@/lib/site-url";
@@ -19,13 +18,11 @@ function header(): string[] {
   return [
     `# ${site.businessName}`,
     "",
-    `> ${intro} Services include ${services.services
-      .slice(0, 5)
-      .map((s) => s.title)
-      .join(", ")}, and more.`,
+    `> ${site.tagline} ${site.pitch}`,
+    "",
+    intro,
     "",
     `Availability: ${site.availability}.`,
-    `Engagements: ${site.engagements.join("; ")}.`,
     "",
     "## Contact",
     "",
@@ -53,17 +50,13 @@ export function llmsTxt(): string {
     "",
     ...pages.map((p) => `- [${p.name}](${absoluteUrl(p.path)}): ${p.description}`),
     "",
-    "## Services",
-    "",
-    ...services.services.map((s) => `- ${s.title}: ${s.description ?? ""}`.trimEnd()),
-    "",
     "## Selected work",
     "",
     ...projects.map(projectLine),
     "",
     "## Optional",
     "",
-    `- [Full details](${absoluteUrl("/llms-full.txt")}): every service, project write-ups, and background`,
+    `- [Full details](${absoluteUrl("/llms-full.txt")}): project write-ups and background`,
     "",
   ].join("\n");
 }
@@ -76,17 +69,6 @@ export function llmsFullTxt(): string {
     ...about.body,
     "",
     ...about.quickFacts.map((f) => `- ${f.label.trim()}: ${f.value}`),
-    "",
-    "## Services",
-    "",
-    ...services.services.flatMap((s) => [
-      `### ${s.title}`,
-      "",
-      ...(s.description ? [s.description, ""] : []),
-      ...(s.bullets ?? []).map((b) => `- ${b}`),
-      "",
-    ]),
-    `Stack: ${services.stack.join(", ")}.`,
     "",
     "## Selected work",
     "",

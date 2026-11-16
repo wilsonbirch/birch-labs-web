@@ -1,56 +1,64 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
+import { about } from "@/content/about";
+import { contact } from "@/content/contact";
+import { home } from "@/content/home";
 import { ownYourSoftware } from "@/content/own-your-software";
-import { services } from "@/content/services";
+import { site } from "@/content/site";
+import { allProjects } from "@/content/projects";
+import { work } from "@/content/work";
 import { isContactTopic } from "@/lib/contact-schema";
+import { llmsFullTxt, llmsTxt } from "@/lib/llms";
 import { pages } from "@/lib/pages";
-import { ownYourSoftwareGraph } from "@/lib/structured-data";
+import { ownYourSoftwareGraph, projectsGraph, siteGraph } from "@/lib/structured-data";
 
 // Pricing is quoted per client, never published. Matches amounts, not the word "price".
 const PRICE = /[$€£]\s?\d|\b\d[\d,.]*\s?(k|CAD|USD)\b/i;
 
 describe("/own-your-software", () => {
-  afterEach(() => {
-    vi.unstubAllEnvs();
-    vi.resetModules();
-  });
-
-  it("publishes no prices, in the copy or the JSON-LD", () => {
-    for (const amount of ["$4,500", "from $25k", "25k", "4500 CAD", "1,500 USD"]) expect(amount).toMatch(PRICE);
-    expect(JSON.stringify(ownYourSoftware)).not.toMatch(PRICE);
-    expect(JSON.stringify(ownYourSoftwareGraph())).not.toMatch(PRICE);
-  });
-
-  it("points its case study at a real project", async () => {
-    // Drafts only load in development; a typo here would hide the case study forever.
-    vi.stubEnv("NODE_ENV", "development");
-    vi.resetModules();
-    const { projects } = await import("@/content/projects");
-    expect(projects.map((p) => p.slug)).toContain(ownYourSoftware.caseStudySlug);
-  });
-
-  it("is registered, in the nav, and linked from a services card", () => {
-    const page = pages.find((p) => p.path === "/own-your-software");
-    expect(page?.navLabel).toBeTruthy();
-    expect(services.services.some((s) => s.href === "/own-your-software")).toBe(true);
+  it("is registered and in the nav", () => {
+    expect(pages.find((p) => p.path === "/own-your-software")?.navLabel).toBe("Own your software");
   });
 
   it("sends its calls to action to a contact topic that exists", () => {
     expect(isContactTopic("own-your-software")).toBe(true);
   });
 
-  it("describes every step and FAQ in the JSON-LD", () => {
-    const [service, faq] = ownYourSoftwareGraph()["@graph"];
+  it("describes the service in one JSON-LD node, with no offer list", () => {
+    const service = ownYourSoftwareGraph();
+    expect(service["@type"]).toBe("Service");
     expect(service.url).toBe("https://birchlabs.ca/own-your-software");
     expect(service.provider).toEqual({ "@id": "https://birchlabs.ca/#business" });
-    expect(service.hasOfferCatalog?.itemListElement).toHaveLength(ownYourSoftware.steps.length);
-    expect(faq.mainEntity?.map((q) => q.name)).toEqual(ownYourSoftware.faqs.map((f) => f.question));
+    expect(service).not.toHaveProperty("hasOfferCatalog");
   });
 });
 
-describe("services cards", () => {
-  it("only link to registered pages", () => {
+describe("site copy", () => {
+  const copy = [home, site, ownYourSoftware, about, work, contact];
+
+  it("publishes no prices or full stack in the page copy or any JSON-LD", () => {
+    for (const amount of ["$4,500", "from $25k", "25k", "4500 CAD", "1,500 USD"]) expect(amount).toMatch(PRICE);
+    // allProjects includes drafts, so draft copy is checked before it ships.
+    for (const content of [...copy, allProjects, siteGraph(), ownYourSoftwareGraph(), projectsGraph(allProjects)]) {
+      const text = JSON.stringify(content);
+      expect(text).not.toMatch(PRICE);
+      expect(text).not.toMatch(/full[- ]?stack/i);
+    }
+  });
+
+  it("says nothing about prices or full stack in llms.txt or llms-full.txt", () => {
+    const text = llmsTxt() + llmsFullTxt();
+    expect(text).not.toMatch(PRICE);
+    expect(text).not.toMatch(/full[- ]?stack/i);
+  });
+
+  it("leads llms.txt with the narrative and the pitch", () => {
+    expect(llmsTxt()).toContain(`> ${site.tagline} ${site.pitch}`);
+  });
+
+  it("sends the home hero buttons to registered pages", () => {
     const paths = pages.map((p) => p.path);
-    for (const s of services.services) if (s.href) expect(paths).toContain(s.href);
+    expect(paths).toContain(home.heroPrimaryHref);
+    expect(paths).toContain(home.heroSecondaryHref);
   });
 });

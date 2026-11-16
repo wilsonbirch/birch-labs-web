@@ -34,21 +34,6 @@
   50%, 100% { opacity: 0; }
 }
 
-/* Infinite horizontal marquee — pauses on hover, respects reduced motion. */
-@utility animate-marquee {
-  animation: marquee 45s linear infinite;
-  &:hover {
-    animation-play-state: paused;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 /* Runtime CSS variables — read by utility classes via bg-[color:var(--color-*)] etc.
    Swapped wholesale by the .dark class on <html>. */
 :root {
@@ -58,7 +43,7 @@
   --color-bg: #ffffff;
   --color-surface: #f8fafc;
   --color-ink: #0d131c;
-  --color-ink-muted: #0d131c; /* all body text is Ink; the hero wordmark keeps Slate in its SVG */
+  --color-ink-muted: #0d131c; /* all body text is Ink; the hero wordmark keeps Slate (--logo-text) */
   --color-rule: #e2e8f0;
   --color-brand: #003087;
   --color-brand-soft: #1d4ed8;
@@ -69,6 +54,11 @@
   --color-footer-fg: #ffffff;
   --color-footer-fg-muted: rgba(255, 255, 255, 0.7);
   --color-footer-rule: #e2e8f0;
+  /* Logo fills (components/ui/BrandLogo.tsx): Royal and Monochrome mark, Slate letters.
+     Other themes get theirs from themeCss() in lib/themes.ts. */
+  --logo-a: #003087;
+  --logo-b: #60a5fa;
+  --logo-text: #64748b;
   /* Per-theme hero artwork (lib/themes.ts sets it for themes that have one). */
   --hero-image: none;
   --hero-image-phone: none;
@@ -91,6 +81,10 @@
   --color-footer-fg: #ffffff;
   --color-footer-fg-muted: rgba(255, 255, 255, 0.7);
   --color-footer-rule: #60a5fa;
+  /* The royal half vanishes on Ink, so the dark mark is all white. */
+  --logo-a: #ffffff;
+  --logo-b: #ffffff;
+  --logo-text: #cbd5e1;
 }
 
 html {

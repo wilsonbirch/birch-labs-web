@@ -1,6 +1,5 @@
 import { about } from "@/content/about";
 import { ownYourSoftware } from "@/content/own-your-software";
-import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
 import type { ProjectCard } from "@/lib/types";
@@ -45,7 +44,7 @@ export function siteGraph() {
         email: `mailto:${site.email}`,
         address,
         worksFor: { "@id": ids.business },
-        knowsAbout: services.stack,
+        knowsAbout: site.knowsAbout,
         sameAs,
       },
       {
@@ -62,20 +61,7 @@ export function siteGraph() {
         areaServed,
         founder: { "@id": ids.person },
         sameAs,
-        knowsAbout: services.services.map((s) => s.title),
-        hasOfferCatalog: {
-          "@type": "OfferCatalog",
-          name: "Software development services",
-          itemListElement: services.services.map((s) => ({
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: s.title,
-              description: s.description ?? undefined,
-              provider: { "@id": ids.business },
-            },
-          })),
-        },
+        knowsAbout: site.knowsAbout,
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "sales",
@@ -118,44 +104,18 @@ export function projectsGraph(projects: ProjectCard[]) {
   };
 }
 
-/** /own-your-software: the service itself, and its FAQ. No prices, on purpose. */
+/** /own-your-software: the service itself, in one line. No prices, on purpose. */
 export function ownYourSoftwareGraph() {
   const url = absoluteUrl("/own-your-software");
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "@id": `${url}#service`,
-        name: ownYourSoftware.seo.title,
-        serviceType: "Build vs buy software consulting",
-        description: ownYourSoftware.seo.description,
-        url,
-        provider: { "@id": ids.business },
-        areaServed,
-        hasOfferCatalog: {
-          "@type": "OfferCatalog",
-          name: "Engagement steps",
-          itemListElement: ownYourSoftware.steps.map((step) => ({
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: `${step.title}: ${step.outcome}`,
-              description: step.description,
-              provider: { "@id": ids.business },
-            },
-          })),
-        },
-      },
-      {
-        "@type": "FAQPage",
-        "@id": `${url}#faq`,
-        mainEntity: ownYourSoftware.faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: { "@type": "Answer", text: faq.answer },
-        })),
-      },
-    ],
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: ownYourSoftware.seo.title,
+    serviceType: "Custom software development and maintenance",
+    description: ownYourSoftware.seo.description,
+    url,
+    provider: { "@id": ids.business },
+    areaServed,
   };
 }

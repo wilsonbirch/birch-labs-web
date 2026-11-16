@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
         destination: "https://birchlabs.ca/:path*",
         permanent: true,
       },
+      // /services was folded into /own-your-software.
+      { source: "/services", destination: "/own-your-software", permanent: true },
     ];
   },
 };
