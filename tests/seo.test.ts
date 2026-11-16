@@ -4,27 +4,48 @@ import sitemap from "@/app/sitemap";
 import { services } from "@/content/services";
 import { llmsFullTxt, llmsTxt } from "@/lib/llms";
 import { navLinks } from "@/lib/nav";
+import { pages } from "@/lib/pages";
 import { siteGraph } from "@/lib/structured-data";
 
-const PUBLIC_PATHS = ["/", "/work", "/services", "/about", "/contact"];
+// Pages that must never drop out of the registry by accident.
+const CORE_PATHS = ["/", "/work", "/services", "/about", "/contact"];
+const paths = pages.map((p) => p.path);
+
+describe("page registry", () => {
+  it("keeps the core pages", () => {
+    expect(paths).toEqual(expect.arrayContaining(CORE_PATHS));
+  });
+
+  it("has unique, root-relative paths with a name and description", () => {
+    expect(new Set(paths).size).toBe(paths.length);
+    for (const page of pages) {
+      expect(page.path).toMatch(/^\/[a-z0-9-]*$/);
+      expect(page.name.trim()).not.toBe("");
+      expect(page.description.trim()).not.toBe("");
+    }
+  });
+
+  it("builds the nav from labelled pages, in registry order", () => {
+    expect(navLinks).toEqual(
+      pages.filter((p) => p.navLabel).map((p) => ({ label: p.navLabel, href: p.path })),
+    );
+  });
+});
 
 describe("sitemap", () => {
   const urls = sitemap().map((entry) => entry.url);
 
-  it("lists every public page once, as an absolute URL", () => {
-    expect(urls).toEqual(expect.arrayContaining(PUBLIC_PATHS.map((p) => `https://birchlabs.ca${p}`)));
-    expect(new Set(urls).size).toBe(urls.length);
-  });
-
-  it("lists every nav link", () => {
-    for (const link of navLinks) expect(urls).toContain(`https://birchlabs.ca${link.href}`);
+  it("lists every registered page once, as an absolute URL", () => {
+    expect(urls).toEqual(paths.map((p) => `https://birchlabs.ca${p}`));
   });
 });
 
 describe("llms.txt", () => {
-  it("links every public page", () => {
+  it("links every registered page with its description", () => {
     const txt = llmsTxt();
-    for (const path of PUBLIC_PATHS) expect(txt).toContain(`](https://birchlabs.ca${path})`);
+    for (const page of pages) {
+      expect(txt).toContain(`- [${page.name}](https://birchlabs.ca${page.path}): ${page.description}`);
+    }
   });
 
   it("names every service in both files", () => {
