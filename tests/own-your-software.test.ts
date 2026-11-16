@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { about } from "@/content/about";
 import { contact } from "@/content/contact";
@@ -9,7 +9,7 @@ import { work } from "@/content/work";
 import { isContactTopic } from "@/lib/contact-schema";
 import { llmsFullTxt, llmsTxt } from "@/lib/llms";
 import { pages } from "@/lib/pages";
-import { ownYourSoftwareGraph, siteGraph } from "@/lib/structured-data";
+import { ownYourSoftwareGraph, projectsGraph, siteGraph } from "@/lib/structured-data";
 
 // Pricing is quoted per client, never published. Matches amounts, not the word "price".
 const PRICE = /[$€£]\s?\d|\b\d[\d,.]*\s?(k|CAD|USD)\b/i;
@@ -35,9 +35,17 @@ describe("/own-your-software", () => {
 describe("site copy", () => {
   const copy = [home, site, ownYourSoftware, about, work, contact];
 
-  it("publishes no prices or full stack in the page copy or any JSON-LD", () => {
+  it("publishes no prices or full stack in the page copy or any JSON-LD", async () => {
     for (const amount of ["$4,500", "from $25k", "25k", "4500 CAD", "1,500 USD"]) expect(amount).toMatch(PRICE);
-    for (const content of [...copy, siteGraph(), ownYourSoftwareGraph()]) {
+    // Drafts are filtered outside `next dev`; load them too so draft copy is checked before it ships.
+    vi.stubEnv("NODE_ENV", "development");
+    vi.resetModules();
+    const { projects } = await import("@/content/projects").finally(() => {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    });
+    expect(projects.some((p) => p.draft)).toBe(true);
+    for (const content of [...copy, projects, siteGraph(), ownYourSoftwareGraph(), projectsGraph(projects)]) {
       const text = JSON.stringify(content);
       expect(text).not.toMatch(PRICE);
       expect(text).not.toMatch(/full[- ]?stack/i);

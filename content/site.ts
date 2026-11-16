@@ -1,10 +1,13 @@
 import type { Seo, SocialLinks } from "@/lib/types";
 
+const tagline = "Own your software.";
+/** The one-line pitch: the home hero subtitle, reused wherever one line fits. */
+const pitch = "AI has made it possible to build any tool you need. I get yours across the line and keep it running.";
+
 export const site = {
   businessName: "Birch Labs",
-  tagline: "Own your software.",
-  /** The one-line pitch: the home hero subtitle, reused wherever one line fits. */
-  pitch: "AI has made it possible to build any tool you need. I get yours across the line and keep it running.",
+  tagline,
+  pitch,
   availability: "Currently booking — reply within 48 hours",
   email: "wilson@birchlabs.ca",
   address: "Ottawa, ON",
@@ -30,7 +33,6 @@ export const site = {
     "Birch Labs is the freelance practice of Wilson Birch, software developer and CTO. Based in Ottawa, Canada.",
   seo: {
     title: "Birch Labs | Own your software",
-    description:
-      "Own your software. AI has made it possible to build any tool you need. I get yours across the line and keep it running.",
+    description: `${tagline} ${pitch}`,
   } satisfies Seo,
 };
