@@ -3,9 +3,9 @@ import type { Seo, ServiceItem } from "@/lib/types";
 
 export const services = {
   seo: {
-    title: "Build vs Buy, Custom Software and Maintenance",
+    title: "Custom Software You Own: Built, Finished and Maintained",
     description:
-      "A straight answer on build vs buy, custom software you own, AI-built projects made production-ready, and monthly maintenance. From a freelance developer in Ottawa.",
+      "Custom software you own, including projects you started with AI: built or finished, then kept running. From a freelance developer in Ottawa.",
   } satisfies Seo,
   heroEyebrow: "// services",
   heroTitle: "What I do.",
@@ -46,20 +46,8 @@ export const services = {
     "typescript",
     "react",
   ],
-  /** Same names as the steps on /own-your-software, so each card links there. */
+  /** Same names as the steps on /own-your-software, so each card links there. Build or buy? is the optional start. */
   services: [
-    {
-      title: "Build or buy?",
-      description:
-        "A free call, then an audit of what you pay for. You get a straight answer on what's worth owning. When buying wins, I'll tell you to keep it.",
-      icon: "scale",
-      bullets: [
-        "A free call to start",
-        "An audit of your subscriptions and what you use",
-        "Replace, trim, renegotiate or keep, tool by tool",
-      ],
-      href: "/own-your-software",
-    },
     {
       title: "Build it",
       description:
@@ -98,6 +86,18 @@ export const services = {
         "Updates and security patches",
         "Monitoring and alerts",
         "Small changes as you need them",
+      ],
+      href: "/own-your-software",
+    },
+    {
+      title: "Build or buy?",
+      description:
+        "Not sure what to replace? Start with a free call. If you want more, I audit what you pay for and tell you what's worth owning. When buying wins, I'll tell you to keep it.",
+      icon: "scale",
+      bullets: [
+        "A free call to start",
+        "An optional audit of your subscriptions",
+        "Replace, trim, renegotiate or keep, tool by tool",
       ],
       href: "/own-your-software",
     },

@@ -15,12 +15,12 @@ export const ownYourSoftware = {
   seo: {
     title: "Replace SaaS You Barely Use with Software You Own",
     description:
-      "Paying for a platform you use 10% of? I audit what you pay for, build the part you or your team use, and keep it running. You own the code and the data.",
+      "Paying for a platform you use 10% of? Bring me the tool you'd rather own. I build it, get it to production, and keep it running.",
   } satisfies Seo,
   heroEyebrow: "// own your software",
   heroTitle: "Own the software you actually use.",
   heroSubtitle:
-    "I find the subscriptions worth replacing, build the part you use, and keep it running. You own all of it.",
+    "You know which tools you'd rather own than rent. I build them, get them across the line, and keep them running.",
   heroPrimaryButtonText: "Talk it through →",
   heroSecondaryButtonText: "How it works",
 
@@ -35,20 +35,14 @@ export const ownYourSoftware = {
   stepsEyebrow: "// how it works",
   stepsHeading: "Four steps. Start at any of them.",
   stepsIntro: "Each step ends with something you keep. Take one on its own, or run all four.",
-  /** Same names as the services cards on /services. */
+  /** Same names as the services cards on /services ("Build or buy?" is step 01's outcome). */
   steps: [
     {
       number: "01",
-      title: "Build or buy?",
-      outcome: "What's worth owning",
+      title: "Idea",
+      outcome: "Build or buy?",
       description:
-        "A free call about what you pay for, what you really use, and who would own a tool you build. Then an audit that ranks each tool: replace, trim seats, renegotiate, or keep. If buying wins, I'll tell you to keep it.",
-      bullets: [
-        "Seats, cost and renewal dates",
-        "What people actually use, from admin exports and short interviews",
-        "Whether your data comes out cleanly",
-        "The security and compliance work the vendor covers today",
-      ],
+        "A free call about the tool you want to own and whether it's worth building. If buying wins, I'll say so.",
     },
     {
       number: "02",
@@ -92,6 +86,17 @@ export const ownYourSoftware = {
     },
   ] satisfies EngagementStep[],
 
+  /** Optional, never the first step: for people who don't know yet what to replace. */
+  auditHeading: "Not sure what to replace?",
+  auditBody:
+    "I can audit your subscriptions first and rank each tool: replace, trim seats, renegotiate, or keep. It's optional. Skip it if you already know what you want built.",
+  auditBullets: [
+    "Seats, cost and renewal dates",
+    "What people actually use, from admin exports and short interviews",
+    "Whether your data comes out cleanly",
+    "The security and compliance work the vendor covers today",
+  ],
+
   caseStudyEyebrow: "// case study",
   caseStudyHeading: "From a platform to their own app.",
   caseStudyBody:
@@ -105,7 +110,7 @@ export const ownYourSoftware = {
     {
       question: "Isn't buying software always cheaper than building it?",
       answer:
-        "Often, yes. The audit is there to find the cases where it isn't: a tool you pay full price for, barely use, and are about to renew. When buying wins, I'll tell you to keep it.",
+        "Often, yes. The free call is where we check: a tool you pay full price for, barely use, and are about to renew is a good sign. If you're not sure which tools qualify, the audit compares them. When buying wins, I'll tell you to keep it.",
     },
     {
       question: "Who maintains the tool once it's built?",

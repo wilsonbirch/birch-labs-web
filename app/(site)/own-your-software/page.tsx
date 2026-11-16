@@ -21,6 +21,22 @@ const EYEBROW = "font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--
 const H2 = "font-display mt-4 text-4xl leading-[1.05] sm:text-5xl";
 const MUTED = "text-lg leading-relaxed text-[color:var(--color-ink-muted)]";
 
+function Bullets({ items }: { items?: string[] }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <ul className="mt-4 space-y-1 text-sm text-[color:var(--color-ink-muted)]">
+      {items.map((bullet) => (
+        <li key={bullet} className="flex gap-2">
+          <span aria-hidden className="text-[color:var(--color-accent)]">
+            ·
+          </span>
+          {bullet}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function OwnYourSoftwarePage() {
   // Drafts are filtered out of `projects` in production, so the case study
   // appears on its own once the project launches.
@@ -82,22 +98,16 @@ export default function OwnYourSoftwarePage() {
                     {step.outcome}
                   </p>
                   <p className="mt-4 leading-relaxed text-[color:var(--color-ink-muted)]">{step.description}</p>
-                  {step.bullets && step.bullets.length > 0 && (
-                    <ul className="mt-4 space-y-1 text-sm text-[color:var(--color-ink-muted)]">
-                      {step.bullets.map((bullet) => (
-                        <li key={bullet} className="flex gap-2">
-                          <span aria-hidden className="text-[color:var(--color-accent)]">
-                            ·
-                          </span>
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <Bullets items={step.bullets} />
                 </MotionFadeIn>
               </li>
             ))}
           </ol>
+          <div className="mt-6 rounded-lg border border-dashed border-[color:var(--color-rule)] p-6 sm:p-8">
+            <h3 className="text-xl font-semibold text-[color:var(--color-ink)]">{page.auditHeading}</h3>
+            <p className="mt-4 max-w-3xl leading-relaxed text-[color:var(--color-ink-muted)]">{page.auditBody}</p>
+            <Bullets items={page.auditBullets} />
+          </div>
         </Container>
       </Section>
 

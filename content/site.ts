@@ -17,7 +17,7 @@ export const site = {
     "Contract and fixed-scope projects",
     "Fractional technical lead or CTO",
     "Team augmentation",
-    "Build vs buy: SaaS audits, owned rebuilds, and guardrails for building with AI",
+    "Own your software: tools built for you to own, guardrails for building with AI, and optional SaaS audits",
     "Monthly plans to run and maintain your software",
   ],
   social: {
@@ -29,6 +29,6 @@ export const site = {
   seo: {
     title: "Birch Labs | Own your software",
     description:
-      "Custom software you own. A straight answer on build vs buy, new builds, AI-built projects made production-ready, and monthly maintenance.",
+      "Custom software you own. I build it, finish what you started with AI, and keep it running on a monthly plan.",
   } satisfies Seo,
 };

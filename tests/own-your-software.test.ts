@@ -23,8 +23,9 @@ describe("/own-your-software", () => {
     expect(JSON.stringify(ownYourSoftwareGraph())).not.toMatch(PRICE);
   });
 
-  it("names its steps after the services, in order", () => {
-    expect(ownYourSoftware.steps.map((s) => s.title)).toEqual(services.services.map((s) => s.title));
+  it("names every service as a step (Build or buy? is the first step's outcome)", () => {
+    const names = ownYourSoftware.steps.flatMap((s) => [s.title, s.outcome]);
+    for (const s of services.services) expect(names).toContain(s.title);
   });
 
   it("points its case study at a real project", async () => {
