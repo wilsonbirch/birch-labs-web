@@ -11,12 +11,12 @@ npm run build           # next build — production bundle + static prerender
 
 What each uniquely catches:
 
-- **test** — behaviour the type system can't see: the theme rotation (`pickTheme`), the inlined `<head>` boot script run against fake storage (first visit, repeat visit, pinned, broken/corrupt storage), and a WCAG contrast audit of every site theme in `lib/themes.generated.ts`.
+- **test** — behaviour the type system can't see: the theme rotation (`pickTheme`), the inlined `<head>` boot script run against fake storage (first visit, repeat visit, pinned, broken/corrupt storage), and a WCAG contrast audit of every site theme in `lib/themes.generated.ts`. Also that the sitemap, llms.txt and JSON-LD list every public page and service, and that the contact schema accepts and rejects the right input.
 - **lint** — stale-closure `useEffect` deps (`react-hooks/exhaustive-deps`), missing `key` props in `.map()`, dead variables, a11y regressions, and Next's own rules around `<Image>`, `<Link>`, and metadata. Errors fail the script; warnings are advisory.
 - **typecheck** — whole-program type errors. `next typegen` first writes `next-env.d.ts` (gitignored; it declares the static image-import types), then `tsc --noEmit` walks the entire graph (including server components and route handlers) and surfaces type mismatches across module boundaries — including drift between the content files in `content/` and the types in `lib/types.ts` / component props.
 - **build** — runs the full Next 16 production pipeline (Turbopack compile + static page generation). Only this catches: server/client boundary leaks (`"use client"` placement), prerender failures, broken static image imports from `content/images/`, and Tailwind CSS v4 + PostCSS resolution issues. Content is local, so a build needs no network access or env vars.
 
-Unit tests use Vitest (`tests/**/*.test.ts`, config in `vitest.config.mts`, `@/` alias as in tsconfig). There is no browser/e2e suite (no Playwright) yet.
+Unit tests use Vitest (`tests/**/*.test.ts`, config in `vitest.config.mts`, `@/` alias as in tsconfig; image imports from `content/` are stubbed there). There is no browser/e2e suite (no Playwright) yet.
 
 **Local prerequisites:** none to build or run. The contact form (`/api/contact`) needs `RESEND_API_KEY` + `CONTACT_FORM_TO_EMAIL` to actually deliver mail; without them it logs to the server console and still returns 200 in dev (so dev work doesn't require a Resend account), but returns a 500 in production so leads are never silently dropped.
 
