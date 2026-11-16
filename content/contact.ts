@@ -4,7 +4,7 @@ export const contact = {
   seo: {
     title: "Start a project",
     description:
-      "Pitch a project, ask a question, or just say hi. Short-form messages welcome — I reply within 48 hours with honest thoughts and a rough estimate",
+      "Pitch a project, ask a question, or just say hi. Short-form messages welcome — I reply within 48 hours.",
   } satisfies Seo,
   heading: "Start a project",
   intro:
