@@ -22,7 +22,10 @@ const INITIAL: ContactInput = {
   website: "",
 };
 
-export function ContactForm({ successMessage }: { successMessage?: string | null } = {}) {
+export function ContactForm({
+  successMessage,
+  messageRows = 6,
+}: { successMessage?: string | null; messageRows?: number } = {}) {
   const [values, setValues] = useState<ContactInput>(INITIAL);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -104,7 +107,7 @@ export function ContactForm({ successMessage }: { successMessage?: string | null
       </Field>
       <Field label="Message" error={errors.message}>
         <textarea
-          rows={6}
+          rows={messageRows}
           value={values.message}
           onChange={(e) => update("message", e.target.value)}
           maxLength={MESSAGE_MAX}
