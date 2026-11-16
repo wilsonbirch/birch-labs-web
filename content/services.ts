@@ -47,6 +47,14 @@ export const services = {
   ],
   services: [
     {
+      title: "Own your software",
+      description:
+        "Paying for a platform you use 10% of? Build the part you use, and own it.",
+      icon: "key-round",
+      bullets: ["SaaS spend audit", "One tool rebuilt and owned", "Guardrails for building with AI"],
+      href: "/own-your-software",
+    },
+    {
       title: "Native mobile apps",
       description: "iOS and Android from one codebase, shipped to the App Store and Google Play.",
       icon: "smartphone",

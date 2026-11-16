@@ -3,6 +3,7 @@ import { Chip } from "@/components/ui/Chip";
 import { contact } from "@/content/contact";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
+import type { ContactTopic } from "@/lib/contact-schema";
 
 /**
  * Availability chip, "Start a project" heading, intro and the contact form.
@@ -13,9 +14,11 @@ import { cn } from "@/lib/cn";
 export function ContactPanel({
   headingAs: Heading,
   compact = false,
+  initialTopic,
 }: {
   headingAs: "h1" | "h2";
   compact?: boolean;
+  initialTopic?: ContactTopic;
 }) {
   return (
     <div className={compact ? "space-y-6" : "space-y-10"}>
@@ -50,7 +53,12 @@ export function ContactPanel({
           {contact.intro}
         </p>
       </div>
-      <ContactForm successMessage={contact.successMessage} messageRows={compact ? 3 : 6} />
+      <ContactForm
+        successMessage={contact.successMessage}
+        initialTopic={initialTopic}
+        showTopic={!compact}
+        messageRows={compact ? 3 : 6}
+      />
     </div>
   );
 }

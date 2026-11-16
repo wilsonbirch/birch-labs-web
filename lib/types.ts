@@ -44,4 +44,6 @@ export type ServiceItem = {
   description?: string | null;
   bullets?: string[] | null;
   icon?: string | null;
+  /** A page with more detail; the card links to it. */
+  href?: string | null;
 };
