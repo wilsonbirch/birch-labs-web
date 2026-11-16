@@ -6,23 +6,23 @@ import { useRef, type ReactNode } from "react";
 /**
  * Scroll-linked 3D flip for the home route.
  *
- *   Hero (front)  → rotateY 0°   — visible on load
- *   CTA  (back)   → rotateY 180° — revealed as the card flips
+ *   front → rotateY 0°   — visible on load (the contact form)
+ *   back  → rotateY 180° — revealed as the card flips (the hero)
  *
  * The whole thing lives inside a tall sticky zone. As the user scrolls,
  * scrollYProgress drives rotateY from 0 → 180°. The flip completes at
- * ~60% scroll, then the CTA "holds" pinned for the remaining ~40% so
+ * ~60% scroll, then the back face "holds" pinned for the remaining ~40% so
  * the user has time to read it before leaving the zone.
  *
- * Respects prefers-reduced-motion: renders Hero then CTA stacked, no
+ * Respects prefers-reduced-motion: renders front then back stacked, no
  * 3D transforms, no pinning.
  */
 export function HomeScrollStack({
-  hero,
-  cta,
+  front,
+  back,
 }: {
-  hero: ReactNode;
-  cta: ReactNode;
+  front: ReactNode;
+  back: ReactNode;
 }) {
   const reduce = useReducedMotion();
   const zoneRef = useRef<HTMLDivElement>(null);
@@ -32,7 +32,7 @@ export function HomeScrollStack({
     offset: ["start start", "end start"],
   });
 
-  // Flip completes at 35% of scroll; CTA then holds flat for the remaining
+  // Flip completes at 35% of scroll; the back face then holds flat for the remaining
   // 65%, giving a clear "fully flipped, no footer yet" window before the
   // zone ends and the footer begins to enter the viewport.
   const rotateY = useTransform(scrollYProgress, [0, 0.35, 1], [0, 180, 180]);
@@ -40,8 +40,8 @@ export function HomeScrollStack({
   if (reduce) {
     return (
       <>
-        {hero}
-        {cta}
+        {front}
+        {back}
       </>
     );
   }
@@ -68,7 +68,7 @@ export function HomeScrollStack({
         }}
         className={pinClass}
       >
-        {/* Front face — Hero */}
+        {/* Front face */}
         <div
           className="absolute inset-0 flex items-center-safe"
           style={{
@@ -76,10 +76,10 @@ export function HomeScrollStack({
             WebkitBackfaceVisibility: "hidden",
           }}
         >
-          <div className="w-full">{hero}</div>
+          <div className="w-full">{front}</div>
         </div>
 
-        {/* Back face — CTA, pre-rotated so it's readable once the card flips */}
+        {/* Back face, pre-rotated so it's readable once the card flips */}
         <div
           className="absolute inset-0 flex items-center-safe"
           style={{
@@ -88,7 +88,7 @@ export function HomeScrollStack({
             transform: "rotateY(180deg)",
           }}
         >
-          <div className="w-full">{cta}</div>
+          <div className="w-full">{back}</div>
         </div>
       </motion.div>
     </div>

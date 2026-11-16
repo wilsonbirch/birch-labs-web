@@ -22,9 +22,4 @@ export const home = {
   } satisfies Img,
   heroPrimaryButtonText: "See the work",
   heroSecondaryButtonText: "Start a project →",
-  ctaEyebrow: "// let's build",
-  ctaHeading: "Have a project?",
-  ctaBody:
-    "Short-form pitches welcome. Send a paragraph about what you're building, and I'll reply with honest thoughts and a rough estimate.",
-  ctaButtonText: "Start a project →",
 };
