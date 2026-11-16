@@ -15,14 +15,18 @@ export function Hero({
   logo,
   logoDark,
   primaryButtonText,
+  primaryHref,
   secondaryButtonText,
+  secondaryHref,
 }: {
   eyebrow: string;
   subtitle: string;
   logo: Img;
   logoDark: Img;
   primaryButtonText: string;
+  primaryHref: string;
   secondaryButtonText: string;
+  secondaryHref: string;
 }) {
   const reduce = useReducedMotion();
 
@@ -87,10 +91,10 @@ export function Hero({
           transition={{ duration: 0.5, delay: 0.65 }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <Button href="/work" variant="primary" size="lg">
+          <Button href={primaryHref} variant="primary" size="lg">
             {primaryButtonText}
           </Button>
-          <Button href="/contact" variant="secondary" size="lg">
+          <Button href={secondaryHref} variant="secondary" size="lg">
             {secondaryButtonText}
           </Button>
         </motion.div>

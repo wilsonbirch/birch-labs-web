@@ -38,7 +38,9 @@ export default function HomePage() {
           logo={home.heroLogo}
           logoDark={home.heroLogoDark}
           primaryButtonText={home.heroPrimaryButtonText}
+          primaryHref={home.heroPrimaryHref}
           secondaryButtonText={home.heroSecondaryButtonText}
+          secondaryHref={home.heroSecondaryHref}
         />
       }
     />

@@ -19,10 +19,7 @@ function header(): string[] {
   return [
     `# ${site.businessName}`,
     "",
-    `> ${intro} Services include ${services.services
-      .slice(0, 5)
-      .map((s) => s.title)
-      .join(", ")}, and more.`,
+    `> ${intro} ${site.pitch} Services: ${services.services.map((s) => s.title).join(", ")}.`,
     "",
     `Availability: ${site.availability}.`,
     `Engagements: ${site.engagements.join("; ")}.`,

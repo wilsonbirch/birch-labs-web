@@ -1,10 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { home } from "@/content/home";
 import { ownYourSoftware } from "@/content/own-your-software";
 import { services } from "@/content/services";
+import { site } from "@/content/site";
 import { isContactTopic } from "@/lib/contact-schema";
 import { pages } from "@/lib/pages";
-import { ownYourSoftwareGraph } from "@/lib/structured-data";
+import { ownYourSoftwareGraph, siteGraph } from "@/lib/structured-data";
 
 // Pricing is quoted per client, never published. Matches amounts, not the word "price".
 const PRICE = /[$€£]\s?\d|\b\d[\d,.]*\s?(k|CAD|USD)\b/i;
@@ -19,6 +21,10 @@ describe("/own-your-software", () => {
     for (const amount of ["$4,500", "from $25k", "25k", "4500 CAD", "1,500 USD"]) expect(amount).toMatch(PRICE);
     expect(JSON.stringify(ownYourSoftware)).not.toMatch(PRICE);
     expect(JSON.stringify(ownYourSoftwareGraph())).not.toMatch(PRICE);
+  });
+
+  it("names its steps after the services, in order", () => {
+    expect(ownYourSoftware.steps.map((s) => s.title)).toEqual(services.services.map((s) => s.title));
   });
 
   it("points its case study at a real project", async () => {
@@ -45,6 +51,18 @@ describe("/own-your-software", () => {
     expect(service.provider).toEqual({ "@id": "https://birchlabs.ca/#business" });
     expect(service.hasOfferCatalog?.itemListElement).toHaveLength(ownYourSoftware.steps.length);
     expect(faq.mainEntity?.map((q) => q.name)).toEqual(ownYourSoftware.faqs.map((f) => f.question));
+  });
+});
+
+describe("site copy", () => {
+  it("publishes no prices on any page or in the site JSON-LD", () => {
+    for (const content of [home, services, site, siteGraph()]) expect(JSON.stringify(content)).not.toMatch(PRICE);
+  });
+
+  it("sends the home hero buttons to registered pages", () => {
+    const paths = pages.map((p) => p.path);
+    expect(paths).toContain(home.heroPrimaryHref);
+    expect(paths).toContain(home.heroSecondaryHref);
   });
 });
 

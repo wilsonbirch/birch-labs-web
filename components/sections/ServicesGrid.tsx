@@ -29,11 +29,11 @@ export function ServicesGrid({ services }: { services: ServiceItem[] }) {
   return (
     <Section id="services" spacing="md" tone="surface">
       <Container width="wide">
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-6 sm:grid-cols-2">
           {services.map((s, i) => (
             <li key={s.title} className="flex">
               <MotionFadeIn
-                delay={(i % 3) * 0.08}
+                delay={(i % 2) * 0.08}
                 className="flex flex-1 flex-col rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-bg)] p-6"
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded border border-[color:var(--color-rule)]">

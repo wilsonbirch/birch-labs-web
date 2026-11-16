@@ -98,7 +98,6 @@ export default function OwnYourSoftwarePage() {
               </li>
             ))}
           </ol>
-          <p className={`mt-10 max-w-3xl ${MUTED}`}>{page.ongoing}</p>
         </Container>
       </Section>
 

@@ -1,3 +1,4 @@
+import { site } from "@/content/site";
 import type { Img, Seo } from "@/lib/types";
 
 import wordmarkWhite from "./images/hero-wordmark-white.svg";
@@ -5,13 +6,12 @@ import wordmark from "./images/hero-wordmark.svg";
 
 export const home = {
   seo: {
-    title: "Birch Labs | Full-stack development",
+    title: "Birch Labs | Own your software",
     description:
-      "I build production software for founders and teams: AI-powered Shopify apps, custom SaaS, and motion-rich marketing sites. Ottawa-based, ship-focused.",
+      "Anyone can start building software with AI. I get yours across the line, from sign-in and payments to security and hosting, and keep it running. Ottawa-based.",
   } satisfies Seo,
-  heroEyebrow: "> Full Stack Development",
-  heroSubtitle:
-    "Need a lead for your next software project, or an extra set of hands? Let's build something great together.",
+  heroEyebrow: "> Own your software",
+  heroSubtitle: site.pitch,
   heroLogo: {
     src: wordmark,
     alt: "Birch Labs",
@@ -20,6 +20,8 @@ export const home = {
     src: wordmarkWhite,
     alt: "Birch Labs",
   } satisfies Img,
-  heroPrimaryButtonText: "See the work",
-  heroSecondaryButtonText: "Start a project →",
+  heroPrimaryButtonText: "How it works",
+  heroPrimaryHref: "/own-your-software",
+  heroSecondaryButtonText: "See the work",
+  heroSecondaryHref: "/work",
 };
