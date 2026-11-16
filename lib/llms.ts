@@ -1,7 +1,6 @@
 import { about } from "@/content/about";
 import { contact } from "@/content/contact";
 import { projects } from "@/content/projects";
-import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { pages } from "@/lib/pages";
 import { absoluteUrl } from "@/lib/site-url";
@@ -13,19 +12,17 @@ import { SOCIAL_LABELS, type ProjectCard, type SocialKey } from "@/lib/types";
  * of `projects` in production builds.
  */
 
-/** Ends a sentence without doubling punctuation ("Build or buy?" stays as is). */
-const sentence = (text: string) => (/[.?!]$/.test(text) ? text : `${text}.`);
-
 const intro = `${site.businessName} is the freelance software practice of ${site.owner.name}, a ${site.owner.jobTitle.toLowerCase()}. ${site.workingModel}`;
 
 function header(): string[] {
   return [
     `# ${site.businessName}`,
     "",
-    `> ${intro} ${site.pitch} ${sentence(`Services: ${services.services.map((s) => s.title).join(", ")}`)}`,
+    `> ${site.tagline} ${site.pitch}`,
+    "",
+    intro,
     "",
     `Availability: ${site.availability}.`,
-    `Engagements: ${site.engagements.join("; ")}.`,
     "",
     "## Contact",
     "",
@@ -53,17 +50,13 @@ export function llmsTxt(): string {
     "",
     ...pages.map((p) => `- [${p.name}](${absoluteUrl(p.path)}): ${p.description}`),
     "",
-    "## Services",
-    "",
-    ...services.services.map((s) => `- ${s.title}: ${s.description ?? ""}`.trimEnd()),
-    "",
     "## Selected work",
     "",
     ...projects.map(projectLine),
     "",
     "## Optional",
     "",
-    `- [Full details](${absoluteUrl("/llms-full.txt")}): every service, project write-ups, and background`,
+    `- [Full details](${absoluteUrl("/llms-full.txt")}): project write-ups and background`,
     "",
   ].join("\n");
 }
@@ -76,17 +69,6 @@ export function llmsFullTxt(): string {
     ...about.body,
     "",
     ...about.quickFacts.map((f) => `- ${f.label.trim()}: ${f.value}`),
-    "",
-    "## Services",
-    "",
-    ...services.services.flatMap((s) => [
-      `### ${s.title}`,
-      "",
-      ...(s.description ? [s.description, ""] : []),
-      ...(s.bullets ?? []).map((b) => `- ${b}`),
-      "",
-    ]),
-    `Stack: ${services.stack.join(", ")}.`,
     "",
     "## Selected work",
     "",

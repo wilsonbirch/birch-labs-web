@@ -38,12 +38,3 @@ export type ProjectCard = {
   /** Unreleased: shown (with a Draft chip) in `next dev` only, never in a production build. */
   draft?: boolean;
 };
-
-export type ServiceItem = {
-  title: string;
-  description?: string | null;
-  bullets?: string[] | null;
-  icon?: string | null;
-  /** A page with more detail; the card links to it. */
-  href?: string | null;
-};

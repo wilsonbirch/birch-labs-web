@@ -20,7 +20,7 @@ export const home = {
     src: wordmarkWhite,
     alt: "Birch Labs",
   } satisfies Img,
-  heroPrimaryButtonText: "How it works",
+  heroPrimaryButtonText: "Own your software →",
   heroPrimaryHref: "/own-your-software",
   heroSecondaryButtonText: "See the work",
   heroSecondaryHref: "/work",

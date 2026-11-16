@@ -37,7 +37,7 @@ The Birch Labs site. Next.js 16 (App Router) + Tailwind 4 + Resend. Fully static
 
 ## Layout
 
-- `content/` — **all site copy and images.** There is one typed file per page (`home.ts`, `work.ts`, `services.ts`, `about.ts`, `contact.ts`). `site.ts` holds the name, contact details, socials, and default SEO. `projects.ts` holds the projects. Images are in `content/images/`. Pages import them statically, so `next/image` reads their dimensions and blur placeholders.
+- `content/` — **all site copy and images.** There is one typed file per page (`home.ts`, `work.ts`, `own-your-software.ts`, `about.ts`, `contact.ts`). `site.ts` holds the name, contact details, socials, and default SEO. `projects.ts` holds the projects. Images are in `content/images/`. Pages import them statically, so `next/image` reads their dimensions and blur placeholders.
 - `app/(site)/` — marketing routes with a shared Header/Footer layout
 - `app/api/contact/route.ts` — zod-validated contact endpoint with in-memory rate limiting; sends via Resend when configured
 - `app/robots.ts`, `app/sitemap.ts` — SEO basics
@@ -45,7 +45,7 @@ The Birch Labs site. Next.js 16 (App Router) + Tailwind 4 + Resend. Fully static
 - `app/global-error.tsx` — catastrophic root-layout error boundary
 - `components/ui/` — Button, Container, Heading, Section, Chip
 - `components/layout/` — Header, Footer, Logo, DesktopNav, MobileNav, ThemeToggle
-- `components/sections/` — page sections (Hero, About, ProjectCard, TwoTierServices, …)
+- `components/sections/` — page sections (Hero, About, ProjectCard, CTA, …)
 - `lib/metadata.ts` — `seoMetadata()` builds a page's title/description/Open Graph/Twitter tags from its `seo` block
 
 ## Editing content

@@ -2,11 +2,9 @@ import Link from "next/link";
 
 import { CTA } from "@/components/sections/CTA";
 import { ProjectCard } from "@/components/sections/ProjectCard";
-import { Bullets } from "@/components/ui/Bullets";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/ui/JsonLd";
-import { MotionFadeIn } from "@/components/ui/MotionFadeIn";
 import { Section } from "@/components/ui/Section";
 import { ownYourSoftware as page } from "@/content/own-your-software";
 import { projects } from "@/content/projects";
@@ -38,12 +36,9 @@ export default function OwnYourSoftwarePage() {
             {page.heroTitle}
           </h1>
           <p className={`mt-6 max-w-2xl ${MUTED}`}>{page.heroSubtitle}</p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10">
             <Button href={CONTACT_HREF} size="lg">
               {page.heroPrimaryButtonText}
-            </Button>
-            <Button href="#how-it-works" variant="secondary" size="lg">
-              {page.heroSecondaryButtonText}
             </Button>
           </div>
         </Container>
@@ -61,37 +56,6 @@ export default function OwnYourSoftwarePage() {
                 {paragraph}
               </p>
             ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="how-it-works" className="scroll-mt-20 lg:scroll-mt-24">
-        <Container width="wide">
-          <p className={EYEBROW}>{page.stepsEyebrow}</p>
-          <h2 className={H2}>{page.stepsHeading}</h2>
-          <p className={`mt-6 max-w-2xl ${MUTED}`}>{page.stepsIntro}</p>
-          <ol className="mt-12 grid gap-6 sm:grid-cols-2">
-            {page.steps.map((step, i) => (
-              <li key={step.id} id={step.id} className="flex scroll-mt-20 lg:scroll-mt-24">
-                <MotionFadeIn
-                  delay={(i % 2) * 0.08}
-                  className="flex flex-1 flex-col rounded-lg border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] p-6 sm:p-8"
-                >
-                  <p className="font-mono text-sm text-[color:var(--color-ink-muted)]">{step.number}</p>
-                  <h3 className="mt-3 text-2xl font-semibold text-[color:var(--color-ink)]">{step.title}</h3>
-                  <p className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-ink-muted)]">
-                    {step.outcome}
-                  </p>
-                  <p className="mt-4 leading-relaxed text-[color:var(--color-ink-muted)]">{step.description}</p>
-                  <Bullets items={step.bullets} />
-                </MotionFadeIn>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-6 rounded-lg border border-dashed border-[color:var(--color-rule)] p-6 sm:p-8">
-            <h3 className="text-xl font-semibold text-[color:var(--color-ink)]">{page.auditHeading}</h3>
-            <p className="mt-4 max-w-3xl leading-relaxed text-[color:var(--color-ink-muted)]">{page.auditBody}</p>
-            <Bullets items={page.auditBullets} />
           </div>
         </Container>
       </Section>
@@ -116,29 +80,6 @@ export default function OwnYourSoftwarePage() {
           </Container>
         </Section>
       )}
-
-      <Section>
-        <Container width="narrow">
-          <p className={EYEBROW}>{page.faqEyebrow}</p>
-          <h2 className={H2}>{page.faqHeading}</h2>
-          <div className="mt-10 divide-y divide-[color:var(--color-rule)] border-y border-[color:var(--color-rule)]">
-            {page.faqs.map((faq) => (
-              <details key={faq.question} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-lg font-medium text-[color:var(--color-ink)] [&::-webkit-details-marker]:hidden">
-                  {faq.question}
-                  <span
-                    aria-hidden
-                    className="font-mono text-[color:var(--color-ink-muted)] transition group-open:rotate-45"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 leading-relaxed text-[color:var(--color-ink-muted)]">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
       <CTA
         eyebrow={page.ctaEyebrow}

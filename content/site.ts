@@ -13,12 +13,14 @@ export const site = {
   /** Stated for agents and search (llms.txt, JSON-LD); not shown on the page. */
   workingModel:
     "Based in Ottawa, Canada (Eastern Time), working remotely with clients across Canada and the US.",
-  engagements: [
-    "Contract and fixed-scope projects",
-    "Fractional technical lead or CTO",
-    "Team augmentation",
-    "Own your software: tools built for you to own, guardrails for building with AI, and optional SaaS audits",
-    "Monthly plans to run and maintain your software",
+  /** Topics for the JSON-LD `knowsAbout`; not shown on the page. */
+  knowsAbout: [
+    "Native iOS and Android apps",
+    "Web apps and SaaS",
+    "Shopify apps",
+    "AI and LLM features",
+    "Data pipelines and scrapers",
+    "Memberships and payments on Stripe",
   ],
   social: {
     github: "https://github.com/wilsonbirch",
@@ -29,6 +31,6 @@ export const site = {
   seo: {
     title: "Birch Labs | Own your software",
     description:
-      "Custom software you own. I build it, finish what you started with AI, and keep it running on a monthly plan.",
+      "Own your software. AI has made it possible to build any tool you need. I get yours across the line and keep it running.",
   } satisfies Seo,
 };

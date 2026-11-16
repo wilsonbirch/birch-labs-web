@@ -34,21 +34,6 @@
   50%, 100% { opacity: 0; }
 }
 
-/* Infinite horizontal marquee — pauses on hover, respects reduced motion. */
-@utility animate-marquee {
-  animation: marquee 45s linear infinite;
-  &:hover {
-    animation-play-state: paused;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 /* Runtime CSS variables — read by utility classes via bg-[color:var(--color-*)] etc.
    Swapped wholesale by the .dark class on <html>. */
 :root {
