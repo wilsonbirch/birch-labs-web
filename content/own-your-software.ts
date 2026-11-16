@@ -20,13 +20,6 @@ export const ownYourSoftware = {
     "AI has made it possible to build the part you use and own it. Where people stall is the last stretch: sign-in, payments, security, hosting, moving the data over, and what happens when it breaks months later. I get it across the line and keep it running.",
   ],
 
-  caseStudyEyebrow: "// case study",
-  caseStudyHeading: "From a platform to their own app.",
-  caseStudyBody:
-    "Nothing Much Happens took its paying community off Fourthwall and onto a member app it owns: iOS, Android and web on one backend, with memberships on Stripe and existing members brought across.",
-  /** Shown only while this project is published on /work (drafts stay hidden in production). */
-  caseStudySlug: "village-of-nothing-much",
-
   ctaEyebrow: "// let's talk",
   ctaHeading: "Paying for more than you use?",
   ctaBody:

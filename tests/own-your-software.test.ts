@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { about } from "@/content/about";
 import { contact } from "@/content/contact";
@@ -15,19 +15,6 @@ import { ownYourSoftwareGraph, siteGraph } from "@/lib/structured-data";
 const PRICE = /[$€£]\s?\d|\b\d[\d,.]*\s?(k|CAD|USD)\b/i;
 
 describe("/own-your-software", () => {
-  afterEach(() => {
-    vi.unstubAllEnvs();
-    vi.resetModules();
-  });
-
-  it("points its case study at a real project", async () => {
-    // Drafts only load in development; a typo here would hide the case study forever.
-    vi.stubEnv("NODE_ENV", "development");
-    vi.resetModules();
-    const { projects } = await import("@/content/projects");
-    expect(projects.map((p) => p.slug)).toContain(ownYourSoftware.caseStudySlug);
-  });
-
   it("is registered and in the nav", () => {
     expect(pages.find((p) => p.path === "/own-your-software")?.navLabel).toBe("Own your software");
   });
