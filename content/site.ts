@@ -15,6 +15,7 @@ export const site = {
     "Contract and fixed-scope projects",
     "Fractional technical lead or CTO",
     "Team augmentation",
+    "Build vs buy: SaaS audits, owned rebuilds, and guardrails for building with AI",
   ],
   social: {
     github: "https://github.com/wilsonbirch",

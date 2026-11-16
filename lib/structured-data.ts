@@ -1,4 +1,5 @@
 import { about } from "@/content/about";
+import { ownYourSoftware } from "@/content/own-your-software";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
@@ -22,6 +23,11 @@ const address = {
 };
 
 const sameAs = Object.values(site.social).filter(Boolean);
+
+const areaServed = [
+  { "@type": "Country", name: "Canada" },
+  { "@type": "Country", name: "United States" },
+];
 
 /** Site-wide graph: the person, the business, and the website. */
 export function siteGraph() {
@@ -53,10 +59,7 @@ export function siteGraph() {
         image: absoluteUrl("/og-image.png"),
         email: site.email,
         address,
-        areaServed: [
-          { "@type": "Country", name: "Canada" },
-          { "@type": "Country", name: "United States" },
-        ],
+        areaServed,
         founder: { "@id": ids.person },
         sameAs,
         knowsAbout: services.services.map((s) => s.title),
@@ -112,5 +115,47 @@ export function projectsGraph(projects: ProjectCard[]) {
         creator: { "@id": ids.person },
       },
     })),
+  };
+}
+
+/** /own-your-software: the service itself, and its FAQ. No prices, on purpose. */
+export function ownYourSoftwareGraph() {
+  const url = absoluteUrl("/own-your-software");
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: ownYourSoftware.seo.title,
+        serviceType: "Build vs buy software consulting",
+        description: ownYourSoftware.seo.description,
+        url,
+        provider: { "@id": ids.business },
+        areaServed,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Engagement steps",
+          itemListElement: ownYourSoftware.steps.map((step) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: `${step.title}: ${step.outcome}`,
+              description: step.description,
+              provider: { "@id": ids.business },
+            },
+          })),
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: ownYourSoftware.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      },
+    ],
   };
 }

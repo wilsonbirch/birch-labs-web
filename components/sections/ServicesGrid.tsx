@@ -1,4 +1,5 @@
 import * as Icons from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -60,6 +61,14 @@ export function ServicesGrid({ services }: { services: ServiceItem[] }) {
                       </li>
                     ))}
                   </ul>
+                )}
+                {s.href && (
+                  <Link
+                    href={s.href}
+                    className="mt-auto pt-6 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-brand)] underline-offset-4 hover:underline"
+                  >
+                    How it works →
+                  </Link>
                 )}
               </MotionFadeIn>
             </li>
