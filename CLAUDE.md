@@ -110,4 +110,4 @@ originals plus one per Omarchy desktop theme.
   The generator nudges any colour that fails contrast; `npm test` re-checks the committed output.
 - Hero artwork: `public/themes/<theme-id>.webp` (1920×1080). It is rendered in POV-Ray (Wilson's
   `~/povray`, scenes in `scenes/omarchy/`). Re-run the generator after adding or removing images so
-  `hero` is set. CSS: `.hero-art` in `app/globals.css`.
+  `hero` is set. It sits behind the contact form on the home page's front face (the hero itself has none). CSS: `.hero-art` in `app/globals.css`.

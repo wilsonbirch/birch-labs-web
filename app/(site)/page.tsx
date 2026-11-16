@@ -23,6 +23,7 @@ export default function HomePage() {
           spacing="none"
           className="relative overflow-hidden py-8 sm:py-12 [@media(max-height:800px)]:py-4"
         >
+          <span className="hero-art" aria-hidden />
           <span className="noise-overlay" aria-hidden />
           <Container width="narrow" className="relative">
             {/* h2: the hero's wordmark on the back face is the page's h1. */}

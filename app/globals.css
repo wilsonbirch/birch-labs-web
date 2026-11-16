@@ -139,7 +139,7 @@ body {
     var(--hero-image);
   background-size: cover;
   background-position: center right;
-  /* atmosphere, not a second subject: the hero already shows the LB wordmark */
+  /* atmosphere behind the home page's contact form, not a second subject */
   opacity: 0.6;
   mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
 }
