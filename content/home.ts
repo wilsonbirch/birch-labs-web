@@ -1,8 +1,5 @@
 import { site } from "@/content/site";
-import type { Img, Seo } from "@/lib/types";
-
-import wordmarkWhite from "./images/hero-wordmark-white.svg";
-import wordmark from "./images/hero-wordmark.svg";
+import type { Seo } from "@/lib/types";
 
 export const home = {
   seo: {
@@ -12,14 +9,7 @@ export const home = {
   } satisfies Seo,
   heroEyebrow: "> Own your software",
   heroSubtitle: site.pitch,
-  heroLogo: {
-    src: wordmark,
-    alt: "Birch Labs",
-  } satisfies Img,
-  heroLogoDark: {
-    src: wordmarkWhite,
-    alt: "Birch Labs",
-  } satisfies Img,
+  heroLogoAlt: "Birch Labs",
   heroPrimaryButtonText: "Own your software →",
   heroPrimaryHref: "/own-your-software",
   heroSecondaryButtonText: "See the work",
