@@ -1,10 +1,11 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { about } from "@/content/about";
 import { contact } from "@/content/contact";
 import { home } from "@/content/home";
 import { ownYourSoftware } from "@/content/own-your-software";
 import { site } from "@/content/site";
+import { allProjects } from "@/content/projects";
 import { work } from "@/content/work";
 import { isContactTopic } from "@/lib/contact-schema";
 import { llmsFullTxt, llmsTxt } from "@/lib/llms";
@@ -35,17 +36,10 @@ describe("/own-your-software", () => {
 describe("site copy", () => {
   const copy = [home, site, ownYourSoftware, about, work, contact];
 
-  it("publishes no prices or full stack in the page copy or any JSON-LD", async () => {
+  it("publishes no prices or full stack in the page copy or any JSON-LD", () => {
     for (const amount of ["$4,500", "from $25k", "25k", "4500 CAD", "1,500 USD"]) expect(amount).toMatch(PRICE);
-    // Drafts are filtered outside `next dev`; load them too so draft copy is checked before it ships.
-    vi.stubEnv("NODE_ENV", "development");
-    vi.resetModules();
-    const { projects } = await import("@/content/projects").finally(() => {
-      vi.unstubAllEnvs();
-      vi.resetModules();
-    });
-    expect(projects.some((p) => p.draft)).toBe(true);
-    for (const content of [...copy, projects, siteGraph(), ownYourSoftwareGraph(), projectsGraph(projects)]) {
+    // allProjects includes drafts, so draft copy is checked before it ships.
+    for (const content of [...copy, allProjects, siteGraph(), ownYourSoftwareGraph(), projectsGraph(allProjects)]) {
       const text = JSON.stringify(content);
       expect(text).not.toMatch(PRICE);
       expect(text).not.toMatch(/full[- ]?stack/i);

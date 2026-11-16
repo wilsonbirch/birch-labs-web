@@ -17,7 +17,8 @@ import vnmVillageMap from "./images/projects/vnm-village-map.png";
 import vnmVillageSquare from "./images/projects/vnm-village-square.png";
 
 /** Shown on /work in this order. */
-const allProjects: ProjectCard[] = [
+/** Every project, drafts included. Pages use `projects`; tests check copy here. */
+export const allProjects: ProjectCard[] = [
   {
     slug: "village-of-nothing-much",
     // Remove once the app launches.
