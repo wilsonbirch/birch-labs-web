@@ -1,8 +1,10 @@
 <!doctype html>
 <!--
   One-page letter leave-behind for /ai-assistant. Not part of the site build.
-  Render: google-chrome-stable --headless=new --no-pdf-header-footer \
-    --print-to-pdf=ai-assistant-leave-behind.pdf print/ai-assistant-leave-behind.html
+  Render (from the repo root; writes outside the repo, and *.pdf is gitignored anyway):
+    google-chrome-stable --headless=new --no-pdf-header-footer \
+      --print-to-pdf="$HOME/BirchLabs/leave-behind/ai-assistant-leave-behind.pdf" \
+      "file://$PWD/print/ai-assistant-leave-behind.html"
   QR: qrencode -t SVG -l M -m 2 --svg-path -o print/ai-assistant-qr.svg https://birchlabs.ca/ai-assistant
 -->
 <html lang="en-CA">

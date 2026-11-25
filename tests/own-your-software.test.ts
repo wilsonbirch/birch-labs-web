@@ -26,11 +26,20 @@ describe("/own-your-software", () => {
   });
 
   it("describes the service in one JSON-LD node, with no offer list", () => {
-    const service = ownYourSoftwareGraph();
-    expect(service["@type"]).toBe("Service");
-    expect(service.url).toBe("https://birchlabs.ca/own-your-software");
-    expect(service.provider).toEqual({ "@id": "https://birchlabs.ca/#business" });
-    expect(service).not.toHaveProperty("hasOfferCatalog");
+    expect(ownYourSoftwareGraph()).toEqual({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://birchlabs.ca/own-your-software#service",
+      name: ownYourSoftware.seo.title,
+      serviceType: "Custom software development and maintenance",
+      description: ownYourSoftware.seo.description,
+      url: "https://birchlabs.ca/own-your-software",
+      provider: { "@id": "https://birchlabs.ca/#business" },
+      areaServed: [
+        { "@type": "Country", name: "Canada" },
+        { "@type": "Country", name: "United States" },
+      ],
+    });
   });
 });
 

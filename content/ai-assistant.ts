@@ -116,7 +116,7 @@ export const aiAssistant = {
     { id: "time", label: "How long does it take?", low: "A minute or two", high: "An hour or more" },
     { id: "clarity", label: "How clear are the steps?", low: "Different every time", high: "Same steps every time" },
     { id: "digital", label: "How digital is it?", low: "Paper and phone calls", high: "All email, files or apps" },
-    { id: "mistakes", label: "If it goes wrong, how bad is it?", low: "Costly or hard to undo", high: "Easy to spot and fix" },
+    { id: "mistakes", label: "How easy is a mistake to spot and fix?", low: "Costly or hard to undo", high: "Easy to spot and fix" },
     { id: "handover", label: "How safe is it to hand over?", low: "Needs my judgement each time", high: "Anyone could draft it" },
   ] satisfies ReadonlyArray<{ id: FitFactor; label: string; low: string; high: string }>,
   fitBands: {

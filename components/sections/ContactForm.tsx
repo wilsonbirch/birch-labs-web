@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { Field, INPUT_CLASS } from "@/components/ui/Field";
 import { contact } from "@/content/contact";
 import {
   contactSchema,
@@ -15,9 +16,6 @@ import {
 } from "@/lib/contact-schema";
 
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
-
-const INPUT_CLASS =
-  "block w-full rounded-md border border-[color:var(--color-rule)] bg-[color:var(--color-surface)] px-[0.9rem] py-[0.65rem] text-base leading-[1.4] text-[color:var(--color-ink)] focus:outline-2 focus:outline-offset-2 focus:outline-[color:var(--color-brand)]";
 
 function initialValues(topic: ContactTopic = DEFAULT_TOPIC): ContactInput {
   return { name: "", email: "", message: "", topic, website: "" };
@@ -97,55 +95,66 @@ export function ContactForm({
   return (
     <form noValidate onSubmit={onSubmit} className="space-y-5">
       <Field label="Name" error={errors.name}>
-        <input
-          type="text"
-          value={values.name}
-          onChange={(e) => update("name", e.target.value)}
-          autoComplete="name"
-          className={INPUT_CLASS}
-        />
+        {(control) => (
+          <input
+            {...control}
+            type="text"
+            value={values.name}
+            onChange={(e) => update("name", e.target.value)}
+            autoComplete="name"
+            className={INPUT_CLASS}
+          />
+        )}
       </Field>
       <Field label="Email" error={errors.email}>
-        <input
-          type="email"
-          value={values.email}
-          onChange={(e) => update("email", e.target.value)}
-          autoComplete="email"
-          className={INPUT_CLASS}
-        />
+        {(control) => (
+          <input
+            {...control}
+            type="email"
+            value={values.email}
+            onChange={(e) => update("email", e.target.value)}
+            autoComplete="email"
+            className={INPUT_CLASS}
+          />
+        )}
       </Field>
       {showTopic && (
         <Field label={contact.topicLabel} error={errors.topic}>
-          <select
-            value={values.topic}
-            onChange={(e) => {
-              if (isContactTopic(e.target.value)) update("topic", e.target.value);
-            }}
-            className={INPUT_CLASS}
-          >
-            {contact.topics.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label}
-              </option>
-            ))}
-          </select>
+          {(control) => (
+            <select
+              {...control}
+              value={values.topic}
+              onChange={(e) => {
+                if (isContactTopic(e.target.value)) update("topic", e.target.value);
+              }}
+              className={INPUT_CLASS}
+            >
+              {contact.topics.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          )}
         </Field>
       )}
       <Field label="Message" error={errors.message}>
-        <textarea
-          rows={messageRows}
-          value={values.message}
-          onChange={(e) => update("message", e.target.value)}
-          maxLength={MESSAGE_MAX}
-          className={`${INPUT_CLASS} resize-y`}
-          aria-describedby="message-hint"
-        />
-        <span
-          id="message-hint"
-          className="mt-1 block text-xs text-[color:var(--color-ink-muted)]"
-        >
-          <MessageCount length={values.message.trim().length} />
-        </span>
+        {(control) => (
+          <>
+            <textarea
+              {...control}
+              rows={messageRows}
+              value={values.message}
+              onChange={(e) => update("message", e.target.value)}
+              maxLength={MESSAGE_MAX}
+              className={`${INPUT_CLASS} resize-y`}
+              aria-describedby={[control["aria-describedby"], "message-hint"].filter(Boolean).join(" ")}
+            />
+            <span id="message-hint" className="mt-1 block text-xs text-[color:var(--color-ink-muted)]">
+              <MessageCount length={values.message.trim().length} />
+            </span>
+          </>
+        )}
       </Field>
 
       {/* Honeypot — visually hidden, real users leave it blank */}
@@ -163,7 +172,7 @@ export function ContactForm({
       </div>
 
       {formError && (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="text-sm text-[color:var(--color-ink)]" role="alert">
           {formError}
         </p>
       )}
@@ -193,22 +202,4 @@ function MessageCount({ length }: { length: number }) {
     );
   }
   return <>{length}</>;
-}
-
-function Field({
-  label,
-  error,
-  children,
-}: {
-  label: string;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className="block">
-      <span className="mb-1 block text-sm font-medium text-[color:var(--color-ink)]">{label}</span>
-      {children}
-      {error && <span className="mt-1 block text-sm text-red-600">{error}</span>}
-    </label>
-  );
 }
