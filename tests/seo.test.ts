@@ -8,7 +8,7 @@ import { pages } from "@/lib/pages";
 import { siteGraph } from "@/lib/structured-data";
 
 // Pages that must never drop out of the registry by accident.
-const CORE_PATHS = ["/", "/work", "/own-your-software", "/about", "/contact"];
+const CORE_PATHS = ["/", "/work", "/own-your-software", "/ai-assistant", "/about", "/contact"];
 const paths = pages.map((p) => p.path);
 
 describe("page registry", () => {

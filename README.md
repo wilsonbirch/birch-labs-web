@@ -37,8 +37,9 @@ The Birch Labs site. Next.js 16 (App Router) + Tailwind 4 + Resend. Fully static
 
 ## Layout
 
-- `content/` — **all site copy and images.** There is one typed file per page (`home.ts`, `work.ts`, `own-your-software.ts`, `about.ts`, `contact.ts`). `site.ts` holds the name, contact details, socials, and default SEO. `projects.ts` holds the projects. Images are in `content/images/`. Pages import them statically, so `next/image` reads their dimensions and blur placeholders.
+- `content/` — **all site copy and images.** There is one typed file per page (`home.ts`, `work.ts`, `own-your-software.ts`, `ai-assistant.ts`, `about.ts`, `contact.ts`). `site.ts` holds the name, contact details, socials, and default SEO. `projects.ts` holds the projects. Images are in `content/images/`. Pages import them statically, so `next/image` reads their dimensions and blur placeholders.
 - `app/(site)/` — marketing routes with a shared Header/Footer layout
+- `print/` — printable leave-behinds (HTML + QR SVG, rendered to PDF with headless Chrome; the command is in each file). Not part of the build.
 - `app/api/contact/route.ts` — zod-validated contact endpoint with in-memory rate limiting; sends via Resend when configured
 - `app/robots.ts`, `app/sitemap.ts` — SEO basics
 - `app/icon.svg`, `app/apple-icon.svg` — favicon

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { about } from "@/content/about";
+import { aiAssistant } from "@/content/ai-assistant";
 import { contact } from "@/content/contact";
 import { home } from "@/content/home";
 import { ownYourSoftware } from "@/content/own-your-software";
@@ -10,7 +11,7 @@ import { work } from "@/content/work";
 import { isContactTopic } from "@/lib/contact-schema";
 import { llmsFullTxt, llmsTxt } from "@/lib/llms";
 import { pages } from "@/lib/pages";
-import { ownYourSoftwareGraph, projectsGraph, siteGraph } from "@/lib/structured-data";
+import { aiAssistantGraph, ownYourSoftwareGraph, projectsGraph, siteGraph } from "@/lib/structured-data";
 
 // Pricing is quoted per client, never published. Matches amounts, not the word "price".
 const PRICE = /[$€£]\s?\d|\b\d[\d,.]*\s?(k|CAD|USD)\b/i;
@@ -34,12 +35,12 @@ describe("/own-your-software", () => {
 });
 
 describe("site copy", () => {
-  const copy = [home, site, ownYourSoftware, about, work, contact];
+  const copy = [home, site, ownYourSoftware, aiAssistant, about, work, contact];
 
   it("publishes no prices or full stack in the page copy or any JSON-LD", () => {
     for (const amount of ["$4,500", "from $25k", "25k", "4500 CAD", "1,500 USD"]) expect(amount).toMatch(PRICE);
     // allProjects includes drafts, so draft copy is checked before it ships.
-    for (const content of [...copy, allProjects, siteGraph(), ownYourSoftwareGraph(), projectsGraph(allProjects)]) {
+    for (const content of [...copy, allProjects, siteGraph(), ownYourSoftwareGraph(), aiAssistantGraph(), projectsGraph(allProjects)]) {
       const text = JSON.stringify(content);
       expect(text).not.toMatch(PRICE);
       expect(text).not.toMatch(/full[- ]?stack/i);

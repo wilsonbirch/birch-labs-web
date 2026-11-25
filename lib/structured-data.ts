@@ -1,8 +1,9 @@
 import { about } from "@/content/about";
+import { aiAssistant } from "@/content/ai-assistant";
 import { ownYourSoftware } from "@/content/own-your-software";
 import { site } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
-import type { ProjectCard } from "@/lib/types";
+import type { ProjectCard, Seo } from "@/lib/types";
 
 /**
  * schema.org JSON-LD built from content/, so search engines and LLM tools read
@@ -104,18 +105,26 @@ export function projectsGraph(projects: ProjectCard[]) {
   };
 }
 
-/** /own-your-software: the service itself, in one line. No prices, on purpose. */
-export function ownYourSoftwareGraph() {
-  const url = absoluteUrl("/own-your-software");
+/** A service page as one Service node. No prices, on purpose. */
+function serviceGraph(path: string, seo: Seo, serviceType: string) {
+  const url = absoluteUrl(path);
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${url}#service`,
-    name: ownYourSoftware.seo.title,
-    serviceType: "Custom software development and maintenance",
-    description: ownYourSoftware.seo.description,
+    name: seo.title,
+    serviceType,
+    description: seo.description,
     url,
     provider: { "@id": ids.business },
     areaServed,
   };
+}
+
+export function ownYourSoftwareGraph() {
+  return serviceGraph("/own-your-software", ownYourSoftware.seo, "Custom software development and maintenance");
+}
+
+export function aiAssistantGraph() {
+  return serviceGraph("/ai-assistant", aiAssistant.seo, "AI assistant setup and support for small businesses");
 }

@@ -1,4 +1,5 @@
 import { about } from "@/content/about";
+import { aiAssistant } from "@/content/ai-assistant";
 import { contact } from "@/content/contact";
 import { home } from "@/content/home";
 import { ownYourSoftware } from "@/content/own-your-software";
@@ -25,6 +26,12 @@ export const pages: ReadonlyArray<SitePage> = [
     name: "Own your software",
     navLabel: "Own your software",
     description: ownYourSoftware.seo.description,
+  },
+  {
+    path: "/ai-assistant",
+    name: "AI assistant",
+    navLabel: "AI assistant",
+    description: aiAssistant.seo.description,
   },
   { path: "/about", name: "About", navLabel: "About", description: about.seo.description },
   { path: "/contact", name: "Contact", description: contact.seo.description },
