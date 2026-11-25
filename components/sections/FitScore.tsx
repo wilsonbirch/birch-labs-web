@@ -46,14 +46,14 @@ export function FitScore({ contactHref }: { contactHref: string }) {
     setStatus(`Added ${trimmed}: ${total} out of ${FIT_MAX}, ${page.fitBands[fitBand(total)]}. ${jobCount(tasks.length + 1)}`);
     setName("");
     setScores(DEFAULT_SCORES);
-    nameRef.current?.focus();
+    // Focus stays put: moving it to the name field scrolls the status line off a phone screen.
   }
 
   function removeTask(task: Task) {
     setTasks((current) => current.filter((t) => t.id !== task.id));
     setStatus(`Removed ${task.name}. ${jobCount(tasks.length - 1)}`);
     // The removed button takes focus with it; keep the reader at the list, not back up at the form.
-    listHeadingRef.current?.focus();
+    listHeadingRef.current?.focus({ preventScroll: true });
   }
 
   return (

@@ -172,7 +172,7 @@ export function ContactForm({
       </div>
 
       {formError && (
-        <p className="text-sm text-[color:var(--color-ink)]" role="alert">
+        <p className="border-l-2 border-red-600 pl-3 text-sm font-medium text-[color:var(--color-ink)]" role="alert">
           {formError}
         </p>
       )}
