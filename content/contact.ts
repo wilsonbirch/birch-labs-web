@@ -15,6 +15,7 @@ export const contact = {
   topics: [
     { value: "project", label: "A software project" },
     { value: "own-your-software", label: "Own your software" },
+    { value: "ai-assistant", label: "An AI assistant" },
     { value: "other", label: "Something else" },
   ],
 } as const;

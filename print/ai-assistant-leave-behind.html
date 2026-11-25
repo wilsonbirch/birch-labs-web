@@ -1,0 +1,95 @@
+<!doctype html>
+<!--
+  One-page letter leave-behind for /ai-assistant. Not part of the site build.
+  Render (from the repo root; writes outside the repo, and *.pdf is gitignored anyway):
+    google-chrome-stable --headless=new --no-pdf-header-footer \
+      --print-to-pdf="$HOME/BirchLabs/leave-behind/ai-assistant-leave-behind.pdf" \
+      "file://$PWD/print/ai-assistant-leave-behind.html"
+  QR: qrencode -t SVG -l M -m 2 --svg-path -o print/ai-assistant-qr.svg https://birchlabs.ca/ai-assistant
+-->
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <title>Birch Labs: an AI assistant for your business</title>
+    <style>
+      @page { size: letter; margin: 0; }
+      * { box-sizing: border-box; margin: 0; }
+      :root { --royal: #003087; --sky: #60a5fa; --gold: #ffb81c; --ink: #0d131c; --slate: #64748b; --rule: #e2e8f0; --surface: #f8fafc; }
+      body { width: 8.5in; height: 11in; padding: 0.6in 0.65in 0.5in; font-family: Inter, "Liberation Sans", Arial, sans-serif; color: var(--ink); display: flex; flex-direction: column; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .mono { font-family: "JetBrains Mono", "JetBrainsMono Nerd Font", ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.18em; font-size: 9pt; color: var(--slate); }
+      header { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 3px solid var(--royal); }
+      header img { height: 34px; }
+      header strong { font-size: 17pt; font-weight: 800; letter-spacing: -0.02em; }
+      header .mono { margin-left: auto; }
+      h1 { margin-top: 30px; font-size: 38pt; line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; }
+      h1 span { color: var(--royal); }
+      .lead { margin-top: 14px; font-size: 13pt; line-height: 1.45; max-width: 6.4in; }
+      h2 { font-size: 15pt; font-weight: 800; letter-spacing: -0.01em; }
+      .jobs { margin-top: 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .job { border: 1px solid var(--rule); border-top: 4px solid var(--sky); border-radius: 8px; padding: 12px 13px; background: var(--surface); font-size: 10.5pt; line-height: 1.4; }
+      .job .mono { display: block; margin-top: 9px; font-size: 7.5pt; }
+      .note { margin-top: 6px; font-size: 8pt; color: var(--slate); }
+      .promise { margin-top: 22px; background: var(--royal); color: #fff; border-radius: 10px; padding: 18px 22px; font-size: 17pt; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; border-left: 10px solid var(--gold); }
+      .steps { margin: 22px 0 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; list-style: none; padding: 0; }
+      .steps li { font-size: 10.5pt; line-height: 1.4; }
+      .steps b { display: block; font-size: 12pt; margin: 3px 0 4px; }
+      .steps .num { color: var(--royal); font-weight: 800; font-size: 13pt; }
+      footer { margin-top: auto; display: flex; align-items: flex-end; gap: 22px; padding-top: 16px; border-top: 1px solid var(--rule); }
+      footer .who { flex: 1; font-size: 11pt; line-height: 1.5; }
+      footer .who strong { font-size: 13pt; }
+      footer .url { font-size: 15pt; font-weight: 800; color: var(--royal); }
+      footer img { width: 1.25in; height: 1.25in; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="../public/images/birchlabs-mark.svg" alt="" />
+      <strong>Birch Labs</strong>
+      <span class="mono">Ottawa, ON</span>
+    </header>
+
+    <p class="mono" style="margin-top: 28px">// An AI assistant for your business</p>
+    <h1>Get your evenings back from the <span>busywork.</span></h1>
+    <p class="lead">
+      An assistant that reads the inbox, drafts the replies, chases the invoices and hands you a one-page brief each
+      morning. It runs on a small computer you own. I set it up and look after it.
+    </p>
+
+    <div class="jobs">
+      <div class="job">
+        <h2>Morning brief</h2>
+        <span class="mono">Before</span>You dig through email, texts and the calendar.
+        <span class="mono">After</span>One page at 7: who's booked, what's overdue, what needs a reply.
+      </div>
+      <div class="job">
+        <h2>Invoice chaser</h2>
+        <span class="mono">Before</span>Overdue invoices wait for an awkward email.
+        <span class="mono">After</span>A polite reminder is drafted on schedule. You tap OK and it goes.
+      </div>
+      <div class="job">
+        <h2>Quote follow-up</h2>
+        <span class="mono">Before</span>Quotes go out and you never hear back.
+        <span class="mono">After</span>A few days later, a short check-in is drafted for every open quote.
+      </div>
+    </div>
+    <p class="note">Typical aims, not measured results.</p>
+
+    <p class="promise">Nothing goes out in your name without your OK. Your data stays yours.</p>
+
+    <ol class="steps">
+      <li><span class="num">01</span><b>Free 30-minute look</b>We talk through your week. I tell you honestly if an assistant would help.</li>
+      <li><span class="num">02</span><b>Process review</b>A scored list of the jobs worth handing over, and which to do first.</li>
+      <li><span class="num">03</span><b>Build and care</b>The first few assistants, two weeks of drafts only, then I stay on to look after it.</li>
+    </ol>
+
+    <footer>
+      <div class="who">
+        <strong>Wilson Birch</strong>, Birch Labs<br />
+        Software developer in Ottawa<br />
+        <span class="url">birchlabs.ca/ai-assistant</span><br />
+        wilson@birchlabs.ca
+      </div>
+      <img src="ai-assistant-qr.svg" alt="QR code for birchlabs.ca/ai-assistant" />
+    </footer>
+  </body>
+</html>
